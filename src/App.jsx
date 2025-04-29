@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
@@ -10,13 +10,34 @@ import CategoryPage from './components/CategoryPage'
 import Dashboard from './components/Dashboard'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [discovery, setApi] = useState()
+
+  /*const getTestApi = async () => {
+    fetch("https://app.ticketmaster.com/discovery/v2/events?apikey=LWeeRs6C0ToGwEe5Gz96AnZM9scR2ynq&keyword=findings&locale=*")
+      .then((response) => response.json())
+      .then((data) => setApi(data))
+      .catch((error) => console.error("Feil ved fetch av Findings", error))
+  };
+  */
+
+  useEffect(() => {
+    //https://www.freecodecamp.org/news/how-to-fetch-api-data-in-react/
+    fetch('https://app.ticketmaster.com/discovery/v2/events?apikey=LWeeRs6C0ToGwEe5Gz96AnZM9scR2ynq&keyword=findings&locale=*')
+    .then((res) => {
+      return res.json();
+    })
+    .then((data) => {
+      console.log(data);
+      setApi(data);
+    })  
+  }, [])
+
 
   return (
     <Layout>
       <Routes>
         <Route path='/' element={<Home />}/>
-        <Route path='/event/:id' element={<EventPage />}/>
+        <Route path='/event/' element={<EventPage discovery={discovery} setApi={setApi} />}/>
         <Route path='/category/:slug' element={<CategoryPage />}/>
         <Route path='/dashboard' element={<Dashboard />}/>
       </Routes>

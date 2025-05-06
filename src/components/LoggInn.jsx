@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-export default function LoggInn({ setUserLoggedInn }){
+export default function LoggInn({setUserLoggedInn}){
     const [userLogin, setUserLogin] = useState([]);
     const [error, setError] = useState()
     const navigate = useNavigate()
@@ -14,9 +14,11 @@ export default function LoggInn({ setUserLoggedInn }){
 
     const handleClick = (event) => {
         event.preventDefault()
-        const exists = userLogin.username === "TomHeine" && userLogin.password === "123"
+        const existingUser = JSON.parse(localStorage.getItem("user"))
+        const exists = userLogin.username === existingUser.username && userLogin.password === existingUser.password
         console.log(exists)
         if(exists){
+            sessionStorage.setItem("loggedinn", "true")
             setUserLoggedInn(true)
             navigate("/dashboard")
         }

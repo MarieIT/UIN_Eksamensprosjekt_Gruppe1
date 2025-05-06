@@ -22,12 +22,12 @@ function App() {
 
   useEffect(() => {
     //https://www.freecodecamp.org/news/how-to-fetch-api-data-in-react/
-    fetch('https://app.ticketmaster.com/discovery/v2/events?apikey=LWeeRs6C0ToGwEe5Gz96AnZM9scR2ynq&keyword=findings&locale=*')
+    fetch('https://app.ticketmaster.com/discovery/v2/events?apikey=LWeeRs6C0ToGwEe5Gz96AnZM9scR2ynq&keyword=findings%20festival&locale=*')
     .then((res) => {
       return res.json();
     })
     .then((data) => {
-      console.log(data);
+      //console.log(data);
       setApi(data);
     })  
   }, [])

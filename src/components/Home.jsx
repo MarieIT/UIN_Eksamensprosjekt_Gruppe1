@@ -26,19 +26,12 @@ console.log(pageContent, "fra pageContent")
   return (
     <>
     <h1>Sommerens Festivaler</h1>
-    <article className="mainEvent">
-      <img src="/src/assets/findings.jpeg" alt="Findings 2025" />
-      <h2>Findings</h2>
-      <button className="mainEventBtn">Les mer om festivalen her!</button>
-    </article>
-    <article >
-
-    </article>
     <section>
       {pageContent?._embedded.attractions.map((event) => 
         <article key={event.id}>
-          <h2>{event.name}</h2> 
           <img src={event.images[0].url}/>
+          <h2>{event.name}</h2> 
+          <button className="mainEventBtn">Les mer om festivalen her!</button>
         </article>)}
     </section>
     </>

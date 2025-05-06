@@ -25,7 +25,7 @@ export default function Home({ discovery, setApi }) {
 
   return (
     <>
-    <h1>Home</h1>
+    <h1>Sommerens Festivaler</h1>
     <section>
       {pageContent?._embedded.attractions.
         map((event) => 
@@ -33,6 +33,7 @@ export default function Home({ discovery, setApi }) {
             <h2>{event.name}</h2>
             <img src={event.images.
             filter(image => image.width > 1000)[0].url}/>
+          <button className="mainEventBtn">Les mer om festivalen her!</button>
           </article>)}
     </section>
     </>

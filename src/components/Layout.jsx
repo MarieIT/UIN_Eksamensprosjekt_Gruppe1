@@ -1,3 +1,12 @@
-export default function Layout() {
-  return <h1>Layout</h1>
+import Nav from "./Nav";
+
+export default function Layout({ children }) {
+  return (
+    <>
+      <Nav/>
+      <main>
+        {children}
+      </main>
+    </>
+  )
 }

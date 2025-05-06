@@ -9,3 +9,22 @@
 body {
     background-color: colors.$backgroundcolor; 
 }
+
+/* Medieforespørsel for store skjermer mellom 700-1023px: */
+@media (min-width: 700px) and (max-width: 1023px) {
+}
+/* Medieforespørsel for mellomstore skjermer: 2 kolonner for artikler */
+@media (min-width: 450px) {
+}
+
+/* Medieforespørsel for Desktop */
+@media (min-width: 1024px) {
+}
+
+/* Responsivt design for mindre skjermer */
+@media (max-width: 768px) {
+}
+
+/* Media query for viewport fra 1400px og større - tre kolonner */
+@media (min-width: 1350px) {
+}

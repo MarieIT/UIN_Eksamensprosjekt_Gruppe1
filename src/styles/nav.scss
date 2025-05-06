@@ -2,6 +2,9 @@
 @use "./partials/fonts";
 
 header {
+    display: block;
+    min-width: 450px;
+    padding: 1rem;
     background-color: colors.$header;
     width: 100%;
     
@@ -18,14 +21,13 @@ header {
             display : flex;
             font-weight: bold;
             align-items: center;
+            text-decoration: none;
         }
 
         ul {
             display: flex;
             align-items: center;
-            justify-content: space-between;
             padding: 0;
-            margin: 20px;
 
             li {
             
@@ -36,7 +38,11 @@ header {
                 a:hover {
                     color: colors.$whitetext;
                 }
-            }    
+
+                a {
+                    text-decoration: none;
+                }
+            }  
         }
     }
 }

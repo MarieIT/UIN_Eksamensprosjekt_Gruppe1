@@ -17,15 +17,7 @@ function App() {
     setUserLoggedInn(JSON.parse(sessionStorage.getItem("loggedinn")))
     console.log(userLoggedInn)
   }, [])
-  const [discovery, setApi] = useState()
-
-  /*const getTestApi = async () => {
-    fetch("https://app.ticketmaster.com/discovery/v2/events?apikey=LWeeRs6C0ToGwEe5Gz96AnZM9scR2ynq&keyword=findings&locale=*")
-      .then((response) => response.json())
-      .then((data) => setApi(data))
-      .catch((error) => console.error("Feil ved fetch av Findings", error))
-  };
-  */
+  const [discovery, setApi] = useState();
 
   useEffect(() => {
     //https://www.freecodecamp.org/news/how-to-fetch-api-data-in-react/
@@ -44,7 +36,7 @@ function App() {
     <Layout>
       <Routes>
         <Route path='/' element={<Home />}/>
-        <Route path='/event/' element={<EventPage discovery={discovery} setApi={setApi} />}/>
+        <Route path='/event/:id' element={<EventPage discovery={discovery} setApi={setApi} />}/>
         <Route path='/category/:slug' element={<CategoryPage />}/>
         <Route path='/dashboard' element={<Dashboard />}/>
         <Route path='/logginn' element={userLoggedInn ? <Navigate to={"/dashboard"}/>: <LoggInn setUserLoggedInn={setUserLoggedInn}/>}/>

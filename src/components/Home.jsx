@@ -22,18 +22,20 @@ export default function Home({ discovery, setApi }) {
     })  
   }, [])
 
-console.log(pageContent, "fra pageContent")
+  console.log(pageContent, "fra pageContent")
 
   return (
     <>
     <h1>Sommerens Festivaler</h1>
-    <section className="mainEventSection">
-      {pageContent?._embedded.attractions.map((event) => 
-        <article key={event.id}>
-          <img src={event.images[0].url}/>
-          <h2>{event.name}</h2> 
+    <section>
+      {pageContent?._embedded.attractions.
+        map((event) => 
+          <article key={event.id}>
+            <h2>{event.name}</h2>
+            <img src={event.images.
+            filter(image => image.width > 1000)[0].url}/>
           <button className="mainEventBtn">Les mer om festivalen her!</button>
-        </article>)}
+          </article>)}
     </section>
     </>
   )

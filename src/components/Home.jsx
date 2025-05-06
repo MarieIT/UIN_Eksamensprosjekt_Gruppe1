@@ -20,7 +20,15 @@ console.log(pageContent, "fra pageContent")
 
   return (
     <>
-    <h1>Home</h1>
+    <h1>Sommerens Festivaler</h1>
+    <article className="mainEvent">
+      <image>Bildet fra festival</image>
+      <h2>Findings</h2>
+      <button className="mainEventBtn">Les mer om festivalen her!</button>
+    </article>
+    <article >
+
+    </article>
     <section>
       {pageContent?.map((event) => <article key={event.id}>{event._links}</article>)}
     </section>

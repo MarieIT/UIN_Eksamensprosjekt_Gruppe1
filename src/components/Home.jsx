@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
+import '../styles/home.scss'
 
 export default function Home({ discovery, setApi }) {
   const { slug, events } = useParams();

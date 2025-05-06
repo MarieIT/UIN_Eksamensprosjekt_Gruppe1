@@ -15,7 +15,7 @@ function App() {
   useEffect(() => {
     localStorage.setItem("user", JSON.stringify({username: "TomHeine", password: "123"}))
     setUserLoggedInn(JSON.parse(sessionStorage.getItem("loggedinn")))
-    console.log(userLoggedInn)
+    console.log("userloggedinn", userLoggedInn)
   }, [])
   const [discovery, setApi] = useState()
 
@@ -41,13 +41,13 @@ function App() {
 
 
   return (
-    <Layout>
+    <Layout userLoggedInn={userLoggedInn} setUserLoggedInn={setUserLoggedInn}>
       <Routes>
         <Route path='/' element={<Home />}/>
         <Route path='/event/' element={<EventPage discovery={discovery} setApi={setApi} />}/>
         <Route path='/category/:slug' element={<CategoryPage />}/>
-        <Route path='/dashboard' element={<Dashboard />}/>
-        <Route path='/logginn' element={userLoggedInn ? <Navigate to={"/dashboard"}/>: <LoggInn setUserLoggedInn={setUserLoggedInn}/>}/>
+        <Route path='/dashboard' element={<Dashboard setUserLoggedInn={setUserLoggedInn}/>}/>
+        <Route path='/logginn' element={<LoggInn setUserLoggedInn={setUserLoggedInn}/>}/>
       </Routes>
     </Layout>
   )

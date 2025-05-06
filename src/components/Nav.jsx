@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom"
+import '../styles/nav.scss'
 
 export default function Nav(){
     return(
         <header>
             <nav>
-                <Link to="/">Billettlyst</Link>
+                <Link className="logo" to="/">BillettLyst</Link>
                 <ul>
                     <li>Musikk</li>
                     <li>Sport</li>

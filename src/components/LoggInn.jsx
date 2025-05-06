@@ -16,8 +16,13 @@ export default function LoggInn({ setUserLoggedInn }){
         event.preventDefault()
         const exists = userLogin.username === "TomHeine" && userLogin.password === "123"
         console.log(exists)
-        exists ? setUserLoggedInn(true) : setError("Brukernavn eller passord er feil")
-        navigate("/dashboard")
+        if(exists){
+            setUserLoggedInn(true)
+            navigate("/dashboard")
+        }
+        else{
+            setError("Brukernavn eller passord er feil")
+        }
     }
     return(
         <>

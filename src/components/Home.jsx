@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import '../styles/home.scss'
 
 export default function Home({ discovery, setApi }) {
   const [pageContent, setPageContent] = useState();

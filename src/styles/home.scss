@@ -6,6 +6,32 @@
     width: 100%; 
 }
 
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto; 
+    padding: 0 20px; 
+    width: 100%; 
+
+    section {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto;
+        padding: 0 20px;
+        width: 100%;
+
+        img {
+            max-width: 333px;
+            min-height: auto;
+        }
+    
+    }
+}
+
 
 
 body {

@@ -2,29 +2,32 @@
 @use "./partials/fonts";
 
 header {
-
+    display: block;
+    min-width: 450px;
+    padding: 1rem;
     background-color: colors.$header;
+    width: 100%;
     
     // Legger på en display flex for på nav for å få elementene til å stå på linje
-    nav{
+    nav {
+        min-width: 425px;
         color: colors.$blacktext;
-        width: 100%;
         display: flex;
         flex-direction: row;
         justify-content: space-between;
         text-decoration: none;
 
         .logo {
-            display: flex;
+            display : flex;
             font-weight: bold;
             align-items: center;
+            text-decoration: none;
         }
 
         ul {
             display: flex;
             align-items: center;
             padding: 0;
-            margin: 20px;
 
             li {
             
@@ -35,7 +38,11 @@ header {
                 a:hover {
                     color: colors.$whitetext;
                 }
-            }    
+
+                a {
+                    text-decoration: none;
+                }
+            }  
         }
     }
 }

@@ -21,17 +21,19 @@ export default function Home({ discovery, setApi }) {
     })  
   }, [])
 
-console.log(pageContent, "fra pageContent")
+  console.log(pageContent, "fra pageContent")
 
   return (
     <>
     <h1>Home</h1>
     <section>
-      {pageContent?._embedded.attractions.map((event) => 
-        <article key={event.id}>
-          <h2>{event.name}</h2> 
-          <img src={event.images[0].url}/>
-        </article>)}
+      {pageContent?._embedded.attractions.
+        map((event) => 
+          <article key={event.id}>
+            <h2>{event.name}</h2>
+            <img src={event.images.
+            filter(image => image.width > 1000)[0].url}/>
+          </article>)}
     </section>
     </>
   )

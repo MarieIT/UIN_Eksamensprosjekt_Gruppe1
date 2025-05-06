@@ -1,0 +1,36 @@
+@use "./partials/colors";
+@use "./partials/fonts";
+
+header {
+
+    background-color: colors.$header;
+    
+    // Legger på en display flex for på nav for å få elementene til å stå på linje
+    nav{
+        color: colors.$blacktext;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        text-decoration: none;
+        text-transform: uppercase;
+        font-weight: bolder;
+
+        ul {
+            display: flex;
+            padding: 0;
+            margin: 20px;
+
+            li {
+            
+                list-style-type: none;
+                padding: 20px;
+                //Setter på hover på a-tag for å bytte farge på teksten. 
+            
+                a:hover {
+                    color: colors.$whitetext;
+                }
+            }    
+        }
+    }
+}

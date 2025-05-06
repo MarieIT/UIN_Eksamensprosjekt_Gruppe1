@@ -8,8 +8,10 @@ import EventPage from './components/EventPage'
 import Home from './components/Home'
 import CategoryPage from './components/CategoryPage'
 import Dashboard from './components/Dashboard'
+import LoggInn from './components/LoggInn'
 
 function App() {
+  const [userLoggedInn, setUserLoggedInn] = useState([])
   const [discovery, setApi] = useState()
 
   /*const getTestApi = async () => {
@@ -40,6 +42,7 @@ function App() {
         <Route path='/event/' element={<EventPage discovery={discovery} setApi={setApi} />}/>
         <Route path='/category/:slug' element={<CategoryPage />}/>
         <Route path='/dashboard' element={<Dashboard />}/>
+        <Route path='/logginn' element={<LoggInn setUserLoggedInn={setUserLoggedInn}/>}/>
       </Routes>
     </Layout>
   )

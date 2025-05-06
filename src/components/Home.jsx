@@ -26,7 +26,7 @@ console.log(pageContent, "fra pageContent")
   return (
     <>
     <h1>Sommerens Festivaler</h1>
-    <section>
+    <section className="mainEventSection">
       {pageContent?._embedded.attractions.map((event) => 
         <article key={event.id}>
           <img src={event.images[0].url}/>

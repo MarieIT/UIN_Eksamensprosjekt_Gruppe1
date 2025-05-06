@@ -2,20 +2,22 @@
 @use "./partials/fonts";
 
 header {
-
+    display: flex;
     background-color: colors.$header;
+    min-width: 425px;
+    width: 100%;
     
     // Legger på en display flex for på nav for å få elementene til å stå på linje
-    nav{
+    nav {
+        min-width: 425px;
         color: colors.$blacktext;
-        width: 100%;
         display: flex;
         flex-direction: row;
         justify-content: space-between;
         text-decoration: none;
 
         .logo {
-            display: flex;
+            display : flex;
             font-weight: bold;
             align-items: center;
         }
@@ -23,6 +25,7 @@ header {
         ul {
             display: flex;
             align-items: center;
+            justify-content: space-between;
             padding: 0;
             margin: 20px;
 

@@ -22,7 +22,7 @@ console.log(pageContent, "fra pageContent")
     <>
     <h1>Sommerens Festivaler</h1>
     <article className="mainEvent">
-      <image>Bildet fra festival</image>
+      <img src="/src/assets/findings.jpeg" alt="Findings 2025" />
       <h2>Findings</h2>
       <button className="mainEventBtn">Les mer om festivalen her!</button>
     </article>

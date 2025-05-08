@@ -3,7 +3,7 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import Layout from './components/Layout'
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate, Link, useNavigate } from 'react-router-dom';
 import EventPage from './components/EventPage'
 import Home from './components/Home'
 import CategoryPage from './components/CategoryPage'
@@ -17,6 +17,25 @@ function App() {
     setUserLoggedInn(JSON.parse(sessionStorage.getItem("loggedinn")))
     console.log("userloggedinn", userLoggedInn)
   }, [])
+
+  const [linkData, setLinkData] = useState(<li><Link to={"/logginn"}>Logg inn</Link></li>)
+  useEffect(() => {
+      if(JSON.parse(sessionStorage.getItem("loggedinn")) == true){
+          setLinkData(<><li><Link to={"/dashboard"}>Dashbord</Link></li><li><button onClick={handleClick}>Logg ut</button></li></>)
+      }
+      else{
+          setLinkData(<li><Link to={"/logginn"}>Logg inn</Link></li>)
+      }
+      console.log("linkdata", linkData)
+  }, [userLoggedInn])
+
+  const navigate = useNavigate()
+  function handleClick(){
+    navigate("/")
+    sessionStorage.clear()
+    setUserLoggedInn(false)
+  }
+
   const [discovery, setApi] = useState()
 
   /*const getTestApi = async () => {
@@ -41,12 +60,12 @@ function App() {
 
 
   return (
-    <Layout userLoggedInn={userLoggedInn} setUserLoggedInn={setUserLoggedInn}>
+    <Layout linkData={linkData}>
       <Routes>
         <Route path='/' element={<Home />}/>
         <Route path='/event/' element={<EventPage discovery={discovery} setApi={setApi} />}/>
         <Route path='/category/:slug' element={<CategoryPage />}/>
-        <Route path='/dashboard' element={<Dashboard setUserLoggedInn={setUserLoggedInn}/>}/>
+        <Route path='/dashboard' element={<Dashboard handleClick={handleClick}/>}/>
         <Route path='/logginn' element={<LoggInn setUserLoggedInn={setUserLoggedInn}/>}/>
       </Routes>
     </Layout>

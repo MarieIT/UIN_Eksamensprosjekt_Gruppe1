@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 
-export default function Dashboard() {
+export default function Dashboard({handleClick}) {
   const [user, setUser] = useState()
+
   useEffect(()=>{
     setUser(JSON.parse(localStorage.getItem("user")))
   },[])
@@ -11,7 +13,7 @@ export default function Dashboard() {
       <h2>Dashbord</h2>
       <section>
         <p>{user?.username}</p>
-        <button>Logg ut</button>
+        <button onClick={handleClick}>Logg ut</button>
         <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.explicit.bing.net%2Fth%3Fid%3DOIP.5swNd1zAKZRCz1LWWDueJwHaJ5%26pid%3DApi&f=1&ipt=9be4da7fb2566206dcf34fc5593f4b98ff2342cd36d155f441ce2aae7c72921c"/>
       </section>
       <section>

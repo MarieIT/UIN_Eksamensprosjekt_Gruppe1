@@ -21,7 +21,7 @@ function App() {
   const [linkData, setLinkData] = useState(<li><Link to={"/logginn"}>Logg inn</Link></li>)
   useEffect(() => {
       if(JSON.parse(sessionStorage.getItem("loggedinn")) == true){
-          setLinkData(<><li><Link to={"/dashboard"}>Dashbord</Link></li><li><button onClick={handleClick}>Logg ut</button></li></>)
+          setLinkData(<><li><Link to={"/dashboard"}>Min side</Link></li><li><button onClick={handleClick}>Logg ut</button></li></>)
       }
       else{
           setLinkData(<li><Link to={"/logginn"}>Logg inn</Link></li>)

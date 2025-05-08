@@ -1,15 +1,26 @@
-
+import { useParams } from "react-router-dom"
+import { useEffect, useState } from "react"
 
 export default function EventPage({ discovery, setApi }) {
+  const {id} = useParams()
+  const [event, setEvent] = useState()
 
-  console.log(discovery?._embedded.events[0]._embedded.attractions, "console.log på EventPage")
+  useEffect(() => {
+      fetch(`https://app.ticketmaster.com/discovery/v2/attractions?apikey=LWeeRs6C0ToGwEe5Gz96AnZM9scR2ynq&id=${id}`)
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        console.log(data, "event page ");
+        setEvent(data._embedded.attractions[0]);
+      })  
+    }, [])
 
   return (
     <>
-      <h1>Event Page</h1>
+      <h1>{event?.name}</h1>
       <section>
         <ul>
-          {discovery?._embedded.events[0]._embedded.attractions.map((findings) => <li key={findings.id}>{findings.name} {findings.images[0].url}</li>)}
         </ul>
       </section>
     </>

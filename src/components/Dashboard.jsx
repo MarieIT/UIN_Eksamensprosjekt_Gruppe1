@@ -21,7 +21,7 @@ export default function Dashboard({handleClick}) {
         {/** legge till billetter kjøpt */}  
       </section>
       <section>
-        <h3>Mine Kjøp</h3>
+        <h3>Min Ønskeliste</h3>
         {/** ønskeliste items */}  
       </section>
       <section>

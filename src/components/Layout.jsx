@@ -1,9 +1,9 @@
 import Nav from "./Nav";
 
-export default function Layout({ children, setUserLoggedInn, userLoggedInn }) {
+export default function Layout({ children,linkData }) {
   return (
     <>
-      <Nav userLoggedInn={userLoggedInn} setUserLoggedInn={setUserLoggedInn}/>
+      <Nav linkData={linkData}/>
       <main>
         {children}
       </main>

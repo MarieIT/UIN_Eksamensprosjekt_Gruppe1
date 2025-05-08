@@ -63,7 +63,7 @@ function App() {
     <Layout linkData={linkData}>
       <Routes>
         <Route path='/' element={<Home />}/>
-        <Route path='/event/' element={<EventPage discovery={discovery} setApi={setApi} />}/>
+        <Route path='/event/:id' element={<EventPage discovery={discovery} setApi={setApi} />}/>
         <Route path='/category/:slug' element={<CategoryPage />}/>
         <Route path='/dashboard' element={<Dashboard handleClick={handleClick}/>}/>
         <Route path='/logginn' element={<LoggInn setUserLoggedInn={setUserLoggedInn}/>}/>

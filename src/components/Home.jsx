@@ -14,9 +14,9 @@ export default function Home({ discovery, setApi }) {
   //Skeikampen ID: K8vZ917bJC7
 
   function CityNameFromClick(input) {
+    input.preventDefault();
     setCityName(input.target.innerHTML);
     console.log(cityName);
-    CheckCityName(cityName);
   }
 
   useEffect(() => {
@@ -31,7 +31,7 @@ export default function Home({ discovery, setApi }) {
   }, [])
   
   useEffect(() => {
-    fetch(`https://app.ticketmaster.com/discovery/v2/events?apikey=LWeeRs6C0ToGwEe5Gz96AnZM9scR2ynq&locale=*&city=${cityName}`)
+    fetch(`https://app.ticketmaster.com/discovery/v2/events?apikey=LWeeRs6C0ToGwEe5Gz96AnZM9scR2ynq&locale=*&size=10&city=${cityName}`)
     .then((res) => {
       return res.json();
     })
@@ -39,7 +39,7 @@ export default function Home({ discovery, setApi }) {
       console.log(data, "fra Home – byer");
       setCityContent(data);
     })  
-  }, [])
+  }, [cityName]);
 
   console.log(cityName, "cityName");
   console.log(cityContent, "cityContent");
@@ -54,7 +54,7 @@ export default function Home({ discovery, setApi }) {
           <article key={event.id}>
             <h2>{event.name}</h2>
             <img src={event.images.
-            filter(image => image.width > 1000)[0].url}/>
+            filter(image => image.width < 600)[0].url}/>
           <Link to={`/event/${event.id}`} className="mainEventBtn">Les mer om {event.name} her!</Link>
           </article>)}
     </section>
@@ -68,12 +68,18 @@ export default function Home({ discovery, setApi }) {
         <Link onClick={CityNameFromClick}>Paris</Link>
       </article>
     </section>    
-    <section>
-      {cityContent?._embedded.events.map((city) =>
-        <article key={city.id}>
-        <h3>{city.name}</h3>
-        </article>
-      )}
+    <section className="artikkel-fra-byer">
+      {cityContent?._embedded.events.
+          map((cityEvent) => <article key={cityEvent.id}>
+            <img src={cityEvent.images.
+              filter(image => image.width > 1000)[0].url}/>
+            <h3>{cityEvent.name}</h3>
+            <p>{cityEvent.dates.start.localDate}</p>
+            <p>{cityEvent.dates.start.localTime}</p>
+            <p>{cityEvent._embedded.venues[0].city.name}</p>
+            <p>{cityEvent._embedded.venues[0].country.name}</p>
+            <p>{cityEvent._embedded.venues[0].name}</p>
+        </article>)}
     </section>
     </>
   )

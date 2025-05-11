@@ -3,7 +3,8 @@ import { Link, useParams } from "react-router-dom"
 import '../styles/home.scss'
 
 export default function Home({ discovery, setApi }) {
-  const [pageContent, setPageContent] = useState();
+  const [eventContent, setEventContent] = useState();
+  const [cityContent, setCityContent] = useState();
 
   //Findings ID: K8vZ917K7fV
   //Tons ID: K8vZ917oWOV
@@ -17,17 +18,29 @@ export default function Home({ discovery, setApi }) {
     })
     .then((data) => {
       console.log(data, "fra Home ");
-      setPageContent(data);
+      setEventContent(data);
     })  
   }, [])
 
-  console.log(pageContent, "fra pageContent")
+  useEffect(() => {
+    fetch('https://app.ticketmaster.com/discovery/v2/events?apikey=LWeeRs6C0ToGwEe5Gz96AnZM9scR2ynq&locale=*&city=oslo,%20paris,%20stockholm,%20berlin,%20london')
+    .then((res) => {
+      return res.json();
+    })
+    .then((data) => {
+      console.log(data, "fra Home ");
+      setCityContent(data);
+    })  
+  }, [])
+
+  console.log(eventContent, "fra eventContent")
+  console.log(cityContent, "Fra cityContent")
 
   return (
     <>
     <h1>Sommerens Festivaler</h1>
     <section>
-      {pageContent?._embedded.attractions.
+      {eventContent?._embedded.attractions.
         map((event) => 
           <article key={event.id}>
             <h2>{event.name}</h2>
@@ -45,6 +58,19 @@ export default function Home({ discovery, setApi }) {
         <Link>London</Link>
         <Link>Paris</Link>
       </article>
+    </section>    
+    <section>
+      {cityContent?._embedded.events.
+        map((cityEvent) => <article key={cityEvent.id}>
+          <img src={cityEvent.images.
+            filter(image => image.width > 1000)[0].url}/>
+          <h3>{cityEvent.name}</h3>
+          <p>{cityEvent.dates.start.localDate}</p>
+          <p>{cityEvent.dates.start.localTime}</p>
+          <p>{cityEvent._embedded.venues[0].city.name}</p>
+          <p>{cityEvent._embedded.venues[0].country.name}</p>
+          <p>{cityEvent._embedded.venues[0].name}</p>
+      </article>)}
     </section>
     </>
   )

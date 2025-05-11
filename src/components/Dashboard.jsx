@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
 export default function Dashboard({handleClick}) {
   const [user, setUser] = useState()
@@ -46,6 +46,15 @@ export default function Dashboard({handleClick}) {
       </section>
       <section>
         <h3>Min Ønskeliste</h3>
+        <ul>
+          <li><Link>Wicked</Link></li>
+          <li><Link>Disturbed</Link></li>
+          <li><Link>Legally Blond</Link></li>
+          <li><Link>Coldplay Worldtour</Link></li>
+          <li><Link>Finding Festivalen</Link></li>
+          <li><Link>Golf Klubben</Link></li>
+          <li><Link>Ty Dolls $ign</Link></li>
+        </ul>
         {/** ønskeliste items */}  
       </section>
       <section>

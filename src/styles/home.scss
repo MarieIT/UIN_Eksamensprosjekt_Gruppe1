@@ -3,7 +3,8 @@
 
 #root {
     margin: 0, auto; 
-    width: 100%; 
+    width: 100%;
+    font-family: fonts.$quantitytext;
 }
 
 main {
@@ -13,20 +14,28 @@ main {
     align-items: center;
     margin: 0 auto; 
     padding: 0 20px; 
-    width: 100%; 
 
-    section {
+    article {
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         margin: 0 auto;
         padding: 0 20px;
-        width: 100%;
+        
 
         img {
             max-width: 333px;
             min-height: auto;
+        }
+
+        .mainEventBtn {
+            color: colors.$whitetext;
+            background-color: colors.$buttons;
+            padding: 1rem;
+            border-radius: 2px;
+            text-decoration: none;
+
         }
     
     }

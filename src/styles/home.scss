@@ -14,7 +14,7 @@ main {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: 0 auto; 
+    margin: 3rem auto; 
     padding: 0 20px;
 
     section {
@@ -25,7 +25,7 @@ main {
         article {
             display: flex;
             flex-direction: column;
-            margin: 0 auto;
+            margin: 1rem auto;
             padding: 0 20px;
             gap: 1rem;
             
@@ -50,6 +50,30 @@ main {
         
         }
 
+    }
+
+    .by-knapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 3rem 0 2rem 0;
+
+        article {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+
+            a {
+                text-decoration: none;
+                color: colors.$whitetext;
+                background-color: colors.$buttons;
+                padding: .7rem 1.2rem;
+                border-radius: 2px;
+                text-decoration: none;
+                width: auto;
+                height: 25px;
+            }
+        }
     }
 
     

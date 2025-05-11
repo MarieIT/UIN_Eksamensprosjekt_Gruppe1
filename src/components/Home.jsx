@@ -36,6 +36,16 @@ export default function Home({ discovery, setApi }) {
           <Link to={`/event/${event.id}`} className="mainEventBtn">Les mer om {event.name} her!</Link>
           </article>)}
     </section>
+    <section className="by-knapper">
+      <h2>Hva skjer i verdens storbyer?</h2>
+      <article>
+        <Link>Oslo</Link>
+        <Link>Stockholm</Link>
+        <Link>Berlin</Link>
+        <Link>London</Link>
+        <Link>Paris</Link>
+      </article>
+    </section>
     </>
   )
 }

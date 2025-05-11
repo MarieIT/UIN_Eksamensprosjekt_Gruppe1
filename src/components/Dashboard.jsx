@@ -18,6 +18,30 @@ export default function Dashboard({handleClick}) {
       </section>
       <section>
         <h3>Mine Kjøp</h3>
+        <article>
+          <img src="https://s1.ticketm.net/dam/a/29a/fdf8b9b8-c529-458e-bdbc-3b473975c29a_TABLET_LANDSCAPE_16_9.jpg"/>
+          <h4>Findings Festival</h4>
+        </article>
+        <article>
+          <img src="https://s1.ticketm.net/dam/a/29a/fdf8b9b8-c529-458e-bdbc-3b473975c29a_TABLET_LANDSCAPE_16_9.jpg"/>
+          <h4>Findings Festival</h4>
+        </article>
+        <article>
+          <img src="https://s1.ticketm.net/dam/a/29a/fdf8b9b8-c529-458e-bdbc-3b473975c29a_TABLET_LANDSCAPE_16_9.jpg"/>
+          <h4>Findings Festival</h4>
+        </article>
+        <article>
+          <img src="https://s1.ticketm.net/dam/a/29a/fdf8b9b8-c529-458e-bdbc-3b473975c29a_TABLET_LANDSCAPE_16_9.jpg"/>
+          <h4>Findings Festival</h4>
+        </article>
+        <article>
+          <img src="https://s1.ticketm.net/dam/a/29a/fdf8b9b8-c529-458e-bdbc-3b473975c29a_TABLET_LANDSCAPE_16_9.jpg"/>
+          <h4>Findings Festival</h4>
+        </article>
+        <article>
+          <img src="https://s1.ticketm.net/dam/a/29a/fdf8b9b8-c529-458e-bdbc-3b473975c29a_TABLET_LANDSCAPE_16_9.jpg"/>
+          <h4>Findings Festival</h4>
+        </article>
         {/** legge till billetter kjøpt */}  
       </section>
       <section>

@@ -76,6 +76,19 @@ main {
         }
     }
 
+    .artikkel-fra-byer {
+        
+        article{
+            border: 1px solid black;
+            max-width: 320px;
+            padding: 1rem;
+
+            p{
+                line-height: 5px;
+            }
+        }
+    }
+
     
 }
 

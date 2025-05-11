@@ -3,7 +3,6 @@ import { Link, useParams } from "react-router-dom"
 import '../styles/home.scss'
 
 export default function Home({ discovery, setApi }) {
-  const { slug, events } = useParams();
   const [pageContent, setPageContent] = useState();
 
   //Findings ID: K8vZ917K7fV
@@ -34,8 +33,18 @@ export default function Home({ discovery, setApi }) {
             <h2>{event.name}</h2>
             <img src={event.images.
             filter(image => image.width > 1000)[0].url}/>
-          <Link to={`/event/${event.id}`} className="mainEventBtn">Les mer om festivalen her!</Link>
+          <Link to={`/event/${event.id}`} className="mainEventBtn">Les mer om {event.name} her!</Link>
           </article>)}
+    </section>
+    <section className="by-knapper">
+      <h2>Hva skjer i verdens storbyer?</h2>
+      <article>
+        <Link>Oslo</Link>
+        <Link>Stockholm</Link>
+        <Link>Berlin</Link>
+        <Link>London</Link>
+        <Link>Paris</Link>
+      </article>
     </section>
     </>
   )

@@ -1,0 +1,220 @@
+@use "./partials/colors";
+@use "./partials/fonts";
+
+
+// Mobil-first
+* {
+    color: colors.$blacktext;
+    padding: 0;
+    margin: 0;
+}
+
+header {
+    background-color: colors.$header;
+
+    nav {       
+        .header-desktop {
+            display: none;
+        }
+
+        .header-mobil {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            text-decoration: none;
+            padding: 0 .4rem;
+
+            .logo{
+                display : flex;
+                font-weight: bold;
+                align-items: center;
+                text-decoration: none;
+                font-family: fonts.$logo;
+                font-size: 3rem;
+            }
+
+            .hamburger {
+                position: absolute;
+                right: 0;
+                top: 70px;
+                width: 300px;
+                height: 163px;
+                background-color: colors.$header;
+                
+                
+                
+                ul {
+                    list-style: none;
+                    
+
+                    li {
+                        padding: 10px;
+                        border-bottom: 1px solid black;
+                        
+                        //https://www.w3schools.com/howto/howto_css_arrows.asp
+                        .arrow {
+                            border: solid black;
+                            border-width: 0 2px 2px 0;
+                            display: inline-block;
+                            padding: 9px;
+                            
+                            transform: rotate(-45deg);
+                        }
+                    }
+                }
+
+                a {
+                    text-decoration: none;
+                    display: flex;
+                    justify-content: space-between;
+                }
+            }
+
+            .hamburger2 {
+
+            }
+
+            img {
+                color: colors.$blacktext;
+                width: 40px;
+            }
+        }
+    }
+}
+
+/* Tablet: */
+@media (min-width: 481px) and (max-width: 768px) {
+}
+
+/* Liten desktop */
+@media (min-width: 769px) and (max-width: 1024px) {
+
+    
+    header {
+        //display: block;
+        padding: 1rem;
+        background-color: colors.$header;
+        
+        
+        // Legger på en display flex for på nav for å få elementene til å stå på linje
+        nav {
+            .header-mobil {
+                display: none;
+            }        
+            
+            .header-desktop {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                width: 100%;
+                
+
+                .logo {
+                    font-weight: bold;
+                    text-decoration: none;
+                    font-family: fonts.$logo;
+                    font-size: 3rem;
+                    margin-right: -5rem;
+                }
+
+                ul {
+                    display: flex;
+                    //align-items: center;
+                    padding: 0;
+                    font-family: fonts.$quantitytext;
+        
+                    li {
+                    
+                        list-style-type: none;
+                        padding: 20px;
+                        //Setter på hover på a-tag for å bytte farge på teksten. 
+                    
+                        a:hover {
+                            color: colors.$whitetext;
+                        }
+        
+                        a {
+                            text-decoration: none;
+                            color: colors.$blacktext;
+                        }
+                    }  
+                }
+
+                span {
+                    list-style: none;
+
+                    a {
+                        text-decoration: none;
+                    }
+                }
+            }       
+        }
+    }
+}
+
+/* Stor desktop */
+@media (min-width: 1025px) {
+    header {
+        //display: block;
+        padding: 1rem;
+        background-color: colors.$header;
+        
+        
+        // Legger på en display flex for på nav for å få elementene til å stå på linje
+        nav {
+            .header-mobil {
+                display: none;
+            }
+            color: colors.$blacktext;         
+            
+            .header-desktop {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                width: 100%;
+                padding: 0 .5rem;
+                
+
+                .logo {
+                    font-weight: bold;
+                    text-decoration: none;
+                    font-family: fonts.$logo;
+                    font-size: 3rem;
+                    margin-right: -8rem;
+                }
+
+                ul {
+                    display: flex;
+                    //align-items: center;
+                    padding: 0;
+                    font-family: fonts.$quantitytext;
+        
+                    li {
+                    
+                        list-style-type: none;
+                        padding: 20px;
+                        //Setter på hover på a-tag for å bytte farge på teksten. 
+                    
+                        a:hover {
+                            color: colors.$whitetext;
+                        }
+        
+                        a {
+                            text-decoration: none;
+                            color: colors.$blacktext;
+                        }
+                    }  
+                }
+
+                span {
+                    list-style: none;
+
+                    a {
+                        text-decoration: none;
+                    }
+                }
+            }       
+        }
+    }
+
+}

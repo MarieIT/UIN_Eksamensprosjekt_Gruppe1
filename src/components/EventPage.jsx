@@ -6,13 +6,13 @@ export default function EventPage({ discovery, setApi }) {
   const [event, setEvent] = useState()
 
   useEffect(() => {
-      fetch(`https://app.ticketmaster.com/discovery/v2/attractions?apikey=LWeeRs6C0ToGwEe5Gz96AnZM9scR2ynq&id=${id}`)
+      fetch(`https://app.ticketmaster.com/discovery/v2/events?apikey=LWeeRs6C0ToGwEe5Gz96AnZM9scR2ynq&id=${id}`)
       .then((res) => {
         return res.json();
       })
       .then((data) => {
         console.log(data, "event page ");
-        setEvent(data._embedded.attractions[0]);
+        setEvent(data._embedded.events[0]);
       })  
     }, [])
 

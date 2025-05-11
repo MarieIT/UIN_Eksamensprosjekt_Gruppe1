@@ -16,7 +16,7 @@ export default function LoggInn({setUserLoggedInn}){
         event.preventDefault()
         const existingUser = JSON.parse(localStorage.getItem("user"))
         const exists = userLogin.username === existingUser.username && userLogin.password === existingUser.password
-        console.log(exists)
+        console.log("does he exist? ", exists)
         if(exists){
             sessionStorage.setItem("loggedinn", "true")
             setUserLoggedInn(true)

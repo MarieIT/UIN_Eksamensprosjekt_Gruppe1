@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { Link, useParams } from "react-router-dom"
 import '../styles/home.scss'
 
 export default function Home({ discovery, setApi }) {
@@ -32,7 +33,7 @@ export default function Home({ discovery, setApi }) {
             <h2>{event.name}</h2>
             <img src={event.images.
             filter(image => image.width > 1000)[0].url}/>
-            <button className="mainEventBtn">Les mer om festivalen her!</button>
+          <Link to={`/event/${event.id}`} className="mainEventBtn">Les mer om festivalen her!</Link>
           </article>)}
     </section>
     </>

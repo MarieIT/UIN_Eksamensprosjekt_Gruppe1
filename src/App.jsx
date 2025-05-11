@@ -24,7 +24,7 @@ function App() {
           setLinkData(<><li><Link to={"/dashboard"}>Min side</Link></li><li><button onClick={handleClick}>Logg ut</button></li></>)
       }
       else{
-          setLinkData(<li><Link to={"/logginn"}>Logg inn</Link></li>)
+          setLinkData(<li><Link to={"/logginn"}>Logg inn<i className="arrow"></i></Link></li>)
       }
       console.log("linkdata", linkData)
   }, [userLoggedInn])
@@ -37,14 +37,6 @@ function App() {
   }
 
   const [discovery, setApi] = useState()
-
-  /*const getTestApi = async () => {
-    fetch("https://app.ticketmaster.com/discovery/v2/events?apikey=LWeeRs6C0ToGwEe5Gz96AnZM9scR2ynq&keyword=findings&locale=*")
-      .then((response) => response.json())
-      .then((data) => setApi(data))
-      .catch((error) => console.error("Feil ved fetch av Findings", error))
-  };
-  */
 
   useEffect(() => {
     //https://www.freecodecamp.org/news/how-to-fetch-api-data-in-react/

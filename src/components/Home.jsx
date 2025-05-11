@@ -33,7 +33,7 @@ export default function Home({ discovery, setApi }) {
             <h2>{event.name}</h2>
             <img src={event.images.
             filter(image => image.width > 1000)[0].url}/>
-          <Link to={`/event/${event.id}`} className="mainEventBtn">Les mer om festivalen her!</Link>
+          <Link to={`/event/${event.id}`} className="mainEventBtn">Les mer om {event.name} her!</Link>
           </article>)}
     </section>
     </>

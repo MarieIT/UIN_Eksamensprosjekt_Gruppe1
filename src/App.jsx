@@ -24,7 +24,7 @@ function App() {
           setLinkData(<><li><Link to={"/dashboard"}>Min side</Link></li><li><button onClick={handleClick}>Logg ut</button></li></>)
       }
       else{
-          setLinkData(<li><Link to={"/logginn"}>Logg inn</Link></li>)
+          setLinkData(<li><Link to={"/logginn"}>Logg inn<i className="arrow"></i></Link></li>)
       }
       console.log("linkdata", linkData)
   }, [userLoggedInn])

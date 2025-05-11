@@ -1,6 +1,8 @@
 @use "./partials/colors"; 
 @use "./partials/fonts.scss"; 
 
+
+//Mobile-first
 #root {
     margin: 0, auto; 
     width: 100%;
@@ -13,32 +15,40 @@ main {
     justify-content: center;
     align-items: center;
     margin: 0 auto; 
-    padding: 0 20px; 
+    padding: 0 20px;
 
-    article {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        margin: 0 auto;
-        padding: 0 20px;
+    section {
         
 
-        img {
-            max-width: 333px;
-            min-height: auto;
-        }
-
-        .mainEventBtn {
-            color: colors.$whitetext;
-            background-color: colors.$buttons;
-            padding: 1rem;
-            border-radius: 2px;
-            text-decoration: none;
-
-        }
+        article {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto;
+            padding: 0 20px;
+            gap: 2rem;
+            
     
+            img {
+                max-width: 333px;
+                min-height: auto;
+            }
+    
+            .mainEventBtn {
+                color: colors.$whitetext;
+                background-color: colors.$buttons;
+                padding: 1rem;
+                border-radius: 2px;
+                text-decoration: none;
+    
+            }
+        
+        }
+
     }
+
+    
 }
 
 

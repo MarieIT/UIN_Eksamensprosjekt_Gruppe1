@@ -34,7 +34,49 @@ header {
             }
 
             .hamburger {
-                display: none;
+                position: absolute;
+                right: 0;
+                top: 70px;
+                width: 300px;
+                height: 163px;
+                background-color: colors.$header;
+                
+                
+                
+                ul {
+                    list-style: none;
+                    
+
+                    li {
+                        padding: 10px;
+                        border-bottom: 1px solid black;
+                        
+                        //https://www.w3schools.com/howto/howto_css_arrows.asp
+                        .arrow {
+                            border: solid black;
+                            border-width: 0 2px 2px 0;
+                            display: inline-block;
+                            padding: 9px;
+                            
+                            transform: rotate(-45deg);
+                        }
+                    }
+                }
+
+                a {
+                    text-decoration: none;
+                    display: flex;
+                    justify-content: space-between;
+                }
+            }
+
+            .hamburger2 {
+
+            }
+
+            img {
+                color: colors.$blacktext;
+                width: 40px;
             }
         }
     }

@@ -22,7 +22,7 @@ function App() {
   useEffect(() => {
       if(JSON.parse(sessionStorage.getItem("loggedinn")) == true){
           setLinkData(<><li><Link to={"/dashboard"}>Min side<i className="arrow"></i></Link></li>
-          <div className="button-flex"><li ><button onClick={handleClick}>Logg ut<i className="arrow"></i></button></li></div></>)
+          <li><button onClick={handleClick}>Logg ut<i className="arrow"></i></button></li></>)
       }
       else{
           setLinkData(<li><Link to={"/logginn"}>Logg inn<i className="arrow"></i></Link></li>)

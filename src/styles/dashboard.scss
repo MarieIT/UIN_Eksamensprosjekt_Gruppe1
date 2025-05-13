@@ -22,7 +22,7 @@ main {
         gap: 1.2rem; 
         
         p {
-            font-family: fonts.$quantitytext; 
+            font-family: fonts.$titles; 
             font-size: 1.6rem; 
             color: colors.$blacktext;
             text-align: center; 
@@ -52,7 +52,7 @@ main {
     #user-purchases {
         
         h3 {
-            font-family: fonts.$quantitytext; 
+            font-family: fonts.$titles; 
             font-size: 1.5rem; 
             color: colors.$blacktext; 
             margin-bottom: 50px; 
@@ -62,7 +62,7 @@ main {
     #user-wishlist {
 
         h3 { 
-            font-family: fonts.$quantitytext; 
+            font-family: fonts.$titles; 
             font-size: 1.5rem; 
             color: colors.$blacktext;
             margin-bottom: 50px; 
@@ -72,7 +72,7 @@ main {
     #user-friends {
 
         h3 {
-            font-family: fonts.$quantitytext; 
+            font-family: fonts.$titles; 
             font-size: 1.5rem; 
             color: colors.$blacktext; 
             text-align: center;

@@ -37,14 +37,13 @@ main {
             .mainEventBtn {
                 color: colors.$whitetext;
                 background-color: colors.$buttons;
-                padding: .7rem 1.2rem;
+                padding: .5rem 1rem;
                 border-radius: 2px;
                 text-decoration: none;
-                width: auot;
+                width: auto;
                 height: 25px;
-                text-align: left;
+                text-align: center;
                 display: inline-block;
-    
     
             }
         
@@ -130,7 +129,6 @@ body {
                 text-decoration: none;
                 width: auto;
                 height: 25px;
-                text-align: left;
                 display: inline-block;
             }
         }
@@ -140,4 +138,21 @@ body {
 
 /* Stor desktop */
 @media (min-width: 1025px) {
+    main {
+        display: block; 
+        h1 {
+            font-family: fonts.$titles;
+            font-size: 2rem;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            gap: 2.5rem;
+        }
+    }
 }

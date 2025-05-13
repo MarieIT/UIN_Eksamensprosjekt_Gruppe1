@@ -1,9 +1,9 @@
 import Nav from "./Nav";
 
-export default function Layout({ children }) {
+export default function Layout({ children,linkData }) {
   return (
     <>
-      <Nav/>
+      <Nav linkData={linkData}/>
       <main>
         {children}
       </main>

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
+import "../styles/dashboard.scss"
 
 export default function Dashboard({handleClick}) {
   const [user, setUser] = useState()
@@ -10,7 +11,7 @@ export default function Dashboard({handleClick}) {
 
   return (
     <>
-      <h2>Dashbord</h2>
+      <h1>Dashbord</h1>
       <section id="user-info">
         <p>{user?.username}</p>
         <button onClick={handleClick}>Logg ut</button>

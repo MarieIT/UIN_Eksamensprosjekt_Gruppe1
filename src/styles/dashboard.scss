@@ -6,38 +6,45 @@
 #root {
     margin: 0, auto; 
     width: 100%;
-    font-family: fonts.$quantitytext;
 }
 
 main { 
 
     h1 {
         font-family: fonts.$titles;
-        font-size: 2rem; 
+        font-size: 2.8rem; 
         color: colors.$blacktext; 
+        margin: 0px 0px 25px; 
     }
 
     #user-info { 
+
+        gap: 1.2rem; 
         
         p {
             font-family: fonts.$quantitytext; 
-            font-size: 1.5rem; 
+            font-size: 1.6rem; 
             color: colors.$blacktext;
+            text-align: center; 
         }
 
         button {
             font-family: fonts.$buttons; 
-            font-size: 1.3rem; 
+            font-size: 1.4rem; 
             background-color: colors.$buttons;
             color: colors.$whitetext;
-            align-items: center; 
+            align-items: center;
+            margin: 0 100px 0 100px;
+            padding: 15px 0px 15px 0px; 
+            border-color: colors.$frames;
         }
 
         img {
             align-items: center;
-            padding: 2rem;
-            max-width: 250px;
-            min-width: 200px;  
+            max-width: 333px;
+            height: auto; 
+            border: 10px solid; 
+            border-color: colors.$frames; 
         }
     }
 

@@ -1,0 +1,127 @@
+@use "./partials/colors"; 
+@use "./partials/fonts.scss";
+
+//Mobile-first 
+
+#root {
+    margin: 0, auto; 
+    width: 100%;
+}
+
+main { 
+
+    h1 {
+        font-family: fonts.$titles;
+        font-size: 2.8rem; 
+        color: colors.$blacktext; 
+        margin: 0px 0px 25px; 
+    }
+
+    #user-info { 
+
+        gap: 1.2rem; 
+        
+        p {
+            font-family: fonts.$quantitytext; 
+            font-size: 1.6rem; 
+            color: colors.$blacktext;
+            text-align: center; 
+        }
+
+        button {
+            font-family: fonts.$buttons; 
+            font-size: 1.4rem; 
+            background-color: colors.$buttons;
+            color: colors.$whitetext;
+            margin: 0 100px 0 100px;
+            padding: 15px 0px 15px 0px; 
+            border-color: colors.$frames;
+        }
+
+        img {
+            max-width: 333px;
+            height: auto; 
+            margin-bottom: 50px;  
+            border: 10px solid;
+            border-color: colors.$frames;
+            border-radius: 25px; 
+            
+        }
+    }
+
+    #user-purchases {
+        
+        h3 {
+            font-family: fonts.$quantitytext; 
+            font-size: 1.5rem; 
+            color: colors.$blacktext; 
+            margin-bottom: 50px; 
+        }
+    }
+
+    #user-wishlist {
+
+        h3 { 
+            font-family: fonts.$quantitytext; 
+            font-size: 1.5rem; 
+            color: colors.$blacktext;
+            margin-bottom: 50px; 
+        }
+    }
+
+    #user-friends {
+
+        h3 {
+            font-family: fonts.$quantitytext; 
+            font-size: 1.5rem; 
+            color: colors.$blacktext; 
+            text-align: center;
+        }
+
+        article {
+
+            background-color: colors.$frames; 
+            max-width: 333px;
+            border-radius: 25px; 
+            align-items: center; 
+            margin: 0px; 
+            padding: 0px; 
+
+            img { 
+                align-content: center;
+                max-width: 200px;
+                height: auto;
+                margin-bottom: 25px;
+                margin-top: 25px;
+                border-radius: 25px; 
+            }
+
+            h4 {
+                font-family: fonts.$quantitytext; 
+                font-size: 1.3rem; 
+                color: colors.$blacktext; 
+                text-align: center;
+                padding-left: 25px;
+                padding-right: 25px;
+                color: colors.$whitetext; 
+            }
+
+            p {
+                font-family: fonts.$quantitytext; 
+                font-size: 1rem; 
+                color: colors.$blacktext;
+                text-align: center;
+                padding-left: 25px;
+                padding-right: 25px;
+                margin-bottom: 25px; 
+                color: colors.$whitetext; 
+
+                span {
+                    color: colors.$whitetext;
+                }
+            }
+        }
+
+    }
+
+}

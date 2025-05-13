@@ -1,9 +1,12 @@
 @use "./partials/colors"; 
 @use "./partials/fonts.scss"; 
 
+
+//Mobile-first
 #root {
     margin: 0, auto; 
-    width: 100%; 
+    width: 100%;
+    font-family: fonts.$quantitytext;
 }
 
 main {
@@ -11,25 +14,82 @@ main {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: 0 auto; 
-    padding: 0 20px; 
-    width: 100%; 
+    margin: 3rem auto; 
+    padding: 0 20px;
 
     section {
         display: flex;
         flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        margin: 0 auto;
-        padding: 0 20px;
-        width: 100%;
+        gap: 2.5rem;
 
-        img {
-            max-width: 333px;
-            min-height: auto;
-        }
+        article {
+            display: flex;
+            flex-direction: column;
+            margin: 1rem auto;
+            padding: 0 20px;
+            gap: 1rem;
+            
+            img {
+                max-width: 333px;
+                min-height: auto;
+            }
     
+            .mainEventBtn {
+                color: colors.$whitetext;
+                background-color: colors.$buttons;
+                padding: .7rem 1.2rem;
+                border-radius: 2px;
+                text-decoration: none;
+                width: auot;
+                height: 25px;
+                text-align: left;
+                display: inline-block;
+    
+    
+            }
+        
+        }
+
     }
+
+    .by-knapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 3rem 0 2rem 0;
+
+        article {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+
+            a {
+                text-decoration: none;
+                color: colors.$whitetext;
+                background-color: colors.$buttons;
+                padding: .7rem 1.2rem;
+                border-radius: 2px;
+                text-decoration: none;
+                width: auto;
+                height: 25px;
+            }
+        }
+    }
+
+    .artikkel-fra-byer {
+        
+        article{
+            border: 1px solid black;
+            max-width: 320px;
+            padding: 1rem;
+
+            p{
+                line-height: 5px;
+            }
+        }
+    }
+
+    
 }
 
 

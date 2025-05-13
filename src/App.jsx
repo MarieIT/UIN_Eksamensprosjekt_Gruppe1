@@ -3,7 +3,7 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import Layout from './components/Layout'
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate, Link, useNavigate } from 'react-router-dom';
 import EventPage from './components/EventPage'
 import Home from './components/Home'
 import CategoryPage from './components/CategoryPage'
@@ -15,17 +15,29 @@ function App() {
   useEffect(() => {
     localStorage.setItem("user", JSON.stringify({username: "TomHeine", password: "123"}))
     setUserLoggedInn(JSON.parse(sessionStorage.getItem("loggedinn")))
-    console.log(userLoggedInn)
+    console.log("userloggedinn", userLoggedInn)
   }, [])
-  const [discovery, setApi] = useState()
 
-  /*const getTestApi = async () => {
-    fetch("https://app.ticketmaster.com/discovery/v2/events?apikey=LWeeRs6C0ToGwEe5Gz96AnZM9scR2ynq&keyword=findings&locale=*")
-      .then((response) => response.json())
-      .then((data) => setApi(data))
-      .catch((error) => console.error("Feil ved fetch av Findings", error))
-  };
-  */
+  const [linkData, setLinkData] = useState(<li><Link to={"/logginn"}>Logg inn</Link></li>)
+  useEffect(() => {
+      if(JSON.parse(sessionStorage.getItem("loggedinn")) == true){
+          setLinkData(<><li><Link to={"/dashboard"}>Min side<i className="arrow"></i></Link></li>
+          <li><button onClick={handleClick}>Logg ut<i className="arrow"></i></button></li></>)
+      }
+      else{
+          setLinkData(<li><Link to={"/logginn"}>Logg inn<i className="arrow"></i></Link></li>)
+      }
+      console.log("linkdata", linkData)
+  }, [userLoggedInn])
+
+  const navigate = useNavigate()
+  function handleClick(){
+    navigate("/")
+    sessionStorage.clear()
+    setUserLoggedInn(false)
+  }
+
+  const [discovery, setApi] = useState()
 
   useEffect(() => {
     //https://www.freecodecamp.org/news/how-to-fetch-api-data-in-react/
@@ -41,13 +53,13 @@ function App() {
 
 
   return (
-    <Layout>
+    <Layout linkData={linkData}>
       <Routes>
         <Route path='/' element={<Home />}/>
-        <Route path='/event/' element={<EventPage discovery={discovery} setApi={setApi} />}/>
+        <Route path='/event/:id' element={<EventPage discovery={discovery} setApi={setApi} />}/>
         <Route path='/category/:slug' element={<CategoryPage />}/>
-        <Route path='/dashboard' element={<Dashboard />}/>
-        <Route path='/logginn' element={userLoggedInn ? <Navigate to={"/dashboard"}/>: <LoggInn setUserLoggedInn={setUserLoggedInn}/>}/>
+        <Route path='/dashboard' element={<Dashboard handleClick={handleClick}/>}/>
+        <Route path='/logginn' element={<LoggInn setUserLoggedInn={setUserLoggedInn}/>}/>
       </Routes>
     </Layout>
   )

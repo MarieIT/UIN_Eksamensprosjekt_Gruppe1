@@ -17,6 +17,10 @@ main {
     margin: 3rem auto; 
     padding: 0 20px;
 
+    h1{
+        font-family: fonts.$titles;
+    }
+
     section {
         display: flex;
         flex-direction: column;

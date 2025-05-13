@@ -1,0 +1,40 @@
+@use "./partials/colors"; 
+@use "./partials/fonts.scss";
+
+//Mobile-first 
+
+#root {
+    margin: 0, auto; 
+    width: 100%;
+    font-family: fonts.$quantitytext;
+}
+
+main { 
+
+    h1 {
+        font-family: fonts.$titles;
+        color: colors.$blacktext; 
+    }
+
+    #user-info { 
+        
+        p {
+            font-family: fonts.$titles; 
+            color: colors.$blacktext;
+        }
+
+        button {
+            font-family: fonts.$buttons; 
+            font-size: 2rem; 
+            background-color: colors.$buttons;
+            color: colors.$whitetext;
+            align-items: center; 
+        }
+
+        img {
+            align-items: center;
+            padding: 2rem; 
+        }
+    }
+
+}

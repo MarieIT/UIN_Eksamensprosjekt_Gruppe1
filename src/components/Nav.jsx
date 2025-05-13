@@ -17,7 +17,7 @@ export default function Nav({linkData}){
                     <ul>
                         <li><Link to={"/category/music"}>Musikk</Link></li>
                         <li><Link to={"/category/sport"}>Sport</Link></li>
-                        <li><Link to={"/category/theatreshow"}>Teater/Show</Link></li>
+                        <li><Link to={"/category/theatre"}>Teater/Show</Link></li>
                     </ul>
                     <span>
                         {linkData}

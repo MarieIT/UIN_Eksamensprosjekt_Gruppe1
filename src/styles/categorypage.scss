@@ -1,3 +1,16 @@
-.hamburger2{
-  display: none;
+#root {
+
+  margin: 0;
+  padding: 0;
+}
+
+main  {
+  
+  article {
+    width: 100%;
+
+    img {
+      width: 400px;
+    }
+  }
 }

@@ -42,6 +42,7 @@ main {
             }
     
             .mainEventBtn {
+                max-width: 300px;
                 color: colors.$whitetext;
                 background-color: colors.$buttons;
                 padding: .5rem 1rem;
@@ -129,12 +130,12 @@ body {
             gap: 2.5rem;
 
             .mainEventBtn {
+                max-width: 300px;
                 color: colors.$whitetext;
                 background-color: colors.$buttons;
                 padding: .7rem 1.2rem;
                 border-radius: 2px;
                 text-decoration: none;
-                width: auto;
                 height: 25px;
                 display: inline-block;
             }

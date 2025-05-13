@@ -23,9 +23,10 @@ export default function CategoryPage() {
 
   useEffect(() => {
     setMapData(() =>
-          <>
-          <section>          
-            <form action="/action_page.php">
+        <>
+          <section className="filter-search"> 
+            <h3>Filtrert søk</h3>         
+            <form action={slug}>
               <label for="dato">Dato:</label>
               <input type="date" id="dato-felt" name="dato" />
               <label for="countries">Land:</label>
@@ -42,10 +43,16 @@ export default function CategoryPage() {
                 <option value="stockholm">Stockholm</option>
                 <option value="kobenhavn">København</option>
               </select>
-              <input type="submit" name="filtrer"/>
-            </form>          
+              <input type="submit" value="Filtrer" />
+            </form>
+            <form>
+            <h3>Søk</h3>
+              <label for="search">Søk etter event, attraksjon eller spillested</label>
+              <input type="text" id="search" onkeyup="myFunction()" placeholder="findings" />
+            </form>
           </section>
           <section>
+            <h3>Attractions</h3>
             {genre?._embedded.events.
               map((genreEvent) => <article key={genreEvent.id}>
                 <img src={genreEvent.images.
@@ -58,7 +65,7 @@ export default function CategoryPage() {
                 <p>{genreEvent._embedded.venues[0].name}</p>
             </article>)}
           </section>
-          </>
+        </>
     )
   }, [genre])
 

@@ -6,11 +6,24 @@
 
 main  {
   
-  article {
-    width: 100%;
-
-    img {
-      width: 400px;
+  section {
+    display: flex;
+    article {
+      width: 100%;
+  
+      img {
+        width: 400px;
+      }
     }
   }
+
+  .filter-search{
+    display: flex;
+    flex-direction: column;
+
+    input {
+      max-width: 100px;
+    }
+  }
+  
 }

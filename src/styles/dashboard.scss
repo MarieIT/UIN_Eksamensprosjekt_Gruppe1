@@ -33,18 +33,19 @@ main {
             font-size: 1.4rem; 
             background-color: colors.$buttons;
             color: colors.$whitetext;
-            align-items: center;
             margin: 0 100px 0 100px;
             padding: 15px 0px 15px 0px; 
             border-color: colors.$frames;
         }
 
         img {
-            align-items: center;
             max-width: 333px;
             height: auto; 
-            border: 10px solid; 
-            border-color: colors.$frames; 
+            margin-bottom: 50px;  
+            border: 10px solid;
+            border-color: colors.$frames;
+            border-radius: 25px; 
+            
         }
     }
 
@@ -54,6 +55,7 @@ main {
             font-family: fonts.$quantitytext; 
             font-size: 1.5rem; 
             color: colors.$blacktext; 
+            margin-bottom: 50px; 
         }
     }
 
@@ -62,7 +64,8 @@ main {
         h3 { 
             font-family: fonts.$quantitytext; 
             font-size: 1.5rem; 
-            color: colors.$blacktext; 
+            color: colors.$blacktext;
+            margin-bottom: 50px; 
         }
     }
 
@@ -72,25 +75,50 @@ main {
             font-family: fonts.$quantitytext; 
             font-size: 1.5rem; 
             color: colors.$blacktext; 
+            text-align: center;
         }
 
         article {
-             
-            img {
-                height: 150;
-                width: 250; 
+
+            background-color: colors.$frames; 
+            max-width: 333px;
+            border-radius: 25px; 
+            align-items: center; 
+            margin: 0px; 
+            padding: 0px; 
+
+            img { 
+                align-content: center;
+                max-width: 200px;
+                height: auto;
+                margin-bottom: 25px;
+                margin-top: 25px;
+                border-radius: 25px; 
             }
 
             h4 {
                 font-family: fonts.$quantitytext; 
                 font-size: 1.3rem; 
                 color: colors.$blacktext; 
+                text-align: center;
+                padding-left: 25px;
+                padding-right: 25px;
+                color: colors.$whitetext; 
             }
 
             p {
                 font-family: fonts.$quantitytext; 
                 font-size: 1rem; 
                 color: colors.$blacktext;
+                text-align: center;
+                padding-left: 25px;
+                padding-right: 25px;
+                margin-bottom: 25px; 
+                color: colors.$whitetext; 
+
+                span {
+                    color: colors.$whitetext;
+                }
             }
         }
 

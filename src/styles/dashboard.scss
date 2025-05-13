@@ -45,6 +45,7 @@ main {
         
         h3 {
             font-family: fonts.$quantitytext; 
+            font-size: 1.5rem; 
             color: colors.$blacktext; 
         }
     }
@@ -53,8 +54,39 @@ main {
 
         h3 { 
             font-family: fonts.$quantitytext; 
+            font-size: 1.5rem; 
             color: colors.$blacktext; 
         }
+    }
+
+    #user-friends {
+
+        h3 {
+            font-family: fonts.$quantitytext; 
+            font-size: 1.5rem; 
+            color: colors.$blacktext; 
+        }
+
+        article {
+             
+            img {
+                height: 150;
+                width: 250; 
+            }
+
+            h4 {
+                font-family: fonts.$quantitytext; 
+                font-size: 1.3rem; 
+                color: colors.$blacktext; 
+            }
+
+            p {
+                font-family: fonts.$quantitytext; 
+                font-size: 1rem; 
+                color: colors.$blacktext;
+            }
+        }
+
     }
 
 }

@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import '../styles/logginn.scss'
+
 
 export default function LoggInn({setUserLoggedInn}){
     const [userLogin, setUserLogin] = useState([]);
@@ -29,7 +31,7 @@ export default function LoggInn({setUserLoggedInn}){
     return(
         <>
             <h2>LoggInn</h2>
-            <form>
+            <form id="logginn">
                 <label>
                     Brukernavn
                     <input type="text" placeholder="TomHeine..." name="username" onChange={handleChange}/>
@@ -40,7 +42,7 @@ export default function LoggInn({setUserLoggedInn}){
                 </label>
                 <button onClick={handleClick}>Logg inn</button>
             </form>
-            {error}
+            {error && <p className='errormessage'>{error}</p>}
         </>
     )
 }

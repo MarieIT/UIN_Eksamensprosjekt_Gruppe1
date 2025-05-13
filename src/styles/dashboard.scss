@@ -13,19 +13,21 @@ main {
 
     h1 {
         font-family: fonts.$titles;
+        font-size: 2rem; 
         color: colors.$blacktext; 
     }
 
     #user-info { 
         
         p {
-            font-family: fonts.$titles; 
+            font-family: fonts.$quantitytext; 
+            font-size: 1.5rem; 
             color: colors.$blacktext;
         }
 
         button {
             font-family: fonts.$buttons; 
-            font-size: 2rem; 
+            font-size: 1.3rem; 
             background-color: colors.$buttons;
             color: colors.$whitetext;
             align-items: center; 
@@ -33,7 +35,25 @@ main {
 
         img {
             align-items: center;
-            padding: 2rem; 
+            padding: 2rem;
+            max-width: 250px;
+            min-width: 200px;  
+        }
+    }
+
+    #user-purchases {
+        
+        h3 {
+            font-family: fonts.$quantitytext; 
+            color: colors.$blacktext; 
+        }
+    }
+
+    #user-wishlist {
+
+        h3 { 
+            font-family: fonts.$quantitytext; 
+            color: colors.$blacktext; 
         }
     }
 

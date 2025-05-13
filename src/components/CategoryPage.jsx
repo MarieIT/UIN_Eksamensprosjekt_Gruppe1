@@ -1,4 +1,5 @@
 import { useParams } from "react-router-dom"
+import '../styles/categorypage.scss'
 
 export default function CategoryPage() {
   const { slug } = useParams()

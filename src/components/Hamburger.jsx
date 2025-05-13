@@ -9,7 +9,6 @@ export default function Hamburger({ linkData }) {
   const toggleHamburger = () => {
     setCheckHamburger(!checkHamburger)
   }
-  console.log(checkHamburger);
 
   const [hamburger, setHamburger] = useState()
   useEffect(() => {

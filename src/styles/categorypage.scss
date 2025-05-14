@@ -1,3 +1,7 @@
+@use "./partials/colors";
+@use "./partials/fonts.scss";
+
+
 #root {
 
   margin: 0;
@@ -9,6 +13,43 @@ main  {
   article {
     img {
       width: 400px;
+    }
+  }
+
+  #filtercategory {
+    display: flex;
+    flex-direction: column;
+  
+  
+    label {
+      font-size: 1rem;
+      padding: 0.2rem;
+      text-align: center;
+    }
+  
+    input {
+      background-color: rgb(250, 250, 250);
+      margin: 0.5rem;
+      padding: 0.5rem;
+      align-items: center;
+    }
+
+    select {
+      background-color: rgb(250, 250, 250);
+      margin: 0.5rem;
+      padding: 0.5rem;
+    }
+  
+    button {
+      margin: 1.5rem;
+      align-items: center;
+      color: colors.$whitetext;
+      background-color: colors.$buttons;
+      padding: 0.5rem 0.5rem;
+      font-size: 1rem;
+      text-decoration: none;
+      width: 100PX;
+      height: 50px;
     }
   }
 }

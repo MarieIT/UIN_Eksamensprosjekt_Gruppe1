@@ -6,6 +6,7 @@
 #root {
     margin: 0, auto; 
     width: 100%;
+    background-color: colors.$backgroundcolor;
 }
 
 main { 
@@ -19,13 +20,13 @@ main {
 
     #user-info { 
 
-        gap: 1.2rem; 
+        gap: 2rem; 
         
         p {
             font-family: fonts.$titles; 
             font-size: 1.6rem; 
             color: colors.$blacktext;
-            text-align: center; 
+            text-align: center;
         }
 
         button {
@@ -36,6 +37,7 @@ main {
             margin: 0 100px 0 100px;
             padding: 15px 0px 15px 0px; 
             border-color: colors.$frames;
+            font-weight: bold; 
         }
 
         img {
@@ -53,9 +55,30 @@ main {
         
         h3 {
             font-family: fonts.$titles; 
-            font-size: 1.5rem; 
+            font-size: 2rem; 
             color: colors.$blacktext; 
-            margin-bottom: 50px; 
+        }
+
+        article {
+
+            margin: 0; 
+            padding: 0;  
+            gap: 0; 
+            
+            img {
+                max-width: 333px;
+                height: auto;
+            }
+
+            h4 {
+                font-family: fonts.$quantitytext; 
+                font-size: 1.1rem;
+                color: colors.$whitetext; 
+                background-color: colors.$frames;
+                padding: 10px;
+                text-align: center; 
+            }
+             
         }
     }
 
@@ -63,7 +86,7 @@ main {
 
         h3 { 
             font-family: fonts.$titles; 
-            font-size: 1.5rem; 
+            font-size: 2rem; 
             color: colors.$blacktext;
             margin-bottom: 50px; 
         }
@@ -98,7 +121,7 @@ main {
 
             h4 {
                 font-family: fonts.$quantitytext; 
-                font-size: 1.3rem; 
+                font-size: 1.2rem; 
                 color: colors.$blacktext; 
                 text-align: center;
                 padding-left: 25px;
@@ -118,6 +141,7 @@ main {
 
                 span {
                     color: colors.$whitetext;
+                    font-weight: bolder;
                 }
             }
         }

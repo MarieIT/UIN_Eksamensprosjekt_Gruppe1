@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
+import "../styles/dashboard.scss"
 
 export default function Dashboard({handleClick}) {
   const [user, setUser] = useState()

@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom"
-import "../styles/dashboard.scss"
+import { Link, useNavigate } from "react-router-dom"
 
 export default function Dashboard({handleClick}) {
   const [user, setUser] = useState()
@@ -19,10 +18,43 @@ export default function Dashboard({handleClick}) {
       </section>
       <section id= "user-purchases">
         <h3>Mine Kjøp</h3>
-        {/** legge til billetter kjøpt */}  
+        <article>
+          <img src="https://s1.ticketm.net/dam/a/29a/fdf8b9b8-c529-458e-bdbc-3b473975c29a_TABLET_LANDSCAPE_16_9.jpg"/>
+          <h4>Findings Festival</h4>
+        </article>
+        <article>
+          <img src="https://s1.ticketm.net/dam/a/29a/fdf8b9b8-c529-458e-bdbc-3b473975c29a_TABLET_LANDSCAPE_16_9.jpg"/>
+          <h4>Findings Festival</h4>
+        </article>
+        <article>
+          <img src="https://s1.ticketm.net/dam/a/29a/fdf8b9b8-c529-458e-bdbc-3b473975c29a_TABLET_LANDSCAPE_16_9.jpg"/>
+          <h4>Findings Festival</h4>
+        </article>
+        <article>
+          <img src="https://s1.ticketm.net/dam/a/29a/fdf8b9b8-c529-458e-bdbc-3b473975c29a_TABLET_LANDSCAPE_16_9.jpg"/>
+          <h4>Findings Festival</h4>
+        </article>
+        <article>
+          <img src="https://s1.ticketm.net/dam/a/29a/fdf8b9b8-c529-458e-bdbc-3b473975c29a_TABLET_LANDSCAPE_16_9.jpg"/>
+          <h4>Findings Festival</h4>
+        </article>
+        <article>
+          <img src="https://s1.ticketm.net/dam/a/29a/fdf8b9b8-c529-458e-bdbc-3b473975c29a_TABLET_LANDSCAPE_16_9.jpg"/>
+          <h4>Findings Festival</h4>
+        </article>
+        {/** legge till billetter kjøpt */}  
       </section>
       <section id="user-wishlist">
         <h3>Min Ønskeliste</h3>
+        <ul>
+          <li><Link>Wicked</Link></li>
+          <li><Link>Disturbed</Link></li>
+          <li><Link>Legally Blond</Link></li>
+          <li><Link>Coldplay Worldtour</Link></li>
+          <li><Link>Finding Festivalen</Link></li>
+          <li><Link>Golf Klubben</Link></li>
+          <li><Link>Ty Dolls $ign</Link></li>
+        </ul>
         {/** ønskeliste items */}  
       </section>
       <section id="user-friends">

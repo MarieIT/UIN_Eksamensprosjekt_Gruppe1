@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { Link, useParams } from "react-router-dom"
 import '../styles/home.scss'
+import EventCard from "./EventCard";
 
 export default function Home({ discovery, setApi }) {
   const [eventContent, setEventContent] = useState();
@@ -70,16 +71,7 @@ export default function Home({ discovery, setApi }) {
     </section>    
     <section className="artikkel-fra-byer">
       {cityContent?._embedded.events.
-          map((cityEvent) => <article key={cityEvent.id}>
-            <img src={cityEvent.images.
-              filter(image => image.width > 1000)[0].url}/>
-            <h3>{cityEvent.name}</h3>
-            <p>{cityEvent.dates.start.localDate}</p>
-            <p>{cityEvent.dates.start.localTime}</p>
-            <p>{cityEvent._embedded.venues[0].city.name}</p>
-            <p>{cityEvent._embedded.venues[0].country.name}</p>
-            <p>{cityEvent._embedded.venues[0].name}</p>
-        </article>)}
+          map((cityEvent) => <EventCard event={cityEvent}/>)}
     </section>
     </>
   )

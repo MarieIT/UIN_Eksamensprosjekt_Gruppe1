@@ -6,23 +6,9 @@
 
 main  {
   
-  section {
-    display: flex;
-    article {
-      
-  
-      img {
-        width: 400px;
-      }
-    }
-  }
-
-  .filter-search{
-    display: flex;
-    flex-direction: column;
-
-    input {
-      max-width: 100px;
+  article {
+    img {
+      width: 400px;
     }
   }
   

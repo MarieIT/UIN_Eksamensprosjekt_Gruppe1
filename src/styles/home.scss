@@ -17,6 +17,13 @@ main {
     margin: 3rem auto; 
     padding: 0 20px;
 
+    h1 {
+        font-family: fonts.$titles;
+        font-size: 2.3rem;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+
     section {
         display: flex;
         flex-direction: column;
@@ -25,26 +32,26 @@ main {
         article {
             display: flex;
             flex-direction: column;
-            margin: 1rem auto;
+            margin: 1rem 1rem;
             padding: 0 20px;
             gap: 1rem;
             
             img {
-                max-width: 333px;
-                min-height: auto;
+                width: 300px;
+                height: 200px;
             }
     
             .mainEventBtn {
+                max-width: 300px;
                 color: colors.$whitetext;
                 background-color: colors.$buttons;
-                padding: .7rem 1.2rem;
+                padding: .5rem 1rem;
                 border-radius: 2px;
                 text-decoration: none;
-                width: auot;
+                width: auto;
                 height: 25px;
-                text-align: left;
+                text-align: center;
                 display: inline-block;
-    
     
             }
         
@@ -80,7 +87,7 @@ main {
         
         article{
             border: 1px solid black;
-            max-width: 320px;
+            width: 300px;
             padding: 1rem;
 
             p{
@@ -98,21 +105,62 @@ body {
     background-color: colors.$backgroundcolor; 
 }
 
-/* Medieforespørsel for store skjermer mellom 700-1023px: */
-@media (min-width: 700px) and (max-width: 1023px) {
-}
-/* Medieforespørsel for mellomstore skjermer: 2 kolonner for artikler */
-@media (min-width: 450px) {
+/* Tablet: */
+@media (min-width: 481px) and (max-width: 768px) {
+
+
 }
 
-/* Medieforespørsel for Desktop */
-@media (min-width: 1024px) {
+    /* Liten desktop */
+@media (min-width: 769px) and (max-width: 1024px) {
+
+    main {
+        display: block;
+        h1 {
+            font-family: fonts.$titles;
+            font-size: 2rem;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        section {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 2.5rem;
+
+            .mainEventBtn {
+                max-width: 300px;
+                color: colors.$whitetext;
+                background-color: colors.$buttons;
+                padding: .7rem 1.2rem;
+                border-radius: 2px;
+                text-decoration: none;
+                height: 25px;
+                display: inline-block;
+            }
+        }
+    }
 }
 
-/* Responsivt design for mindre skjermer */
-@media (max-width: 768px) {
-}
 
-/* Media query for viewport fra 1400px og større - tre kolonner */
-@media (min-width: 1350px) {
+/* Stor desktop */
+@media (min-width: 1025px) {
+    main {
+        display: block; 
+        h1 {
+            font-family: fonts.$titles;
+            font-size: 2rem;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            gap: 2.5rem;
+        }
+    }
 }

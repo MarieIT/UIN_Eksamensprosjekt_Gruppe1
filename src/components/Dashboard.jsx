@@ -10,13 +10,13 @@ export default function Dashboard({handleClick}) {
 
   return (
     <>
-      <h2>Dashbord</h2>
-      <section>
+      <h1>Dashbord</h1>
+      <section id="user-info">
         <p>{user?.username}</p>
         <button onClick={handleClick}>Logg ut</button>
         <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.explicit.bing.net%2Fth%3Fid%3DOIP.5swNd1zAKZRCz1LWWDueJwHaJ5%26pid%3DApi&f=1&ipt=9be4da7fb2566206dcf34fc5593f4b98ff2342cd36d155f441ce2aae7c72921c"/>
       </section>
-      <section>
+      <section id= "user-purchases">
         <h3>Mine Kjøp</h3>
         <article>
           <img src="https://s1.ticketm.net/dam/a/29a/fdf8b9b8-c529-458e-bdbc-3b473975c29a_TABLET_LANDSCAPE_16_9.jpg"/>
@@ -44,7 +44,7 @@ export default function Dashboard({handleClick}) {
         </article>
         {/** legge till billetter kjøpt */}  
       </section>
-      <section>
+      <section id="user-wishlist">
         <h3>Min Ønskeliste</h3>
         <ul>
           <li><Link>Wicked</Link></li>
@@ -57,7 +57,7 @@ export default function Dashboard({handleClick}) {
         </ul>
         {/** ønskeliste items */}  
       </section>
-      <section>
+      <section id="user-friends">
         <h3>Venner</h3>
         <article>
           <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fmedia.licdn.com%2Fdms%2Fimage%2FC4E03AQETIGLvxxQ12w%2Fprofile-displayphoto-shrink_800_800%2F0%2F1625595290274%3Fe%3D2147483647%26v%3Dbeta%26t%3DG5GHUAsJj01gfxfoNXxMwn0XFcQ1WjhuLO7hbDzkPLE&f=1&nofb=1&ipt=1f2355ef308909c2b18f613cb51c6bcf722ea1c5fd4b8409a02d9363990383bf"/>

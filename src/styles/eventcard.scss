@@ -36,3 +36,16 @@
     }
 }
 
+.star{
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    fill: colors.$header;
+}
+
+.event-card{
+    position: relative;
+}
+

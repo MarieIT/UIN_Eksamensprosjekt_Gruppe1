@@ -4,7 +4,7 @@ import '../styles/home.scss'
 import EventCard from "./EventCard";
 import AttractionCard from "./AttractionCard";
 
-export default function Home({ discovery, setApi }) {
+export default function Home({ isWishlisted, wishList, addToWishlist, removeWishlist }) {
   const [eventContent, setEventContent] = useState();
   const [cityContent, setCityContent] = useState();
   const [cityName, setCityName] = useState("Oslo");
@@ -67,7 +67,7 @@ export default function Home({ discovery, setApi }) {
     </section>    
     <section className="artikkel-fra-byer">
       {cityContent?._embedded.events.
-          map((cityEvent) => <EventCard event={cityEvent}/>)}
+          map((cityEvent) => <EventCard key={cityEvent?.id} event={cityEvent} isWishlisted={isWishlisted(wishList, cityEvent)} addToWishlist={addToWishlist} removeWishlist={removeWishlist}/>)}
     </section>
     </>
   )

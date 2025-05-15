@@ -22,7 +22,7 @@ main {
 
         gap: 2rem; 
         
-        p {
+        h2 {
             font-family: fonts.$titles; 
             font-size: 1.6rem; 
             color: colors.$blacktext;
@@ -54,7 +54,7 @@ main {
     #user-purchases {
 
         
-        h3 {
+        h2 {
             font-family: fonts.$titles; 
             font-size: 2rem; 
             color: colors.$blacktext; 
@@ -72,7 +72,7 @@ main {
                 height: auto;
             }
 
-            h4 {
+            h3 {
                 font-family: fonts.$quantitytext; 
                 font-size: 1.1rem;
                 color: colors.$whitetext; 
@@ -88,7 +88,7 @@ main {
 
         gap: 0; 
 
-        h3 { 
+        h2 { 
             font-family: fonts.$titles; 
             font-size: 2rem; 
             color: colors.$blacktext;
@@ -96,7 +96,8 @@ main {
             margin-top: 50px; 
             margin-bottom: 15px; 
         }
-
+        
+        //Legger til flex for å få ønskelisten til å flytte seg dynamisk. 
         ul {
             display: flex; 
             flex-direction: row;
@@ -127,7 +128,7 @@ main {
 
     #user-friends { 
 
-        h3 {
+        h2 {
             font-family: fonts.$titles; 
             font-size: 2rem; 
             color: colors.$blacktext; 
@@ -153,7 +154,7 @@ main {
                 border-radius: 25px; 
             }
 
-            h4 {
+            h3 {
                 font-family: fonts.$quantitytext; 
                 font-size: 1.2rem; 
                 color: colors.$blacktext; 
@@ -191,7 +192,24 @@ main {
 
  /* Liten desktop */
 @media (min-width: 769px) and (max-width: 1024px) {
+        main {
 
+        #user-info { 
+            
+            h2 { 
+                text-align: left; 
+            }
+
+            button {
+                margin: 10px; 
+                padding: 10px; 
+            }
+
+            img {
+                align-items: left; 
+            }
+        }
+    }
 }
 
 /* Stor desktop */

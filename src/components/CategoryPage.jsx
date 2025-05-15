@@ -1,12 +1,14 @@
 import { useParams } from "react-router-dom"
 import '../styles/categorypage.scss'
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 
 export default function CategoryPage() {
   const { slug } = useParams()
   const [genre, setGenre] = useState();
   const [mapData, setMapData] = useState();
   const [content, setContent] = useState();
+  const [formData, setFormData] = useState();
+  
 
 
 
@@ -16,36 +18,63 @@ export default function CategoryPage() {
       return res.json();
     })
     .then((data) => {
-      console.log(data, "setGenre");
       setGenre(data);
     })  
   }, [slug]);
 
+  const [search, setSearch] = useState();
+
+  const handleChange = (e) => {
+    setSearch(e.target.value);
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+  }
+
+  useEffect(() => {
+    setFormData(() =>
+      <section className="filter-search"> 
+        <h3>Filtrert søk</h3>         
+        <form action={slug}>
+          <label>
+            Dato: <input type="date" />
+          </label>
+          <label htmlFor="countries">Land:</label>
+          <select id="countries" name="land">
+            <option value="velg-land">Velg et land</option>
+            <option value="norge">Norge</option>
+            <option value="sverige">Sverige</option>
+            <option value="danmark">Danmark</option>
+          </select>
+          <label htmlFor="byer">By:</label>
+          <select id="countries" name="land">
+            <option value="velg-by">Velg en by</option>
+            <option value="oslo">Oslo</option>
+            <option value="stockholm">Stockholm</option>
+            <option value="kobenhavn">København</option>
+          </select>
+          <input type="submit" value="Filtrer" />
+        </form>
+        <form>
+        <h3>Søk</h3>
+          <label htmlFor="search">Søk etter event, attraksjon eller spillested</label>
+          <input type="text" id="search" placeholder="findings" />
+        </form>
+        <form onSubmit={handleSubmit}>  
+          <label htmlFor="search">Her kan du søke etter spill</label>
+          <input type="search" id="search" onChange={handleChange} />
+          <button >Søk</button>
+        </form>
+      </section>
+    )
+  }, [])
+
   useEffect(() => {
     setMapData(() =>
-          <>
-          <section>          
-            <form action="/action_page.php">
-              <label for="dato">Dato:</label>
-              <input type="date" id="dato-felt" name="dato" />
-              <label for="countries">Land:</label>
-              <select id="countries" name="land">
-                <option value="velg-land">Velg et land</option>
-                <option value="norge">Norge</option>
-                <option value="sverige">Sverige</option>
-                <option value="danmark">Danmark</option>
-              </select>
-              <label for="byer">By:</label>
-              <select id="countries" name="land">
-                <option value="velg-by">Velg en by</option>
-                <option value="oslo">Oslo</option>
-                <option value="stockholm">Stockholm</option>
-                <option value="kobenhavn">København</option>
-              </select>
-              <input type="submit" name="filtrer"/>
-            </form>          
-          </section>
+        <>
           <section>
+            <h3>Attractions</h3>
             {genre?._embedded.events.
               map((genreEvent) => <article key={genreEvent.id}>
                 <img src={genreEvent.images.
@@ -58,41 +87,30 @@ export default function CategoryPage() {
                 <p>{genreEvent._embedded.venues[0].name}</p>
             </article>)}
           </section>
-          </>
+        </>
     )
   }, [genre])
 
-
-  useEffect(() => {
-    setContent(
-      <>
-        <section>
-          <h2>hello</h2>
-        </section>
-        <section>
-          {mapData}
-        </section>
-      </>
-    )
-  }, [mapData])
-
-  console.log(mapData, "content")
+  
 
   function translateSlug(){
     switch(slug){
       case "music":
         return (
           <>
+            {formData}
             {mapData}           
           </>)
       case "sport":
         return (
           <>
+            {formData}
             {mapData}
           </>)
       case "theatre":
         return (
           <>
+            {formData}
             {mapData}
           </>)
       default:

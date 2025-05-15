@@ -22,6 +22,8 @@ export default function CategoryPage() {
     })  
   }, [slug]);
 
+  const [search, setSearch] = useState();
+
   function handleSubmit(e) {
     e.preventDefault();
   }
@@ -54,6 +56,11 @@ export default function CategoryPage() {
         <h3>Søk</h3>
           <label htmlFor="search">Søk etter event, attraksjon eller spillested</label>
           <input type="text" id="search" placeholder="findings" />
+        </form>
+        <form onSubmit={handleSubmit}>  
+          <label htmlFor="search">Her kan du søke etter spill</label>
+          <input type="search" id="search" onChange={handleChange} />
+          <button onClick={handleClick}>Søk etter spill</button>
         </form>
       </section>
     )

@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import '../styles/eventcard.scss'
 
 export default function EventCard({event}){

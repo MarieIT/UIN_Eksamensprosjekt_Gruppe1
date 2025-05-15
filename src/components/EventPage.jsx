@@ -22,9 +22,6 @@ export default function EventPage() {
       generatedHtml = Object.entries(attraction?.externalLinks).map((socialMedia, index) => <li key={index}><Link to={socialMedia[1]}>{socialMedia[0]}</Link></li>)
       return <>{generatedHtml}</>
     }
-    else{
-      console.log("No social media was found")
-    }
   }
 
   useEffect(() => {

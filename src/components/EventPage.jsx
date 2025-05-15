@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 import EventCard from "./EventCard"
 import ArtistCard from "./ArtistCard"
 
-export default function EventPage({ discovery, setApi }) {
+export default function EventPage() {
   const {id} = useParams()
   const [events, setEvents] = useState()
   const [artists, setArtists] = useState()
@@ -14,14 +14,6 @@ export default function EventPage({ discovery, setApi }) {
     .then((response) => response.json())
     .then((data) => {setEvents(data._embedded.events); setArtists(data._embedded.events[0]._embedded.attractions); setAttraction(data._embedded.events[0]._embedded.attractions[0])})
     .catch((error) => console.error("Fetching failed ", error))
-  }
-
-  function generateGenres(){
-    let generatedHtml
-    if(typeof attraction?.classifications[0] != "undefined"){
-      generatedHtml = Object.entries(attraction?.classifications[0]).map((genreInfo) => <li key={genreInfo[1].id}><span>{genreInfo[0]}</span>: {genreInfo[1].name}</li>)
-      return <>{generatedHtml}</>
-    }
   }
 
   function generateSocialMedia(){
@@ -45,8 +37,10 @@ export default function EventPage({ discovery, setApi }) {
       <section>
         <h3>Sjanger:</h3>
         <ul>
-          {console.log(attraction?.classifications[0].genre, "Genere")}
-          {generateGenres()}
+          <li>Segment: {attraction?.classifications[0].segment.name}</li>
+          <li>Sjanger: {attraction?.classifications[0].genre.name}</li>
+          <li>Under Sjanger: {attraction?.classifications[0].subGenre.name}</li>
+          <li>Type: {attraction?.classifications[0].subType.name}</li>
         </ul>
         <h3>Følg oss på sosiale medier!</h3>
         <ul>

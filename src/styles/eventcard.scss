@@ -7,3 +7,45 @@
     margin: 0
 }
 
+.event-info{
+    list-style: none;
+    li{
+        margin: 10px 0;
+    }
+}
+
+.event-menu{
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+    margin: 0;
+    li{
+        a, button{
+            background-color: colors.$buttons;
+            color: colors.$whitetext;
+            text-decoration: none;
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            text-align: center;
+            border-style: none;
+            border-radius: 2px;
+            font-family: fonts.$quantitytext;
+            box-sizing: content-box;
+            font-size: large;
+        }
+    }
+}
+
+.star{
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    fill: colors.$header;
+}
+
+.event-card{
+    position: relative;
+}
+

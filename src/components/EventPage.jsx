@@ -1,9 +1,9 @@
-import { useParams } from "react-router-dom"
+import { useParams, Link } from "react-router-dom"
 import { useEffect, useState } from "react"
 import EventCard from "./EventCard"
 import ArtistCard from "./ArtistCard"
 
-export default function EventPage({ discovery, setApi }) {
+export default function EventPage({isWishlisted, wishList, addToWishlist, removeWishlist}) {
   const {id} = useParams()
   const [events, setEvents] = useState()
   const [artists, setArtists] = useState()
@@ -16,11 +16,11 @@ export default function EventPage({ discovery, setApi }) {
     .catch((error) => console.error("Fetching failed ", error))
   }
 
-  function generatSocialMediaLinks(){
-    let html = `` 
-    for(let [socialmedia, url] of Object.entries(attraction?.externalLinks)){
-      html += `<li><a src="${url[0].url}"${socialmedia}<li>`
-      console.log(html, "Social media")
+  function generateSocialMedia(){
+    let generatedHtml
+    if(typeof attraction?.externalLinks != "undefined"){
+      generatedHtml = Object.entries(attraction?.externalLinks).map((socialMedia, index) => <li key={index}><Link to={socialMedia[1]}>{socialMedia[0]}</Link></li>)
+      return <>{generatedHtml}</>
     }
   }
 
@@ -31,20 +31,26 @@ export default function EventPage({ discovery, setApi }) {
   return (
     <>
       <h1>{attraction?.name}</h1>
-      <h3>Sjanger:</h3>
-      <ul>
-        <li>some genre</li>
-      </ul>
-      <h3>Følg oss på sosiale medier!</h3>
-      <ul>
-        {generatSocialMediaLinks()}
-        <li><Link to={attraction?.externalLinks.spotify[0].url}>spotify</Link></li>
-        <li>{console.log(attraction?.externalLinks, "external links")}</li>
-      </ul>
-      {/** sosiale medier ting */}
+      <section>
+        <h3>Sjanger:</h3>
+        <ul>
+          <li>Segment: {attraction?.classifications[0].segment.name}</li>
+          <li>Sjanger: {attraction?.classifications[0].genre.name}</li>
+          <li>Under Sjanger: {attraction?.classifications[0].subGenre.name}</li>
+          <li>Type: {attraction?.classifications[0].subType.name}</li>
+        </ul>
+        <h3>Følg oss på sosiale medier!</h3>
+        <ul>
+          {generateSocialMedia()}
+        </ul>
+      </section>
       <h2>Festivalpass</h2>
-      {events?.map((event) => <EventCard key={event.id} event={event}/>)}
-      {artists?.map((artist) => <ArtistCard key={artist.id} artist={artist}/>)}
+      <section>
+        {events?.map((event) => <EventCard key={event.id} event={event} isWishlisted={isWishlisted(wishList, event)} addToWishlist={addToWishlist} removeWishlist={removeWishlist}/>)}
+      </section>
+      <section>
+        {artists?.map((artist) => <ArtistCard key={artist.id} artist={artist}/>)}
+      </section>
     </>
   )
 }

@@ -11,6 +11,19 @@ import Dashboard from './components/Dashboard'
 import LoggInn from './components/LoggInn'
 
 function App() {
+  const [wishList, setWishList] = useState([{id: "Z698xZb_Z174K0o", name: "imagine dragons"}])
+
+  function isWishlisted(wishList, event){
+    return wishList.some(wishEvent => wishEvent.id === event?.id)
+  }
+
+  function addToWishlist(event){
+    setWishList([...wishList, { id: event?.id, name: event?.name}])
+  }
+
+  function removeWishlist(event){
+    setWishList(wishList.filter((wishEvent)=>event?.id != wishEvent.id))
+  }
   const [userLoggedInn, setUserLoggedInn] = useState(false)
   useEffect(() => {
     localStorage.setItem("user", JSON.stringify({username: "TomHeine", password: "123"}))
@@ -54,9 +67,9 @@ function App() {
   return (
     <Layout linkData={linkData}>
       <Routes>
-        <Route path='/' element={<Home />}/>
-        <Route path='/event/:id' element={<EventPage  />}/>
-        <Route path='/category/:slug' element={<CategoryPage setSearch={setSearch} handleClickSearch={handleClickSearch} searchResult={searchResult} />}/>
+        <Route path='/' element={<Home setWishList={setWishList} wishList={wishList} isWishlisted={isWishlisted} addToWishlist={addToWishlist} removeWishlist={removeWishlist}/>}/>
+        <Route path='/event/:id' element={<EventPage setWishList={setWishList} wishList={wishList} isWishlisted={isWishlisted} addToWishlist={addToWishlist} removeWishlist={removeWishlist}/>}/>
+        <Route path='/category/:slug' element={<CategoryPage />}/>
         <Route path='/dashboard' element={<Dashboard handleClick={handleClick}/>}/>
         <Route path='/logginn' element={<LoggInn setUserLoggedInn={setUserLoggedInn}/>}/>
       </Routes>

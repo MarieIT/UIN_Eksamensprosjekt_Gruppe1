@@ -47,8 +47,8 @@ export default function EventPage() {
           {generateSocialMedia()}
         </ul>
       </section>
+      <h2>Festivalpass</h2>
       <section>
-        <h2>Festivalpass</h2>
         {events?.map((event) => <EventCard key={event.id} event={event}/>)}
       </section>
       <section>

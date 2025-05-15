@@ -16,16 +16,22 @@ export default function EventPage({ discovery, setApi }) {
     .catch((error) => console.error("Fetching failed ", error))
   }
 
+  function generateGenres(){
+    let generatedHtml
+    if(typeof attraction?.classifications[0] != "undefined"){
+      generatedHtml = Object.entries(attraction?.classifications[0]).map((genreInfo) => <li key={genreInfo[1].id}><span>{genreInfo[0]}</span>: {genreInfo[1].name}</li>)
+      return <>{generatedHtml}</>
+    }
+  }
+
   function generateSocialMedia(){
     let generatedHtml
     if(typeof attraction?.externalLinks != "undefined"){
       generatedHtml = Object.entries(attraction?.externalLinks).map((socialMedia, index) => <li key={index}><Link to={socialMedia[1]}>{socialMedia[0]}</Link></li>)
-      //<li><Link to={attraction?.externalLinks.element[0].url}>spotify</Link></li>
-      console.log(generatedHtml, "generatedhtml")
       return <>{generatedHtml}</>
     }
     else{
-      console.log("Not here")
+      console.log("No social media was found")
     }
   }
 
@@ -36,18 +42,24 @@ export default function EventPage({ discovery, setApi }) {
   return (
     <>
       <h1>{attraction?.name}</h1>
-      <h3>Sjanger:</h3>
-      <ul>
-        <li>some genre</li>
-      </ul>
-      <h3>Følg oss på sosiale medier!</h3>
-      <ul>
-        {generateSocialMedia()}
-      </ul>
-      {/** sosiale medier ting */}
-      <h2>Festivalpass</h2>
-      {events?.map((event) => <EventCard key={event.id} event={event}/>)}
-      {artists?.map((artist) => <ArtistCard key={artist.id} artist={artist}/>)}
+      <section>
+        <h3>Sjanger:</h3>
+        <ul>
+          {console.log(attraction?.classifications[0].genre, "Genere")}
+          {generateGenres()}
+        </ul>
+        <h3>Følg oss på sosiale medier!</h3>
+        <ul>
+          {generateSocialMedia()}
+        </ul>
+      </section>
+      <section>
+        <h2>Festivalpass</h2>
+        {events?.map((event) => <EventCard key={event.id} event={event}/>)}
+      </section>
+      <section>
+        {artists?.map((artist) => <ArtistCard key={artist.id} artist={artist}/>)}
+      </section>
     </>
   )
 }

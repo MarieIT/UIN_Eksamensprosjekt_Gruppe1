@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { Link, useParams } from "react-router-dom"
 import '../styles/home.scss'
 import EventCard from "./EventCard";
+import AttractionCard from "./AttractionCard";
 
 export default function Home({ discovery, setApi }) {
   const [eventContent, setEventContent] = useState();
@@ -52,12 +53,7 @@ export default function Home({ discovery, setApi }) {
     <section>
       {eventContent?._embedded.attractions.
         map((event) => 
-          <article key={event.id}>
-            <h2>{event.name}</h2>
-            <img src={event.images.
-            filter(image => image.width < 600)[0].url}/>
-          <Link to={`/event/${event.id}`} className="mainEventBtn">Les mer om {event.name} her!</Link>
-          </article>)}
+          <AttractionCard event={event}/>)}
     </section>
     <section className="by-knapper">
       <h2>Hva skjer i verdens storbyer?</h2>

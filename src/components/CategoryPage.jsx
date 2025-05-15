@@ -2,7 +2,8 @@ import { useParams } from "react-router-dom"
 import '../styles/categorypage.scss'
 import { useEffect, useRef, useState } from "react"
 
-export default function CategoryPage() {
+
+export default function CategoryPage({ setSearch, handleClickSearch, searchResult}) {
   const { slug } = useParams()
   const [genre, setGenre] = useState();
   const [mapData, setMapData] = useState();
@@ -22,21 +23,37 @@ export default function CategoryPage() {
     })  
   }, [slug]);
 
-  const [search, setSearch] = useState();
-
   const handleChange = (e) => {
     setSearch(e.target.value);
+    console.log(e.target.value, "fra input")
   }
 
   function handleSubmit(e) {
     e.preventDefault();
   }
 
+  const [mapOutSearch, setMapOutSearch] = useState();
+  useEffect(() => {
+    setMapOutSearch(
+      searchResult?._embedded.events.map((event => 
+        <>
+          <h3></h3>
+          <article key={event.id}>
+            <p>{event.name}</p>
+            
+          </article>
+          
+        </>
+      ))
+    )
+    console.log(searchResult)
+  }, [searchResult])
+
   useEffect(() => {
     setFormData(() =>
       <section className="filter-search"> 
         <h3>Filtrert søk</h3>         
-        <form action={slug}>
+        <form action={slug} id="filtercategory">
           <label>
             Dato: <input type="date" />
           </label>
@@ -48,27 +65,25 @@ export default function CategoryPage() {
             <option value="danmark">Danmark</option>
           </select>
           <label htmlFor="byer">By:</label>
-          <select id="countries" name="land">
+          <select id="byer" name="byer">
             <option value="velg-by">Velg en by</option>
             <option value="oslo">Oslo</option>
             <option value="stockholm">Stockholm</option>
             <option value="kobenhavn">København</option>
           </select>
-          <input type="submit" value="Filtrer" />
-        </form>
-        <form>
-        <h3>Søk</h3>
-          <label htmlFor="search">Søk etter event, attraksjon eller spillested</label>
-          <input type="text" id="search" placeholder="findings" />
+          <button type="submit" name="filtrer">Filtrer</button>
         </form>
         <form onSubmit={handleSubmit}>  
-          <label htmlFor="search">Her kan du søke etter spill</label>
-          <input type="search" id="search" onChange={handleChange} />
-          <button >Søk</button>
+          <h3>Søk</h3>
+          <label htmlFor="search">Søk etter event, attraksjon eller spillested</label>
+          <input type="search" id="search" placeholder="findings" onChange={handleChange} />
+          <button onClick={handleClickSearch}>Søk</button>
         </form>
       </section>
     )
-  }, [])
+  }, []);
+
+  
 
   useEffect(() => {
     setMapData(() =>
@@ -98,7 +113,9 @@ export default function CategoryPage() {
       case "music":
         return (
           <>
+
             {formData}
+            {mapOutSearch}
             {mapData}           
           </>)
       case "sport":

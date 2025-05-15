@@ -39,25 +39,33 @@ function App() {
 
   const [discovery, setApi] = useState()
 
-  useEffect(() => {
-    //https://www.freecodecamp.org/news/how-to-fetch-api-data-in-react/
-    fetch('https://app.ticketmaster.com/discovery/v2/events?apikey=LWeeRs6C0ToGwEe5Gz96AnZM9scR2ynq&keyword=findings%20festival&locale=*')
-    .then((res) => {
-      return res.json();
-    })
-    .then((data) => {
-      //console.log(data);
-      setApi(data);
-    })  
-  }, [])
+  
+  const [searchResult, setSearchResult] = useState();
+  const [search, setSearch] = useState();
+  console.log(typeof(search), "type of")
 
+  const handleClickSearch = async() => {
+    
+    console.log(JSON.stringify(search), "inne i knapp")
+    fetch(`https://app.ticketmaster.com/discovery/v2/suggest?apikey=LWeeRs6C0ToGwEe5Gz96AnZM9scR2ynq&keyword=${search}&locale=*`)
+      .then((response) => {
+         return response.json()
+        })
+      .then((data) => {
+        setSearchResult(data); 
+        console.log(data, "fra data")})
+      .catch((error) => 
+        console.error("Skjedde noe feil ved fetch av søk", error)
+      );
+      
+  };
 
   return (
     <Layout linkData={linkData}>
       <Routes>
         <Route path='/' element={<Home />}/>
-        <Route path='/event/:id' element={<EventPage discovery={discovery} setApi={setApi} />}/>
-        <Route path='/category/:slug' element={<CategoryPage />}/>
+        <Route path='/event/:id' element={<EventPage  />}/>
+        <Route path='/category/:slug' element={<CategoryPage setSearch={setSearch} handleClickSearch={handleClickSearch} searchResult={searchResult} />}/>
         <Route path='/dashboard' element={<Dashboard handleClick={handleClick}/>}/>
         <Route path='/logginn' element={<LoggInn setUserLoggedInn={setUserLoggedInn}/>}/>
       </Routes>

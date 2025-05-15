@@ -2,41 +2,80 @@ import { useParams } from "react-router-dom"
 import '../styles/categorypage.scss'
 import { useEffect, useRef, useState } from "react"
 
-export default function CategoryPage() {
+
+export default function CategoryPage({ setSearch, handleClickSearch, searchResult}) {
   const { slug } = useParams()
   const [genre, setGenre] = useState();
   const [mapData, setMapData] = useState();
   const [content, setContent] = useState();
   const [formData, setFormData] = useState();
+  const [events, setEvents] = useState();
+  const [venue, setVenue] = useState();
   
 
 
 
   useEffect(() => {
-    fetch(`https://app.ticketmaster.com/discovery/v2/events?apikey=LWeeRs6C0ToGwEe5Gz96AnZM9scR2ynq&locale=*&startDateTime=2025-05-13T13:14:00Z&size=10&city=oslo&classificationName=${slug}`)
+    fetch(`https://app.ticketmaster.com/discovery/v2/attractions?apikey=LWeeRs6C0ToGwEe5Gz96AnZM9scR2ynq&keyword=oslo&locale=*&size=10&classificationName=${slug}`)
     .then((res) => {
       return res.json();
     })
     .then((data) => {
-      setGenre(data);
-    })  
-  }, [slug]);
+      setGenre(data._embedded.attractions);
+    })
+  }, []);
 
-  const [search, setSearch] = useState();
+  useEffect(() => {
+    fetch(`https://app.ticketmaster.com/discovery/v2/events?apikey=LWeeRs6C0ToGwEe5Gz96AnZM9scR2ynq&locale=*&size=10&city=oslo`)
+    .then((res) => {
+      return res.json();
+    })
+    .then((data) => {
+      setEvents(data._embedded.events);
+    })
+  }, [])
 
-  const handleChange = (e) => {
-    setSearch(e.target.value);
-  }
+  useEffect(() => {
+    fetch(`https://app.ticketmaster.com/discovery/v2/events?apikey=LWeeRs6C0ToGwEe5Gz96AnZM9scR2ynq&locale=*&city=oslo`)
+    .then((res) => {
+      return res.json();
+    })
+    .then((data) => {
+      setVenue(data._embedded.events);
+    })
+  }, [slug])
 
   function handleSubmit(e) {
     e.preventDefault();
   }
 
+  const handleChange = (e) => {
+    setSearch(e.target.value);
+    console.log(e.target.value, "fra input")
+  }
+
+  const [mapOutSearch, setMapOutSearch] = useState();
+  useEffect(() => {
+    setMapOutSearch(
+      searchResult?._embedded.events.map((event => 
+        <>
+          <h3></h3>
+          <article key={event.id}>
+            <p>{event.name}</p>
+            
+          </article>
+          
+        </>
+      ))
+    )
+    console.log(searchResult)
+  }, [searchResult])
+
   useEffect(() => {
     setFormData(() =>
       <section className="filter-search"> 
         <h3>Filtrert søk</h3>         
-        <form action={slug}>
+        <form action={slug} id="filtercategory">
           <label>
             Dato: <input type="date" />
           </label>
@@ -48,57 +87,68 @@ export default function CategoryPage() {
             <option value="danmark">Danmark</option>
           </select>
           <label htmlFor="byer">By:</label>
-          <select id="countries" name="land">
+          <select id="byer" name="byer">
             <option value="velg-by">Velg en by</option>
             <option value="oslo">Oslo</option>
             <option value="stockholm">Stockholm</option>
             <option value="kobenhavn">København</option>
           </select>
-          <input type="submit" value="Filtrer" />
-        </form>
-        <form>
-        <h3>Søk</h3>
-          <label htmlFor="search">Søk etter event, attraksjon eller spillested</label>
-          <input type="text" id="search" placeholder="findings" />
+          <button type="submit" name="filtrer">Filtrer</button>
         </form>
         <form onSubmit={handleSubmit}>  
-          <label htmlFor="search">Her kan du søke etter spill</label>
-          <input type="search" id="search" onChange={handleChange} />
-          <button >Søk</button>
+          <h3>Søk</h3>
+          <label htmlFor="search">Søk etter event, attraksjon eller spillested</label>
+          <input type="search" id="search" placeholder="findings" onChange={handleChange} />
+          <button onClick={handleClickSearch}>Søk</button>
         </form>
       </section>
     )
-  }, [])
+  }, []);
+
+  console.log(genre, "genre")
+  
 
   useEffect(() => {
     setMapData(() =>
         <>
           <section>
             <h3>Attractions</h3>
-            {genre?._embedded.events.
-              map((genreEvent) => <article key={genreEvent.id}>
-                <img src={genreEvent.images.
-                  filter(image => image.width > 1000)[0].url}/>
-                <h3>{genreEvent.name}</h3>
-                <p>{genreEvent.dates.start.localDate}</p>
-                <p>{genreEvent.dates.start.localTime}</p>
-                <p>{genreEvent._embedded.venues[0].city.name}</p>
-                <p>{genreEvent._embedded.venues[0].country.name}</p>
-                <p>{genreEvent._embedded.venues[0].name}</p>
-            </article>)}
+              {genre?.
+                map((attract) => <article key={attract.id}>
+                  <img src={attract.images.
+                    filter(image => image.width > 1000)[0].url}/>
+                  <h3>{attract.name}</h3>               
+              </article>)}
+          </section>
+          <section>
+            <h3>Arrangementer</h3>
+              {events?.map((events) => 
+                <article key={events.id}>
+                  <img src={events.images[0].url}/>
+                  <h3>{events.name}</h3>
+                </article>
+              )}
+          </section>
+          <section>
+            <h3>Spillesteder</h3>
+              {venue?.map((venues) => 
+                <article key={venues.id}>
+                  <h3>{venues._embedded.venues[0].name} </h3>
+                </article>
+              )}
           </section>
         </>
     )
   }, [genre])
-
-  
 
   function translateSlug(){
     switch(slug){
       case "music":
         return (
           <>
+
             {formData}
+            {mapOutSearch}
             {mapData}           
           </>)
       case "sport":

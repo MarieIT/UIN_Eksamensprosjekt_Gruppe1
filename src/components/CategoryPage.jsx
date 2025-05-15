@@ -21,7 +21,7 @@ export default function CategoryPage({ setSearch, handleClickSearch, searchResul
       return res.json();
     })
     .then((data) => {
-      setGenre(data);
+      setGenre(data._embedded.attractions);
     })
   }, []);
 
@@ -113,7 +113,7 @@ export default function CategoryPage({ setSearch, handleClickSearch, searchResul
         <>
           <section>
             <h3>Attractions</h3>
-              {genre?._embedded.attractions.
+              {genre?.
                 map((attract) => <article key={attract.id}>
                   <img src={attract.images.
                     filter(image => image.width > 1000)[0].url}/>

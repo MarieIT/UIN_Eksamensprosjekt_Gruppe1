@@ -16,14 +16,14 @@ export default function CategoryPage({ setSearch, handleClickSearch, searchResul
 
 
   useEffect(() => {
-    fetch(`https://app.ticketmaster.com/discovery/v2/attractions?apikey=LWeeRs6C0ToGwEe5Gz96AnZM9scR2ynq&keyword=oslo&locale=*&size=10&classificationName=${slug}`)
+    fetch(`https://app.ticketmaster.com/discovery/v2/attractions?apikey=LWeeRs6C0ToGwEe5Gz96AnZM9scR2ynq&locale=*&size=10&classificationName=${slug}`)
     .then((res) => {
       return res.json();
     })
     .then((data) => {
       setGenre(data._embedded.attractions);
     })
-  }, []);
+  }, [slug]);
 
   useEffect(() => {
     fetch(`https://app.ticketmaster.com/discovery/v2/events?apikey=LWeeRs6C0ToGwEe5Gz96AnZM9scR2ynq&locale=*&size=10&city=oslo`)
@@ -43,7 +43,7 @@ export default function CategoryPage({ setSearch, handleClickSearch, searchResul
     .then((data) => {
       setVenue(data._embedded.events);
     })
-  }, [slug])
+  }, [])
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -151,7 +151,7 @@ export default function CategoryPage({ setSearch, handleClickSearch, searchResul
             {mapOutSearch}
             {mapData}           
           </>)
-      case "sport":
+      case "sports":
         return (
           <>
             {formData}

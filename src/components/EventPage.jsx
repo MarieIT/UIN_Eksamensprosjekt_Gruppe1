@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom"
+import { useParams, Link } from "react-router-dom"
 import { useEffect, useState } from "react"
 import EventCard from "./EventCard"
 import ArtistCard from "./ArtistCard"
@@ -16,11 +16,16 @@ export default function EventPage({ discovery, setApi }) {
     .catch((error) => console.error("Fetching failed ", error))
   }
 
-  function generatSocialMediaLinks(){
-    let html = `` 
-    for(let [socialmedia, url] of Object.entries(attraction?.externalLinks)){
-      html += `<li><a src="${url[0].url}"${socialmedia}<li>`
-      console.log(html, "Social media")
+  function generateSocialMedia(){
+    let generatedHtml
+    if(typeof attraction?.externalLinks != "undefined"){
+      generatedHtml = Object.entries(attraction?.externalLinks).map((socialMedia, index) => <li key={index}><Link to={socialMedia[1]}>{socialMedia[0]}</Link></li>)
+      //<li><Link to={attraction?.externalLinks.element[0].url}>spotify</Link></li>
+      console.log(generatedHtml, "generatedhtml")
+      return <>{generatedHtml}</>
+    }
+    else{
+      console.log("Not here")
     }
   }
 
@@ -37,9 +42,7 @@ export default function EventPage({ discovery, setApi }) {
       </ul>
       <h3>Følg oss på sosiale medier!</h3>
       <ul>
-        {generatSocialMediaLinks()}
-        <li><Link to={attraction?.externalLinks.spotify[0].url}>spotify</Link></li>
-        <li>{console.log(attraction?.externalLinks, "external links")}</li>
+        {generateSocialMedia()}
       </ul>
       {/** sosiale medier ting */}
       <h2>Festivalpass</h2>

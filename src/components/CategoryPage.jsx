@@ -25,7 +25,7 @@ export default function CategoryPage() {
     setMapData(() =>
           <>
           <section>          
-            <form action="/action_page.php">
+            <form id="filtercategory" action="/action_page.php">
               <label for="dato">Dato:</label>
               <input type="date" id="dato-felt" name="dato" />
               <label for="countries">Land:</label>
@@ -42,7 +42,7 @@ export default function CategoryPage() {
                 <option value="stockholm">Stockholm</option>
                 <option value="kobenhavn">København</option>
               </select>
-              <input type="submit" name="filtrer"/>
+              <button type="submit" name="filtrer">Filtrer</button>
             </form>          
           </section>
           <section>

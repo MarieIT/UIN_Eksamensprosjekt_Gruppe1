@@ -1,80 +1,64 @@
 import { useEffect, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import "../styles/dashboard.scss"
+import { fetchProfilePageInfo } from "../../backend/sanity/services/userService"
+import EventCard from "./EventCard"
 
 export default function Dashboard({handleClick}) {
   const [user, setUser] = useState()
+  const [purchases, setPurchases] = useState()
+  const [user2, setUser2] = useState()
+
+  
+
+  const getProfileCardInfo = async () => {
+    const data = await fetchProfilePageInfo("mariab29")
+    setUser(data[0])
+    console.log(user, "user data")
+    
+  }
+
+  const getPurchasedEvents = async () => {
+    let apiids = ``
+    user?.prevpurchase.map(purchase => apiids += purchase.apiid + ", ")
+    console.log(apiids, "apiids")
+    fetch(`https://app.ticketmaster.com/discovery/v2/events?apikey=D7ioqsgGEEqH9C5FsLqZZzGw54kRgsYp&id=${apiids}&locale=*`)
+    .then((response) => response.json())
+    .then((data) => setPurchases(data))
+    .catch((error) => console.error("Fetching failed ", error))
+  }
 
   useEffect(()=>{
-    setUser(JSON.parse(localStorage.getItem("user")))
+    setUser2(JSON.parse(localStorage.getItem("user")))
+    getProfileCardInfo()
+    getPurchasedEvents()
   },[])
 
   return (
     <>
       <h1>Dashbord</h1>
       <section id="user-info">
-        <h2>{user?.username}</h2>
+        <h2>{user?.name}</h2>
         <button onClick={handleClick}>Logg ut</button>
-        <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.explicit.bing.net%2Fth%3Fid%3DOIP.5swNd1zAKZRCz1LWWDueJwHaJ5%26pid%3DApi&f=1&ipt=9be4da7fb2566206dcf34fc5593f4b98ff2342cd36d155f441ce2aae7c72921c"/>
+        <img src={user?.image}/>
       </section>
       <section id= "user-purchases">
         <h2>Mine Kjøp</h2>
-        <article>
-          <img src="https://s1.ticketm.net/dam/a/29a/fdf8b9b8-c529-458e-bdbc-3b473975c29a_TABLET_LANDSCAPE_16_9.jpg"/>
-          <h3>Findings Festival</h3>
-        </article>
-        <article>
-          <img src="https://s1.ticketm.net/dam/a/29a/fdf8b9b8-c529-458e-bdbc-3b473975c29a_TABLET_LANDSCAPE_16_9.jpg"/>
-          <h3>Findings Festival</h3>
-        </article>
-        <article>
-          <img src="https://s1.ticketm.net/dam/a/29a/fdf8b9b8-c529-458e-bdbc-3b473975c29a_TABLET_LANDSCAPE_16_9.jpg"/>
-          <h3>Findings Festival</h3>
-        </article>
-        <article>
-          <img src="https://s1.ticketm.net/dam/a/29a/fdf8b9b8-c529-458e-bdbc-3b473975c29a_TABLET_LANDSCAPE_16_9.jpg"/>
-          <h3>Findings Festival</h3>
-        </article>
-        <article>
-          <img src="https://s1.ticketm.net/dam/a/29a/fdf8b9b8-c529-458e-bdbc-3b473975c29a_TABLET_LANDSCAPE_16_9.jpg"/>
-          <h3>Findings Festival</h3>
-        </article>
-        <article>
-          <img src="https://s1.ticketm.net/dam/a/29a/fdf8b9b8-c529-458e-bdbc-3b473975c29a_TABLET_LANDSCAPE_16_9.jpg"/>
-          <h3>Findings Festival</h3>
-        </article>
-        {/** legge till billetter kjøpt */}  
+        {purchases?._embedded.events.map((event, index) => <EventCard key={index} event={event}/>)}
       </section>
       <section id="user-wishlist">
         <h2>Min Ønskeliste</h2>
         <ul>
-          <li><Link>Wicked</Link></li>
-          <li><Link>Disturbed</Link></li>
-          <li><Link>Legally Blond</Link></li>
-          <li><Link>Coldplay Worldtour</Link></li>
-          <li><Link>Finding Festivalen</Link></li>
-          <li><Link>Golf Klubben</Link></li>
-          <li><Link>Ty Dolls $ign</Link></li>
+          {user?.wishlist.map((event, index) => <li key={index}><Link to={`/event/${event.apiid}`}>{event.title}</Link></li>)}
         </ul>
-        {/** ønskeliste items */}  
       </section>
       <section id="user-friends">
         <h2>Venner</h2>
-        <article>
-          <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fmedia.licdn.com%2Fdms%2Fimage%2FC4E03AQETIGLvxxQ12w%2Fprofile-displayphoto-shrink_800_800%2F0%2F1625595290274%3Fe%3D2147483647%26v%3Dbeta%26t%3DG5GHUAsJj01gfxfoNXxMwn0XFcQ1WjhuLO7hbDzkPLE&f=1&nofb=1&ipt=1f2355ef308909c2b18f613cb51c6bcf722ea1c5fd4b8409a02d9363990383bf"/>
-          <h3>Ann-Charlotte</h3>
-          <p>Ann-Charlotte og du ønsker å dra på <span>Wacken 2026</span>, hva med å dra sammen ?</p>
-        </article>
-        <article>
-          <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fmedia.licdn.com%2Fdms%2Fimage%2Fv2%2FC4D03AQHF5QTatUEIIg%2Fprofile-displayphoto-shrink_200_200%2Fprofile-displayphoto-shrink_200_200%2F0%2F1574680082142%3Fe%3D2147483647%26v%3Dbeta%26t%3D12W8t7z6SFBnpjQCeBa2GoUgf_m_4ek8d2Uo_kI0NLE&f=1&nofb=1&ipt=05af40851593c1d12484ac08b105fc8c9dc031d65a03aaad825d467409f35e93"/>
-          <h3>Ole-Edvard</h3>
-          <p>Ole-Edvard og du ønsker å dra på <span>Wacken 2026</span>, hva med å dra sammen ?</p>
-        </article>
-        <article>
-          <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%3Fid%3DOIP.Ozks5_LUaIIH7x9KUivYqgHaHa%26pid%3DApi&f=1&ipt=b42c5bcdfe5d5d3d1f295eabee4c3f9cddef807c872505e7300c624037b7557f"/>
-          <h3>Tore Marius</h3>
-          <p>Tore Marius og du ønsker å dra på <span>Wacken 2026</span>, hva med å dra sammen ?</p>
-        </article>
+        {user?.friends.map((friend, index) => <article key={index}>
+          <img src={friend.image}/>
+          <h3>{friend.name}</h3>
+          <p>{friend.name} og du ønsker å dra på <span>Wacken 2026</span>, hva med å dra sammen ?</p>
+        </article>)}
       </section>  
     </>
   )

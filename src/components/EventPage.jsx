@@ -44,8 +44,8 @@ export default function EventPage({isWishlisted, wishList, addToWishlist, remove
           {generateSocialMedia()}
         </ul>
       </section>
+      <h2>Festivalpass</h2>
       <section>
-        <h2>Festivalpass</h2>
         {events?.map((event) => <EventCard key={event.id} event={event} isWishlisted={isWishlisted(wishList, event)} addToWishlist={addToWishlist} removeWishlist={removeWishlist}/>)}
       </section>
       <section>

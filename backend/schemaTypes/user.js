@@ -26,16 +26,26 @@ const user = {
 
         {
             name: "previouspurchase", 
-            type: "reference", 
+            type: "array", 
             title: "Tidligere kjøp", 
-            to: [{type: "event"}]
+            of: [
+                {
+                    type: "reference", 
+                    to: [{type: "event"}]
+                }
+            ]
         }, 
 
         {
             name: "wishlist", 
-            type: "reference", 
-            title: "Ønskeliste", 
-            to: [{type: "event"}]
+            type: "array", 
+            title: "Ønskeliste",
+            of: [
+                {
+                    type: "reference", 
+                    to: [{type: "event"}]
+                }
+            ]
         }, 
 
         {
@@ -52,9 +62,14 @@ const user = {
 
         { 
             name: "friends", 
-            type: "reference", 
+            type: "array", 
             title: "Venner", 
-            to: [{type: "user"}]
+             of: [
+                {
+                    type: "reference", 
+                    to: [{type: "user"}]
+                }
+            ]
         }, 
 
         {

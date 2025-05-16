@@ -4,7 +4,7 @@ import EventCard from "./EventCard"
 import ArtistCard from "./ArtistCard"
 import '../styles/eventpage.scss'
 
-export default function EventPage() {
+export default function EventPage({isWishlisted, wishList, addToWishlist, removeWishlist}) {
   const {id} = useParams()
   const [events, setEvents] = useState()
   const [artists, setArtists] = useState()
@@ -22,9 +22,6 @@ export default function EventPage() {
     if(typeof attraction?.externalLinks != "undefined"){
       generatedHtml = Object.entries(attraction?.externalLinks).map((socialMedia, index) => <li key={index}><Link to={socialMedia[1]}>{socialMedia[0]}</Link></li>)
       return <>{generatedHtml}</>
-    }
-    else{
-      console.log("No social media was found")
     }
   }
 
@@ -49,8 +46,8 @@ export default function EventPage() {
         </ul>
       </section>
       <h2>Festivalpass</h2>
-      <section id="festivalinfo">
-        {events?.map((event) => <EventCard key={event.id} event={event}/>)}
+      <section>
+        {events?.map((event) => <EventCard key={event.id} event={event} isWishlisted={isWishlisted(wishList, event)} addToWishlist={addToWishlist} removeWishlist={removeWishlist}/>)}
       </section>
       <h2>Artister</h2>
       <section id="artistinfo">

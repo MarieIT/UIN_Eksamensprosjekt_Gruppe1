@@ -1,17 +1,22 @@
 //Fargepaletten er satt sammen i figma. 
 
 //Lyselilla = E4B6E6
-//Mørkelilla/rosa = 680A42
+//Mørkerosa = 680A42
 //Svart = 000000
 //Hvit = FFFFFF
+//Lysegrå = D9D9D9
+//Mørkere lilla = d58bd7 
 
 //Header = lyselilla
-//Knapper + rammer = mørkelilla/rosa
+//Knapper + rammer = mørkerosa
 //Tekst på lyselilla = svart
 //Tekst på mørkelilla/rosa = hvit
 //Bakgrunnsfarge på nettsiden = hvit
+//Input bakgrunnsfarge (for fyll-inn-felter) = lysegrå
+//Stjerne (favoritt ikon) = mørkere lilla
 
 $header: #E4B6E6; 
+$star: #d58bd7; 
 $buttons: #680A42; 
 $frames: #680A42; 
 $blacktext: #000000; 

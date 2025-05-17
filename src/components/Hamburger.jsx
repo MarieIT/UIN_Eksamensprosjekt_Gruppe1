@@ -17,8 +17,8 @@ export default function Hamburger({ linkData }) {
       <div className="hamburger">
       <ul>
         <li><Link to={"/category/music"} onClick={toggleHamburger}>Musikk<i className="arrow"></i></Link></li>
-        <li><Link to={"/category/sport"} onClick={toggleHamburger}>Sport<i className="arrow"></i></Link></li>
-        <li><Link to={"/category/theatre/show"} onClick={toggleHamburger}>Teater/Show<i className="arrow"></i></Link></li>
+        <li><Link to={"/category/sports"} onClick={toggleHamburger}>Sport<i className="arrow"></i></Link></li>
+        <li><Link to={"/category/theatre"} onClick={toggleHamburger}>Teater/Show<i className="arrow"></i></Link></li>
         {linkData}
       </ul>
     </div>)

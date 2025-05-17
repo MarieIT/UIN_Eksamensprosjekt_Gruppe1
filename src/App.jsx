@@ -11,6 +11,19 @@ import Dashboard from './components/Dashboard'
 import LoggInn from './components/LoggInn'
 
 function App() {
+  const [wishList, setWishList] = useState([{id: "Z698xZb_Z174K0o", name: "imagine dragons"}])
+
+  function isWishlisted(wishList, event){
+    return wishList.some(wishEvent => wishEvent.id === event?.id)
+  }
+
+  function addToWishlist(event){
+    setWishList([...wishList, { id: event?.id, name: event?.name}])
+  }
+
+  function removeWishlist(event){
+    setWishList(wishList.filter((wishEvent)=>event?.id != wishEvent.id))
+  }
   const [userLoggedInn, setUserLoggedInn] = useState(false)
   useEffect(() => {
     localStorage.setItem("user", JSON.stringify({username: "TomHeine", password: "123"}))
@@ -36,27 +49,26 @@ function App() {
     sessionStorage.clear()
     setUserLoggedInn(false)
   }
+  
+  const [searchResult, setSearchResult] = useState();
+  const [tempSearch, setTempSearch] = useState();
+  const [search, setSearch] = useState("temp");
 
-  const [discovery, setApi] = useState()
-
-  useEffect(() => {
-    //https://www.freecodecamp.org/news/how-to-fetch-api-data-in-react/
-    fetch('https://app.ticketmaster.com/discovery/v2/events?apikey=LWeeRs6C0ToGwEe5Gz96AnZM9scR2ynq&keyword=findings%20festival&locale=*')
-    .then((res) => {
-      return res.json();
-    })
-    .then((data) => {
-      //console.log(data);
-      setApi(data);
-    })  
-  }, [])
-
-
+  const handleClickSearch = async() => {
+    console.log(search, "fra knapp")
+    fetch(`https://app.ticketmaster.com/discovery/v2/suggest?apikey=LWeeRs6C0ToGwEe5Gz96AnZM9scR2ynq&keyword=${search}&locale=*`)
+      .then((response) => response.json())
+      .then((data) => setSearchResult(data))
+      .catch((error) => 
+        console.error("Skjedde noe feil ved fetch av søk", error)
+      );
+  };
+  
   return (
     <Layout linkData={linkData}>
       <Routes>
-        <Route path='/' element={<Home />}/>
-        <Route path='/event/:id' element={<EventPage discovery={discovery} setApi={setApi} />}/>
+        <Route path='/' element={<Home setWishList={setWishList} wishList={wishList} isWishlisted={isWishlisted} addToWishlist={addToWishlist} removeWishlist={removeWishlist}/>}/>
+        <Route path='/event/:id' element={<EventPage setWishList={setWishList} wishList={wishList} isWishlisted={isWishlisted} addToWishlist={addToWishlist} removeWishlist={removeWishlist}/>}/>
         <Route path='/category/:slug' element={<CategoryPage />}/>
         <Route path='/dashboard' element={<Dashboard handleClick={handleClick}/>}/>
         <Route path='/logginn' element={<LoggInn setUserLoggedInn={setUserLoggedInn}/>}/>

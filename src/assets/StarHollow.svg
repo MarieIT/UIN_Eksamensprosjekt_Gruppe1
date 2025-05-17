@@ -1,0 +1,26 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<!-- Created using Krita: https://krita.org -->
+<svg xmlns="http://www.w3.org/2000/svg" 
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    xmlns:krita="http://krita.org/namespaces/svg/krita"
+    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+    width="240pt"
+    height="240pt"
+    viewBox="0 0 240 240">
+<defs/>
+<g id="group0" transform="translate(19.2, 9.48000038209138)" fill="none">
+  <path id="shape0" transform="translate(76.8, 0.120000004836601)" fill="none" stroke="#E4B6E6" stroke-width="10" stroke-linecap="square" stroke-linejoin="miter" stroke-miterlimit="2" d="M24 0L0 67.2"/>
+  <path id="shape1" transform="translate(100.8, 0)" fill="none" stroke="#E4B6E6" stroke-width="10" stroke-linecap="square" stroke-linejoin="miter" stroke-miterlimit="2" d="M0 0L24 67.32"/>
+  <path id="shape2" transform="translate(0, 67.3199996179086)" fill="none" stroke="#E4B6E6" stroke-width="10" stroke-linecap="square" stroke-linejoin="miter" stroke-miterlimit="2" d="M76.8 0L0 0"/>
+  <path id="shape3" transform="translate(124.8, 67.3199996179086)" fill="none" stroke="#E4B6E6" stroke-width="10" stroke-linecap="square" stroke-linejoin="miter" stroke-miterlimit="2" d="M0 0L76.8 0"/>
+  <path id="shape4" transform="translate(0, 67.3199996179086)" fill="none" stroke="#E4B6E6" stroke-width="10" stroke-linecap="square" stroke-linejoin="miter" stroke-miterlimit="2" d="M0 0L57.6 48"/>
+  <path id="shape5" transform="translate(144, 67.3199996179086)" fill="none" stroke="#E4B6E6" stroke-width="10" stroke-linecap="square" stroke-linejoin="miter" stroke-miterlimit="2" d="M57.6 0L0 48"/>
+  <path id="shape6" transform="translate(19.2, 115.319999617909)" fill="none" stroke="#E4B6E6" stroke-width="10" stroke-linecap="square" stroke-linejoin="miter" stroke-miterlimit="2" d="M38.4 0L0 76.8"/>
+  <path id="shape7" transform="translate(19.2, 143.879994576455)" fill="none" stroke="#E4B6E6" stroke-width="10" stroke-linecap="square" stroke-linejoin="miter" stroke-miterlimit="2" d="M0 48.24L81.6 0"/>
+  <path id="shape8" transform="translate(100.8, 143.879994576455)" fill="none" stroke="#E4B6E6" stroke-width="10" stroke-linecap="square" stroke-linejoin="miter" stroke-miterlimit="2" d="M0 0L72 48.24"/>
+  <path id="shape9" transform="translate(144, 115.319999617909)" fill="none" stroke="#E4B6E6" stroke-width="10" stroke-linecap="square" stroke-linejoin="miter" stroke-miterlimit="2" d="M28.8 76.8L0 0"/>
+  <path id="shape10" transform="translate(76.8, 0.10836779033067)" fill="none" stroke="#E4B6E6" stroke-width="10" stroke-linecap="square" stroke-linejoin="miter" stroke-miterlimit="2" d="M0 67.2116L24 0"/>
+  <path id="shape11" transform="translate(124.8, 67.3199996179086)" fill="none" stroke="#E4B6E6" stroke-width="10" stroke-linecap="square" stroke-linejoin="miter" stroke-miterlimit="2" d="M9.6 0L0 0"/>
+ </g>
+</svg>

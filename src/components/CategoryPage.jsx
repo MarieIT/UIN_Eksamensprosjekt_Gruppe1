@@ -111,8 +111,8 @@ export default function CategoryPage({ setSearch, handleClickSearch, searchResul
   useEffect(() => {
     setMapData(() =>
         <>
-          <section>
-            <h3>Attractions</h3>
+          <h2>Attractions</h2>
+          <section id="attractioncategory">
               {genre?.
                 map((attract) => <article key={attract.id}>
                   <img src={attract.images.
@@ -120,8 +120,8 @@ export default function CategoryPage({ setSearch, handleClickSearch, searchResul
                   <h3>{attract.name}</h3>               
               </article>)}
           </section>
-          <section>
-            <h3>Arrangementer</h3>
+          <h2>Arrangementer</h2>
+          <section id="eventsection">
               {events?.map((events) => 
                 <article key={events.id}>
                   <img src={events.images[0].url}/>
@@ -129,8 +129,8 @@ export default function CategoryPage({ setSearch, handleClickSearch, searchResul
                 </article>
               )}
           </section>
-          <section>
-            <h3>Spillesteder</h3>
+          <h2>Spillesteder</h2>
+          <section id="venuesection">
               {venue?.map((venues) => 
                 <article key={venues.id}>
                   <h3>{venues._embedded.venues[0].name} </h3>

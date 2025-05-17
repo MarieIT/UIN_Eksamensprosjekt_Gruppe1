@@ -118,23 +118,8 @@ export default function CategoryPage({}) {
       setRenderFilter(data);
     })
   }, []);
-  */
+  */  
 
-  function MapOutVenues(){
-    const genreLenght = genre?._embedded.events[0]._embedded.venues.length;
-    console.log(genreLenght, "genrelenghts")
-    for (let i = 0; i < genreLenght; i++) {
-      if(genreLenght != null) {
-        const venuesMApped = genre?._embedded.events[0]._embedded.venues[0].name;
-        return venuesMApped;
-      } else {
-        return null;
-      }
-    }   
-  }
-
-  MapOutVenues();
-  
   const [searchResult, setSearchResult] = useState();
   const [tempSearch, setTempSearch] = useState();
 
@@ -155,6 +140,29 @@ export default function CategoryPage({}) {
   }
 
   console.log(search, "search")
+
+  useEffect(() => {
+    const genreLenght = genre?._embedded.events[0]._embedded.venues.length;
+    console.log(genreLenght, "genrelenghts")
+    
+    function tempMap() {
+      let i = 0;
+      do {
+          <article key={genre?._embedded.events[i]._embedded.venues[i].id}>
+            <h3>{genre?._embedded.events[i]._embedded.venues[i].name}</h3>
+          </article>
+        i++;
+        
+      }
+      while (i <= genreLenght)
+      
+    }
+
+  }, [])
+
+  const [venuesMapped, setVenuesMapped] = useState(tempMap);
+
+  console.log(venuesMapped, "venuesMap")
 
   useEffect(() => {
     setFormData(() =>
@@ -220,13 +228,7 @@ export default function CategoryPage({}) {
           </section>
           <section>
             <h3>Spillesteder</h3>
-              {genre?._embedded.events.
-              map((venues) => 
-                <article key={venues._embedded.venues[0].id}>
-                  <h3>{venues._embedded.venues[0].name} </h3>
-                  <img src={venues.images[0].url} />
-                </article>
-              )}
+              {venuesMapped}
           </section>
         </>
     )

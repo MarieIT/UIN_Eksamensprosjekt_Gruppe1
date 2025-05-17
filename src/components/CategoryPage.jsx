@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom"
 import '../styles/categorypage.scss'
-import { useEffect, useRef, useState } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
 
 
 export default function CategoryPage({}) {
@@ -11,61 +11,9 @@ export default function CategoryPage({}) {
   const [formData, setFormData] = useState();
   const [events, setEvents] = useState();
   const [venue, setVenue] = useState();
+
   
-
-
-
-  useEffect(() => {
-    fetch(`https://app.ticketmaster.com/discovery/v2/events?apikey=LWeeRs6C0ToGwEe5Gz96AnZM9scR2ynq&locale=*&size=10&classificationName=${slug}`)
-    .then((res) => {
-      return res.json();
-    })
-    .then((data) => {
-      setGenre(data);
-    })
-  }, [slug]);
-
-  /*
-  useEffect(() => {
-    fetch(`https://app.ticketmaster.com/discovery/v2/events?apikey=LWeeRs6C0ToGwEe5Gz96AnZM9scR2ynq&locale=*&size=10&city=oslo`)
-    .then((res) => {
-      return res.json();
-    })
-    .then((data) => {
-      setEvents(data._embedded.events);
-    })
-  }, [])
-
-  useEffect(() => {
-    fetch(`https://app.ticketmaster.com/discovery/v2/events?apikey=LWeeRs6C0ToGwEe5Gz96AnZM9scR2ynq&locale=*&size=10&city=oslo`)
-    .then((res) => {
-      return res.json();
-    })
-    .then((data) => {
-      setVenue(data._embedded.events);
-    })
-  }, [])
-  */
-
-  /*
-  const [mapOutSearch, setMapOutSearch] = useState();
-  useEffect(() => {
-    setMapOutSearch(
-      searchResult?._embedded.events.map((event => 
-        <>
-          <h3></h3>
-          <article key={event.id}>
-            <p>{event.name}</p>
-            
-          </article>
-          
-        </>
-      ))
-    )
-    
-  }, [])
-  */
-
+  //Filter for by og land
   const [filter, setFilter] = useState("sverige");
   useEffect(() => {
     console.log(filter);
@@ -79,46 +27,69 @@ export default function CategoryPage({}) {
   
   LoopFilter(filter);
 
+  const [useLand, setUseLand] = useState();  
   function handleChangeSelectCountry(e) {
+    e.preventDefault(e)
     const land = e.target.value;
-    console.log(land)
+    setUseLand(land);
   }
 
-
-  
+  const [useByer, setUseByer] = useState();
   function handleChangeSelectCity(e) {
+    e.preventDefault();
     const byer = e.target.value;
-    console.log(byer)
+    setUseByer(byer)
   }
 
+  console.log(useByer, "fra usestate")
+  console.log(useLand, "fra usestate")
+
   
+  //Setter dato
+  //https://www.geeksforgeeks.org/how-to-format-javascript-date-as-yyyy-mm-dd/
+
+  const [dato, setDato] = useState(cleanDato);
+  
+  function cleanDato () {
+    const date = new Date();
+    const newDate = date.toISOString();
+    const finalDate = newDate.length > 0 ? newDate.slice(0, -14) : newDate;
+    return finalDate;
+
+  }
+  cleanDato();
+
+  let imputDate = "0000-00-00";
   function handleChangeDate(e) {
-    const date = e.target.value;
-    
-    console.log(date)
+    e.preventDefault();
+    imputDate = e.target.value;
+    console.log(imputDate, "imputDate");
   }
-  
 
-  function handleFilter() {
-    const tempByer = byer;
-    
-    if (tempByer == "stockholm") {
-      console.log(yeah)
+
+  const [renderFilter, setRenderFilter] = useState();
+  function handleFilter() {  
+    console.log(useByer, "filter byer");
+    console.log(useLand, "filter land");
+    console.log(imputDate);
+    if (useByer == "kobenhavn" && useLand == "danmark") {
+      fetch(`https://app.ticketmaster.com/discovery/v2/events?apikey=LWeeRs6C0ToGwEe5Gz96AnZM9scR2ynq&locale=*&startDateTime=${imputDate}T18:16:00Z&size=10&city=oslo&countryCode=NO&segmentName=music`)
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        setRenderFilter(data);
+      })
+      .catch((error) =>
+        console.error("Skjedde noe feil ved fetch av load"))
     }
   }
 
-  /*
-  const [renderFilter, setRenderFilter] = useState();
-  useEffect(() => {
-    fetch(`https://app.ticketmaster.com/discovery/v2/events?apikey=LWeeRs6C0ToGwEe5Gz96AnZM9scR2ynq&locale=*&size=10&city=oslo`)
-    .then((res) => {
-      return res.json();
-    })
-    .then((data) => {
-      setRenderFilter(data);
-    })
-  }, []);
-  */  
+  console.log(renderFilter, "RenderFilter");
+
+  function RenderSiteFilter() {
+    
+  }  
 
   const [searchResult, setSearchResult] = useState();
   const [tempSearch, setTempSearch] = useState();
@@ -141,37 +112,99 @@ export default function CategoryPage({}) {
 
   console.log(search, "search")
 
+  const [venuesMapped, setVenuesMapped] = useState();
+
   useEffect(() => {
-    const genreLenght = genre?._embedded.events[0]._embedded.venues.length;
-    console.log(genreLenght, "genrelenghts")
-    
-    function tempMap() {
-      let i = 0;
-      do {
-          <article key={genre?._embedded.events[i]._embedded.venues[i].id}>
-            <h3>{genre?._embedded.events[i]._embedded.venues[i].name}</h3>
+    console.log( "i useEffect");
+    fetch(`https://app.ticketmaster.com/discovery/v2/events?apikey=LWeeRs6C0ToGwEe5Gz96AnZM9scR2ynq&locale=*&startDateTime=${dato}T18:16:00Z&size=10&city=oslo&countryCode=NO&segmentName=${slug}`)
+    .then((res) => {
+      return res.json();
+    })
+    .then((data) => {
+      setGenre(data);
+    })
+    .catch((error) =>
+      console.error("Skjedde noe feil ved fetch av load"))
+  }, [slug, dato]);
+
+  const [attractionsMapped, setAttractionsMapped] = useState();
+
+  useEffect(() => {
+    if (genre?._embedded.events[0]._embedded.attractions.length > 0 && genre?._embedded.events[0]._embedded.attractions[0].images) {
+      setAttractionsMapped(
+        genre?._embedded.events[0]._embedded.attractions.map((attraction) =>
+          <article key={attraction.id}>
+            <h3>{attraction.name}</h3>
+            <img src={attraction.images[0].url} alt="Image of venue" />
           </article>
-        i++;
-        
-      }
-      while (i <= genreLenght)
-      
+        )
+      )
+    } else if (genre?._embedded.events[0]._embedded.attractions.length > 0) {
+      setAttractionsMapped(
+        genre?._embedded.events[0]._embedded.attractions.map((attraction) =>
+          <article key={attraction.id}>
+            <h3>{attraction.name}</h3>
+            <img src="./images/ImageMissing.jpg" alt="Image for venue missing" />
+          </article>
+        )
+      )
+    } else {
+      setAttractionsMapped(
+        <p>There are no attractions listings for this event</p>
+      )
     }
+  }, [slug])
 
-  }, [])
+  const [eventsMapped, setEventsMapped] = useState();
 
-  const [venuesMapped, setVenuesMapped] = useState(tempMap);
+  useEffect(() => {
+    setEventsMapped(
+      genre?._embedded.events.map((events) =>
+        <article key={events.id}>
+          <h3>{events.name}</h3>
+          <img src={events.images[0].url} alt="Image of venue" />
+        </article>
+      )
+    )
+  }, [slug])
 
-  console.log(venuesMapped, "venuesMap")
+  useEffect(() => {
+    if (genre?._embedded.events[0]._embedded.venues.length > 0 && genre?._embedded.events[0]._embedded.venues[0].images) {
+      setVenuesMapped(
+        genre?._embedded.events[0]._embedded.venues.map((venues) =>
+          <article key={venues.id}>
+            <h3>{venues.name}</h3>
+            <img src={venues.images[0].url} alt="Image of venue" />
+          </article>
+        )
+      )
+    } else if (genre?._embedded.events[0]._embedded.venues) {
+      setVenuesMapped(
+        genre?._embedded.events[0]._embedded.venues.map((venues) =>
+          <article key={venues.id}>
+            <h3>{venues.name}</h3>
+            <img src="./images/ImageMissing.jpg" alt="Image for venue missing" />
+          </article>
+        )
+      )
+    } else {
+      setVenuesMapped(
+        <p>There are no venues listing for this event</p>
+      )
+    }
+  }, [slug])
+
+  
+
+  console.log(venuesMapped, "venuesMapped")
 
   useEffect(() => {
     setFormData(() =>
       <section className="filter-search"> 
         <h3>Filtrert søk</h3>         
-        <form action={handleFilter} id="filtercategory">
-          <label>
-            Dato: <input type="date" onChange={(e) => handleChangeDate(e)} />
-          </label>
+        <form action={(e) => handleFilter(e)} id="filtercategory">
+          <label value="dateInput" htmlFor="dato">Dato:</label>
+            <input type="date" id="dato" onChange={(e) => handleChangeDate(e)} />
           <label htmlFor="countries">Land:</label>
           <select onChange={(e) => handleChangeSelectCountry(e)} id="countries" name="land">
             <option value="velg-land">Velg et land</option>
@@ -199,42 +232,6 @@ export default function CategoryPage({}) {
   }, []);  
 
   console.log(genre, "genre")
-  console.log(genre?._embedded.events[0]._embedded.attractions[0].id, "ID 1")
-  console.log(genre?._embedded.events[0].id, "ID 2")
-  console.log(genre?._embedded.events[0]._embedded.venues[0].id, "ID 1")
-
-  useEffect(() => {
-    setMapData(() =>
-        <>
-          <section>
-            <h3>Attractions</h3>
-              {genre?._embedded.events[0]._embedded.attractions.
-                map((attractions) => 
-                <article key={attractions.id}>
-                  <img src={attractions.images.
-                    filter(image => image.width > 1000)[0].url}/>
-                  <h3>{attractions.name}</h3>               
-              </article>)}
-          </section>
-          <section>
-            <h3>Arrangementer</h3>
-              {genre?._embedded.events.map((events) => 
-                <article key={events.id}>
-                  
-                  <img src={events.images[0].url}/>
-                  <h3>{events.name}</h3>
-                </article>
-              )}
-          </section>
-          <section>
-            <h3>Spillesteder</h3>
-              {venuesMapped}
-          </section>
-        </>
-    )
-  }, [genre])
-
-  console.log(venue, "venue")
 
   function translateSlug(){
     switch(slug){
@@ -243,19 +240,44 @@ export default function CategoryPage({}) {
           <>
 
             {formData}
-            {mapData}           
+            <h2>Attraksjoner</h2>
+            {attractionsMapped}
+            <h2>Events</h2>
+            {eventsMapped}
+            <h2>Spillesteder</h2>
+            <section>
+              {venuesMapped}
+            </section>
+            <h2>Test av filter-knapp</h2>
+            <section>
+            {renderFilter}
+            </section>
           </>)
       case "sports":
         return (
           <>
             {formData}
-            {mapData}
+            <h2>Attraksjoner</h2>
+            {attractionsMapped}
+            <h2>Events</h2>
+            {eventsMapped}
+            <h2>Spillesteder</h2>
+            <section>
+              {venuesMapped}
+            </section>
           </>)
       case "theatre":
         return (
           <>
             {formData}
-            {mapData}
+            <h2>Attraksjoner</h2>
+            {attractionsMapped}
+            <h2>Events</h2>
+            {eventsMapped}
+            <h2>Spillesteder</h2>
+            <section>
+              {venuesMapped}
+            </section>
           </>)
       default:
         return "Det er ikke en gyldig kategori"

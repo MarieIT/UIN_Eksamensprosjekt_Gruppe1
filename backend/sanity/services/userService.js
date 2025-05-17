@@ -6,7 +6,14 @@ export async function fetchProfilePageInfo(username){
             name,
             "prevpurchase": previouspurchase[]->{apiid},
             wishlist[]->{apiid, title},
-            friends[] -> {name, "image": image.asset -> url}
+            friends[] -> {
+                name, 
+                "image": image.asset -> url,
+                "commonEvents": wishlist[@._ref in ^.^.wishlist[]._ref] -> {
+                    apiid,
+                    title,
+                }
+            }
         }`)
     return data
 }

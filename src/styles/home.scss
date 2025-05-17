@@ -159,12 +159,20 @@ body {
             padding: 0 20px;
         }
 
-        section {
+        section.hoved-events {
             display: flex;
             flex-direction: row;
             flex-wrap: wrap;
             justify-content: flex-start;
             gap: 2.5rem;
+        }
+
+        section.artikkel-fra-byer {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            gap: 2.5rem; 
         }
     }
 }

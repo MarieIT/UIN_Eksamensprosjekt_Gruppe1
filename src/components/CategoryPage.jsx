@@ -74,10 +74,11 @@ export default function CategoryPage({ setSearch, handleClickSearch, searchResul
   useEffect(() => {
     setFormData(() =>
       <section className="filter-search"> 
-        <h3>Filtrert søk</h3>         
+        <h2>Filtrert søk</h2>         
         <form action={slug} id="filtercategory">
+          <label htmlFor="event">Dato:</label>
           <label>
-            Dato: <input type="date" />
+            <input type="date" />
           </label>
           <label htmlFor="countries">Land:</label>
           <select id="countries" name="land">
@@ -95,8 +96,8 @@ export default function CategoryPage({ setSearch, handleClickSearch, searchResul
           </select>
           <button type="submit" name="filtrer">Filtrer</button>
         </form>
-        <form onSubmit={handleSubmit}>  
-          <h3>Søk</h3>
+        <form id="searchform" onSubmit={handleSubmit}>  
+          <h2>Søk</h2>
           <label htmlFor="search">Søk etter event, attraksjon eller spillested</label>
           <input type="search" id="search" placeholder="findings" onChange={handleChange} />
           <button onClick={handleClickSearch}>Søk</button>
@@ -112,7 +113,7 @@ export default function CategoryPage({ setSearch, handleClickSearch, searchResul
     setMapData(() =>
         <>
           <h2>Attractions</h2>
-          <section id="attractioncategory">
+          <section id="attractionsection">
               {genre?.
                 map((attract) => <article key={attract.id}>
                   <img src={attract.images.

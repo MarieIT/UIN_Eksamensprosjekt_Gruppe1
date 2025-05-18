@@ -27,9 +27,7 @@ function App({}) {
   }
   const [userLoggedInn, setUserLoggedInn] = useState(false)
   useEffect(() => {
-    localStorage.setItem("user", JSON.stringify({username: "TomHeine", password: "123"}))
     setUserLoggedInn(JSON.parse(sessionStorage.getItem("loggedinn")))
-    console.log("userloggedinn", userLoggedInn)
   }, [])
 
   const [linkData, setLinkData] = useState(<li><Link to={"/logginn"}>Logg inn</Link></li>)
@@ -47,6 +45,7 @@ function App({}) {
   function handleClick(){
     navigate("/")
     sessionStorage.clear()
+    localStorage.clear()
     setUserLoggedInn(false)
     
   }
@@ -54,11 +53,11 @@ function App({}) {
   return (
     <Layout linkData={linkData}>
       <Routes>
-        <Route path='/' element={<Home setWishList={setWishList} wishList={wishList} isWishlisted={isWishlisted} addToWishlist={addToWishlist} removeWishlist={removeWishlist}/>}/>
-        <Route path='/event/:id' element={<EventPage setWishList={setWishList} wishList={wishList} isWishlisted={isWishlisted} addToWishlist={addToWishlist} removeWishlist={removeWishlist}/>}/>
+        <Route path='/' element={<Home wishList={wishList} isWishlisted={isWishlisted} addToWishlist={addToWishlist} removeWishlist={removeWishlist}/>}/>
+        <Route path='/event/:id' element={<EventPage wishList={wishList} isWishlisted={isWishlisted} addToWishlist={addToWishlist} removeWishlist={removeWishlist}/>}/>
         <Route path='/category/:slug' element={<CategoryPage />}/>
-        <Route path='/dashboard' element={<Dashboard wishList={wishList} handleClick={handleClick} isWishlisted={isWishlisted} addToWishlist={addToWishlist} removeWishlist={removeWishlist} />}/>
-        <Route path='/logginn' element={<LoggInn setUserLoggedInn={setUserLoggedInn}/>}/>
+        <Route path='/dashboard' element={<Dashboard wishList={wishList} handleClick={handleClick} isWishlisted={isWishlisted} addToWishlist={addToWishlist} removeWishlist={removeWishlist}/>}/>
+        <Route path='/logginn' element={<LoggInn setUserLoggedInn={setUserLoggedInn} setWishList={setWishList}/>}/>
         <Route path='/sanity-event/:id' element={<SanityEventDetails/>}/>
       </Routes>
     </Layout>

@@ -1,10 +1,14 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { data, useNavigate } from "react-router-dom";
 import '../styles/logginn.scss'
+import { fetchLogginn } from "../../backend/sanity/services/userService";
+import { useEffect } from "react";
+import { useRef } from "react";
 
 
 export default function LoggInn({setUserLoggedInn}){
     const [userLogin, setUserLogin] = useState([]);
+    const [response, setResponse] = useState()
     const [error, setError] = useState()
     const navigate = useNavigate()
 
@@ -14,20 +18,30 @@ export default function LoggInn({setUserLoggedInn}){
         setUserLogin((prev) => ({ ...prev, [inputName]: inputValue}))
     }
 
-    const handleClick = (event) => {
-        event.preventDefault()
-        const existingUser = JSON.parse(localStorage.getItem("user"))
-        const exists = userLogin.username === existingUser.username && userLogin.password === existingUser.password
-        console.log("does he exist? ", exists)
-        if(exists){
+    const getUserLoggin = async ()=>{
+        await fetchLogginn(userLogin.username, userLogin.password)
+        .then((data) => checkLogginn(data[0]))
+        .catch((error)=> console.log("Noe gikk galt med fetching av logginn info", error))
+    }
+
+    function checkLogginn(userExists){
+        if(userExists){
             sessionStorage.setItem("loggedinn", "true")
             setUserLoggedInn(true)
+            localStorage.setItem("username", userLogin.username)
             navigate("/dashboard")
         }
         else{
             setError("Brukernavn eller passord er feil")
         }
     }
+
+    const handleClick = (event) => {
+        event.preventDefault()
+        getUserLoggin()
+        console.log(response)
+    }
+
     return(
         <>
             <h2>LoggInn</h2>

@@ -11,7 +11,7 @@ export default function CategoryPage({}) {
   const [categoryName, setCategoryName] = useState()
   const [selecedCountry, setSelectedCountry] = useState()
   const [selectedCity, setSelectedCity] = useState()
-  const [dato, setDato] = useState(cleanDato());
+  const [dato, setDato] = useState();
   const [eventsFromFetch, setEventsFromFetch] = useState();
   const [attractionsFromFetch, setAttractionsFromFetch] = useState();
   const [venuesFromFetch, setVenuesFromFetch] = useState();
@@ -27,31 +27,37 @@ export default function CategoryPage({}) {
   //Filter for by og land
   function handleChangeSelectCountry(e) {
     e.preventDefault(e)
-    setSelectedCountry(e.target.value)
-    console.log(selecedCountry, "country")
+    if(e.target.value === 'velg-land'){
+      setSelectedCountry('*')
+    }
+    else{
+      setSelectedCountry(e.target.value)
+    }
   }
 
   function handleChangeSelectCity(e) {
     e.preventDefault();
+    switch(e.target.value){
+      case 'oslo':
+        setSelectedCity('59.9138688,10.7522454')
+        return
+      case 'stockholm':
+        setSelectedCity('59.3327036,18.0656255')
+        return
+      case 'kobenhavn':
+        setSelectedCity('55.6760968,12.5683371')
+        return
+      case 'velg-by':
+        setSelectedCity('*')
+        return
+    }
     setSelectedCity(e.target.value)
-    console.log(selectedCity, "City")
   }
-  //Setter dato
-  //https://www.geeksforgeeks.org/how-to-format-javascript-date-as-yyyy-mm-dd/
 
-  function cleanDato () {
-    const date = new Date();
-    const newDate = date.toISOString();
-    const finalDate = newDate.length > 0 ? newDate.slice(0, -14) : newDate;
-    return finalDate;    
-  }
-  
-  console.log(dato, "cleanDato")
-
-  let imputDate = "0000-00-00";
   function handleChangeDate(e) {
     e.preventDefault();
-    imputDate = e.target.value;
+    setDato(e.target.value);
+    console.log(dato, "imputdate")
     
   }
 
@@ -70,32 +76,21 @@ export default function CategoryPage({}) {
   const getFindSuggest = async () => {
     await fetch(`https://app.ticketmaster.com/discovery/v2/suggest?apikey=LWeeRs6C0ToGwEe5Gz96AnZM9scR2ynq&locale=*&segmentId=${categoryId}`)
     .then((response) => response.json())
-    .then((data) => {setEventsFromFetch(data._embedded.events); setAttractionsFromFetch(data._embedded.attractions); setVenuesFromFetch(data._embedded.venues); console.log(data)})
+    .then((data) => {setEventsFromFetch(data._embedded.events); setAttractionsFromFetch(data._embedded.attractions); setVenuesFromFetch(data._embedded.venues)})
     .catch((error) => console.error("Fetching from suggest failed", error))
   }
 
   const getFilteredSearch = async () => {
-    await fetch(`https://app.ticketmaster.com/discovery/v2/https://app.ticketmaster.com/discovery/v2/suggest?apikey=LWeeRs6C0ToGwEe5Gz96AnZM9scR2ynq&latlong=59.9138688,10.7522454&locale=*&countryCode=NO&geoPoint=59.9138688,10.7522454&startEndDateTime=2025-10-15T14:35:00Z&segmentId=${categoryId}`)
+    await fetch(`https://app.ticketmaster.com/discovery/v2/suggest?apikey=LWeeRs6C0ToGwEe5Gz96AnZM9scR2ynq&latlong=${selectedCity}&locale=*&countryCode=${selecedCountry}&geoPoint=59.9138688,10.7522454&startEndDateTime=${dato}T14:35:00Z&segmentId=${categoryId}`)
+    .then((response) => response.json())
+    .then((data) => {setEventsFromFetch(data._embedded.events); setAttractionsFromFetch(data._embedded.attractions); setVenuesFromFetch(data._embedded.venues)})
+    .catch((error) => console.error("Noe gikk galt med filtersøk", error))
   }
 
   const [byFraFilterKnapp, setByFraFilterKnapp] = useState();
-  function handleFilter() {
-    const byliste = ["kobenhavn", "stockholm", "oslo"];
-    let filterBy = selectedCity;
-    for (let i = 0; i < byliste.length; i++) {
-      if (byliste[i] == "oslo") {
-        console.log(filterBy, "match byer");
-        setByFraFilterKnapp(filterBy);
-      } else {
-        console.log("njet fra byer")
-      }
-      
-    }
-    if (selectedCity == "kobenhavn" && selecedCountry == "danmark") {
-      console.log("yeah")
-    } else {
-      return null;
-    }
+  const handleFilter = (e)=> {
+   e.preventDefault()
+   getFilteredSearch()
   }
   function translateSlug(){
     switch(slug){
@@ -115,7 +110,6 @@ export default function CategoryPage({}) {
         setCategoryName("Det er ikke en gyldig kategori")
         return;
     }
-    
   }
 
   return(
@@ -123,15 +117,15 @@ export default function CategoryPage({}) {
       <h1>{categoryName}</h1>
       <section className="filter-search"> 
         <h3>Filtrert søk</h3>         
-        <form action={handleFilter} id="filtercategory">
+        <form id="filtercategory">
           <label value="dateInput" htmlFor="dato">Dato:</label>
             <input type="date" id="dato" onChange={handleChangeDate} />
           <label htmlFor="countries">Land:</label>
           <select onChange={handleChangeSelectCountry} id="countries" name="land">
             <option value="velg-land">Velg et land</option>
-            <option value="norge">Norge</option>
-            <option value="sverige">Sverige</option>
-            <option value="danmark">Danmark</option>
+            <option value="NO">Norge</option>
+            <option value="SE">Sverige</option>
+            <option value="DK">Danmark</option>
           </select>
           <label htmlFor="byer">By:</label>
           <select onChange={handleChangeSelectCity} id="byer" name="byer">
@@ -140,7 +134,7 @@ export default function CategoryPage({}) {
             <option value="stockholm">Stockholm</option>
             <option value="kobenhavn">København</option>
           </select>
-          <button type="submit" name="filtrer">Filtrer</button>
+          <button type="submit" onClick={handleFilter} name="filtrer">Filtrer</button>
         </form>
         <form id="searchform" onSubmit={handleSubmit}>  
           <h2>Søk</h2>
@@ -149,15 +143,15 @@ export default function CategoryPage({}) {
           <button>Søk</button>
         </form>
       </section>
-      <section>
+      <section id="attraction-section">
         <h2>Attraksjoner</h2>
         {attractionsFromFetch?.map((event, index)=> <AttractionCard key={index} event={event}/>)}
       </section>
-      <section>
+      <section id="events-section">
         <h2>Eventer</h2>
         {eventsFromFetch?.map((event, index)=> <EventCard key={index} event={event}/>)}
       </section>
-      <section>
+      <section id="venue-section">
         <h2>Spillesteder</h2>
         {venuesFromFetch?.map((event, index)=> <article key={index}>
             <h3>{event?.name}</h3>

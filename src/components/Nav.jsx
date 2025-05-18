@@ -10,7 +10,7 @@ export default function Nav({linkData}){
             <nav>
                 <div className="header-mobil">
                     <Link className="logo" to="/">BillettLyst</Link>
-                    <Hamburger linkData={linkData}/>
+                    <Hamburger linkData={linkData} />
                 </div>
                 <div className="header-desktop">
                     <Link className="logo" to="/">BillettLyst</Link>

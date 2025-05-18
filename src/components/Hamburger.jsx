@@ -4,13 +4,14 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 export default function Hamburger({ linkData }) {
-  const [checkHamburger, setCheckHamburger] = useState();
-  
-  const toggleHamburger = () => {
-    setCheckHamburger(!checkHamburger)
-  }
-
   const [hamburger, setHamburger] = useState()
+  const [checkHamburger, setCheckHamburger] = useState();
+  function toggleHamburger() {
+    setCheckHamburger(!checkHamburger);
+    
+    console.log(linkData, "linkData")
+  };
+
   useEffect(() => {
     if (checkHamburger) {
       setHamburger(

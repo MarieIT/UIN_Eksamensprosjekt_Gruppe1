@@ -1,6 +1,6 @@
 import Nav from "./Nav";
 
-export default function Layout({ children,linkData }) {
+export default function Layout({ children, linkData }) {
   return (
     <>
       <Nav linkData={linkData}/>

@@ -8,9 +8,7 @@ export default function Hamburger({ linkData }) {
   const [checkHamburger, setCheckHamburger] = useState();
   function toggleHamburger() {
     setCheckHamburger(!checkHamburger);
-    if (linkData.onClick) {
-      setCheckHamburger(!checkHamburger);
-    }
+    
     console.log(linkData, "linkData")
   };
 

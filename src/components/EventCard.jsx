@@ -23,10 +23,10 @@ export default function EventCard({event, isWishlisted, addToWishlist, removeWis
             </ul>
             <ul className="event-menu">
                 <li>
-                    <Link to={event?.url}>Kjøp</Link>
+                    <Link to={event?.url} className="buttons-eventcard">Kjøp</Link>
                 </li>
                 <li>
-                    <button onClick={handleClick}>{isWishlisted ? "Fjern fra ønskeliste" : "Legg til i ønskeliste"}</button>
+                    <button onClick={handleClick} className="buttons-eventcard">{isWishlisted ? "Fjern fra ønskeliste" : "Legg i ønskeliste"}</button>
                 </li>
             </ul>
             {isWishlisted ? <img className="star" src={filledStar}/>: <img className="star" src={hollowStar}/>}

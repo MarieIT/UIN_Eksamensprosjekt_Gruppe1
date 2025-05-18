@@ -8,7 +8,7 @@
     background-color: colors.$backgroundcolor;
 }
 
-main { 
+main {
 
     h1 {
         font-family: fonts.$titles;
@@ -19,30 +19,35 @@ main {
 
     #user-info { 
 
-        gap: 2rem; 
+        display: flex; 
+        flex-direction: column;
+        justify-content: center;
+
+        gap: 1rem; 
         
         h2 {
             font-family: fonts.$titles; 
             font-size: 1.8rem; 
             color: colors.$blacktext;
             text-align: center;
+            margin: 10px; 
         }
 
         button {
             font-family: fonts.$buttons; 
             font-size: 1.4rem; 
             background-color: colors.$buttons;
-            color: colors.$whitetext;
-            margin: 0 100px 0 100px;
-            padding: 15px 0px 15px 0px; 
+            color: colors.$whitetext; 
+            padding: 15px;
+            width: 125px;  
+            align-self: center;
             border-color: colors.$frames;
             font-weight: bold; 
         }
 
         img {
             max-width: 333px;
-            height: auto; 
-            margin-bottom: 50px;  
+            height: auto;   
             border: 10px solid;
             border-color: colors.$frames;
             border-radius: 25px; 

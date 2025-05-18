@@ -10,12 +10,22 @@ import CategoryPage from './components/CategoryPage'
 import Dashboard from './components/Dashboard'
 import LoggInn from './components/LoggInn'
 import SanityEventDetails from './components/SanityEventDetails'
+import { fetchWishlist } from '../backend/sanity/services/userService'
 
-function App({}) {
-  const [wishList, setWishList] = useState([{id: "Z698xZb_Z174K0o", name: "imagine dragons"}])  
+function App() {
+  const [wishList, setWishList] = useState([])
+
+  const getUserWishlist = async()=>{
+    await fetchWishlist(localStorage.getItem("username"))
+    .then((data)=> setWishList([data[0]]))
+    .catch((error) => console.error("Noe gikk galt med å hente ønskelisten", error))
+    console.log("something happened", wishList)
+  }
 
   function isWishlisted(wishList, event){
-    return wishList.some(wishEvent => wishEvent.id === event?.id)
+    if(wishList != undefined){
+      return wishList?.some(wishEvent => wishEvent.id === event?.id)
+    }
   }
 
   function addToWishlist(event){
@@ -35,6 +45,7 @@ function App({}) {
       if(JSON.parse(sessionStorage.getItem("loggedinn")) == true){
           setLinkData(<><li><Link to={"/dashboard"}>Min side<i className="arrow"></i></Link></li>
           <li><button onClick={handleClick}>Logg ut<i className="arrow"></i></button></li></>)
+          getUserWishlist()
       }
       else{
           setLinkData(<li><Link to={"/logginn"}>Logg inn<i className="arrow"></i></Link></li>)
@@ -46,9 +57,23 @@ function App({}) {
     navigate("/")
     sessionStorage.clear()
     localStorage.clear()
+    setWishList([])
     setUserLoggedInn(false)
     
   }
+  
+  const [searchResult, setSearchResult] = useState();
+  const [tempSearch, setTempSearch] = useState();
+  const [search, setSearch] = useState("temp");
+
+  const handleClickSearch = async() => {
+    fetch(`https://app.ticketmaster.com/discovery/v2/suggest?apikey=LWeeRs6C0ToGwEe5Gz96AnZM9scR2ynq&keyword=${search}&locale=*`)
+      .then((response) => response.json())
+      .then((data) => setSearchResult(data))
+      .catch((error) => 
+        console.error("Skjedde noe feil ved fetch av søk", error)
+      );
+  };
   
   return (
     <Layout linkData={linkData}>

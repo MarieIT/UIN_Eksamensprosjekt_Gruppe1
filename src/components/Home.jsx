@@ -50,7 +50,7 @@ export default function Home({ isWishlisted, wishList, addToWishlist, removeWish
   return (
     <>
     <h1>Sommerens Festivaler</h1>
-    <section>
+    <section className="hoved-events">
       {eventContent?._embedded.attractions.
         map((event) => 
           <AttractionCard event={event}/>)}

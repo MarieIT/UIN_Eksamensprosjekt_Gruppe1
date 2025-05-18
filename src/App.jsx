@@ -9,6 +9,7 @@ import Home from './components/Home'
 import CategoryPage from './components/CategoryPage'
 import Dashboard from './components/Dashboard'
 import LoggInn from './components/LoggInn'
+import SanityEventDetails from './components/SanityEventDetails'
 
 function App() {
   const [wishList, setWishList] = useState([{id: "Z698xZb_Z174K0o", name: "imagine dragons"}])
@@ -40,7 +41,6 @@ function App() {
       else{
           setLinkData(<li><Link to={"/logginn"}>Logg inn<i className="arrow"></i></Link></li>)
       }
-      console.log("linkdata", linkData)
   }, [userLoggedInn])
 
   const navigate = useNavigate()
@@ -70,8 +70,9 @@ function App() {
         <Route path='/' element={<Home setWishList={setWishList} wishList={wishList} isWishlisted={isWishlisted} addToWishlist={addToWishlist} removeWishlist={removeWishlist}/>}/>
         <Route path='/event/:id' element={<EventPage setWishList={setWishList} wishList={wishList} isWishlisted={isWishlisted} addToWishlist={addToWishlist} removeWishlist={removeWishlist}/>}/>
         <Route path='/category/:slug' element={<CategoryPage />}/>
-        <Route path='/dashboard' element={<Dashboard handleClick={handleClick} isWishlisted={isWishlisted}/>}/>
+        <Route path='/dashboard' element={<Dashboard wishList={wishList} handleClick={handleClick} isWishlisted={isWishlisted} addToWishlist={addToWishlist} removeWishlist={removeWishlist} />}/>
         <Route path='/logginn' element={<LoggInn setUserLoggedInn={setUserLoggedInn}/>}/>
+        <Route path='/sanity-event/:id' element={<SanityEventDetails/>}/>
       </Routes>
     </Layout>
   )

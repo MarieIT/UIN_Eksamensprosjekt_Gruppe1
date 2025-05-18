@@ -18,7 +18,6 @@ export default function Home({ isWishlisted, wishList, addToWishlist, removeWish
   function CityNameFromClick(input) {
     input.preventDefault();
     setCityName(input.target.innerHTML);
-    console.log(cityName);
   }
 
   useEffect(() => {
@@ -27,7 +26,6 @@ export default function Home({ isWishlisted, wishList, addToWishlist, removeWish
       return res.json();
     })
     .then((data) => {
-      console.log(data, "fra Home ");
       setEventContent(data);
     })  
   }, [])
@@ -38,15 +36,10 @@ export default function Home({ isWishlisted, wishList, addToWishlist, removeWish
       return res.json();
     })
     .then((data) => {
-      console.log(data, "fra Home – byer");
       setCityContent(data);
     })  
   }, [cityName]);
-
-  console.log(cityName, "cityName");
-  console.log(cityContent, "cityContent");
   
-
   return (
     <>
     <h1>Sommerens Festivaler</h1>

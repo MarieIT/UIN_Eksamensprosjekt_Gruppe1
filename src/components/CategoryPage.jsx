@@ -51,7 +51,6 @@ export default function CategoryPage({ setSearch, handleClickSearch, searchResul
 
   const handleChange = (e) => {
     setSearch(e.target.value);
-    console.log(e.target.value, "fra input")
   }
 
   const [mapOutSearch, setMapOutSearch] = useState();
@@ -68,7 +67,6 @@ export default function CategoryPage({ setSearch, handleClickSearch, searchResul
         </>
       ))
     )
-    console.log(searchResult)
   }, [searchResult])
 
   useEffect(() => {
@@ -104,10 +102,7 @@ export default function CategoryPage({ setSearch, handleClickSearch, searchResul
       </section>
     )
   }, []);
-
-  console.log(genre, "genre")
   
-
   useEffect(() => {
     setMapData(() =>
         <>

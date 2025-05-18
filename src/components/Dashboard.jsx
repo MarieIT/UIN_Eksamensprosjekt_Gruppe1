@@ -29,11 +29,11 @@ export default function Dashboard({handleClick}) {
   
   function getFriendEventRecomondation(friend){
     if(friend?.commonEvents.length > 0){
-      return `${friend?.name} og du ønsker begge å dra på ${friend?.commonEvents[0].title}, hva med å dra sammen?`
+      return <p>{friend?.name} og du ønsker begge å dra på <span>{friend?.commonEvents[0].title}</span>, hva med å dra sammen?</p>
     }
     else
     {
-      return `Du ønsker å dra på ${user?.wishlist[0].title}, hva med å spørre ${friend?.name} om å dra?`
+      return <p>Du ønsker å dra på <span>{user?.wishlist[0].title}</span>, hva med å spørre {friend?.name} om å dra?</p>
     }
   }
 
@@ -69,7 +69,7 @@ export default function Dashboard({handleClick}) {
         {user?.friends.map((friend, index) => <article key={index}>
           <img src={friend.image}/>
           <h3>{friend.name}</h3>
-          <p>{getFriendEventRecomondation(friend)}</p>
+          {getFriendEventRecomondation(friend)}
         </article>)}
       </section>  
     </>

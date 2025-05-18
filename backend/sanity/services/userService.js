@@ -19,6 +19,6 @@ export async function fetchProfilePageInfo(username){
 }
 
 export async function fetchLogginn(username, password) {
-    const data = await client.fetch(`count(*[_type == 'user' && username == '${username}' && password == '${password}']) > 0`)
+    const data = await client.fetch(`[count(*[_type == 'user' && username == '${username}' && password == '${password}']) > 0]`)
     return data
 }

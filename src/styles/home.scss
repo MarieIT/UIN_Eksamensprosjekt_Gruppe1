@@ -37,18 +37,19 @@ main {
             gap: 1rem;
             
             img {
-                width: 300px;
-                height: 200px;
+                width: 350px;
+                height: 250px;
             }
     
             .mainEventBtn {
-                max-width: 300px;
+                max-width: 400px;
                 color: colors.$whitetext;
                 background-color: colors.$buttons;
+                font-size: 1rem;
                 padding: .5rem 1rem;
                 border-radius: 2px;
                 text-decoration: none;
-                width: auto;
+                width: 320px;
                 height: 25px;
                 text-align: center;
                 display: inline-block;
@@ -84,14 +85,30 @@ main {
     }
 
     .artikkel-fra-byer {
+
         
-        article{
+        article.event-card{
             border: 1px solid black;
             width: 300px;
             padding: 1rem;
+            
+            img {
+                width: 300px;
+                height: 200px;
+            }
+            
 
             h3{
                 min-height: 46px;
+            }
+
+            .star {
+                width: 38px;
+                height: 42px;
+                position: absolute;
+                top: 12px;
+                right: 12px;
+                fill: #d58bd7;
             }
 
             p{

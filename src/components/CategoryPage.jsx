@@ -143,15 +143,15 @@ export default function CategoryPage({}) {
           <button>Søk</button>
         </form>
       </section>
-      <section>
+      <section id="attraction-section">
         <h2>Attraksjoner</h2>
         {attractionsFromFetch?.map((event, index)=> <AttractionCard key={index} event={event}/>)}
       </section>
-      <section>
+      <section id="events-section">
         <h2>Eventer</h2>
         {eventsFromFetch?.map((event, index)=> <EventCard key={index} event={event}/>)}
       </section>
-      <section>
+      <section id="venue-section">
         <h2>Spillesteder</h2>
         {venuesFromFetch?.map((event, index)=> <article key={index}>
             <h3>{event?.name}</h3>

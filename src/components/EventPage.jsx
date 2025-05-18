@@ -46,7 +46,7 @@ export default function EventPage({isWishlisted, wishList, addToWishlist, remove
         </ul>
       </section>
       <h2>Festivalpass</h2>
-      <section>
+      <section id="festivalpass">
         {events?.map((event) => <EventCard key={event.id} event={event} isWishlisted={isWishlisted(wishList, event)} addToWishlist={addToWishlist} removeWishlist={removeWishlist}/>)}
       </section>
       <h2>Artister</h2>

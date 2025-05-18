@@ -24,7 +24,7 @@ main {
         padding: 0 20px;
     }
 
-    section {
+    section.hoved-events {
         display: flex;
         flex-direction: column;
         gap: 2.5rem;
@@ -35,10 +35,17 @@ main {
             margin: 1rem 1rem;
             padding: 0 20px;
             gap: 1rem;
+
+            h2 {
+                font-family: fonts.$titles;
+                font-size: 2rem;
+                color: colors.$blacktext;
+                text-align: center;
+            }
             
             img {
-                width: 350px;
-                height: 250px;
+                width: 310px;
+                height: 200px;
             }
     
             .mainEventBtn {
@@ -49,8 +56,8 @@ main {
                 padding: .5rem 1rem;
                 border-radius: 2px;
                 text-decoration: none;
-                width: 320px;
-                height: 25px;
+                width: 280px;
+                height: 35px;
                 text-align: center;
                 display: inline-block;
     
@@ -78,6 +85,7 @@ main {
                 padding: .7rem 1.2rem;
                 border-radius: 2px;
                 text-decoration: none;
+                margin: 0.5rem;
                 width: auto;
                 height: 25px;
             }
@@ -91,6 +99,8 @@ main {
             border: 1px solid black;
             width: 300px;
             padding: 1rem;
+            gap: 1rem;
+            margin: 1rem 1rem;
             
             img {
                 width: 300px;
@@ -143,7 +153,7 @@ body {
             margin: 0 auto;
             padding: 0 20px;
         }
-        section {
+        section.hoved-events {
             display: flex;
             flex-direction: row;
             flex-wrap: wrap;
@@ -160,6 +170,13 @@ body {
                 height: 25px;
                 display: inline-block;
             }
+        }
+        section.artikkel-fra-byer {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 2.5rem; 
         }
     }
 }
@@ -181,7 +198,7 @@ body {
             flex-direction: row;
             flex-wrap: wrap;
             justify-content: flex-start;
-            gap: 2.5rem;
+            gap: 1rem;
         }
 
         section.artikkel-fra-byer {

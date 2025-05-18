@@ -1,174 +1,167 @@
-import { useParams } from "react-router-dom"
+import { useParams, Link } from "react-router-dom"
 import '../styles/categorypage.scss'
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useState } from "react"
+import AttractionCard from "./AttractionCard";
+import EventCard from "./EventCard";
 
 
-export default function CategoryPage({ setSearch, handleClickSearch, searchResult}) {
+export default function CategoryPage({}) {
   const { slug } = useParams()
-  const [genre, setGenre] = useState();
-  const [mapData, setMapData] = useState();
-  const [content, setContent] = useState();
-  const [formData, setFormData] = useState();
-  const [events, setEvents] = useState();
-  const [venue, setVenue] = useState();
+  const [categoryId, setCategoryId] = useState()
+  const [categoryName, setCategoryName] = useState()
+  const [selecedCountry, setSelectedCountry] = useState()
+  const [selectedCity, setSelectedCity] = useState()
+  const [dato, setDato] = useState(cleanDato());
+  const [eventsFromFetch, setEventsFromFetch] = useState();
+  const [attractionsFromFetch, setAttractionsFromFetch] = useState();
+  const [venuesFromFetch, setVenuesFromFetch] = useState();
   
-
-
-
   useEffect(() => {
-    fetch(`https://app.ticketmaster.com/discovery/v2/attractions?apikey=LWeeRs6C0ToGwEe5Gz96AnZM9scR2ynq&locale=*&size=10&classificationName=${slug}`)
-    .then((res) => {
-      return res.json();
-    })
-    .then((data) => {
-      setGenre(data._embedded.attractions);
-    })
-  }, [slug]);
+    getFindSuggest();
+  }, [categoryId])
 
-  useEffect(() => {
-    fetch(`https://app.ticketmaster.com/discovery/v2/events?apikey=LWeeRs6C0ToGwEe5Gz96AnZM9scR2ynq&locale=*&size=10&city=oslo`)
-    .then((res) => {
-      return res.json();
-    })
-    .then((data) => {
-      setEvents(data._embedded.events);
-    })
-  }, [])
+  useEffect(()=>{
+    translateSlug()
+  }, [slug])
 
-  useEffect(() => {
-    fetch(`https://app.ticketmaster.com/discovery/v2/events?apikey=LWeeRs6C0ToGwEe5Gz96AnZM9scR2ynq&locale=*&city=oslo`)
-    .then((res) => {
-      return res.json();
-    })
-    .then((data) => {
-      setVenue(data._embedded.events);
-    })
-  }, [])
+  //Filter for by og land
+  function handleChangeSelectCountry(e) {
+    e.preventDefault(e)
+    if(e.target.value === 'velg-land'){
+      setSelectedCountry('*')
+    }
+    else{
+      setSelectedCountry(e.target.value)
+    }
+  }
 
-  function handleSubmit(e) {
+  function handleChangeSelectCity(e) {
     e.preventDefault();
+    switch(e.target.value){
+      case 'oslo':
+        setSelectedCity('59.9138688,10.7522454')
+        return
+      case 'stockholm':
+        setSelectedCity('59.3327036,18.0656255')
+        return
+      case 'kobenhavn':
+        setSelectedCity('55.6760968,12.5683371')
+        return
+      case 'velg-by':
+        setSelectedCity('*')
+        return
+    }
+    setSelectedCity(e.target.value)
   }
 
-  const handleChange = (e) => {
-    setSearch(e.target.value);
-    console.log(e.target.value, "fra input")
+  function handleChangeDate(e) {
+    e.preventDefault();
+    setDato(e.target.value);
+    console.log(dato, "imputdate")
+    
   }
 
-  const [mapOutSearch, setMapOutSearch] = useState();
-  useEffect(() => {
-    setMapOutSearch(
-      searchResult?._embedded.events.map((event => 
-        <>
-          <h3></h3>
-          <article key={event.id}>
-            <p>{event.name}</p>
-            
-          </article>
-          
-        </>
-      ))
-    )
-    console.log(searchResult)
-  }, [searchResult])
+  const handleSubmit = async(e) => {
+    e.preventDefault();
+    let tmpSearch = e.target.search.value;
+    await fetch(`https://app.ticketmaster.com/discovery/v2/suggest?apikey=LWeeRs6C0ToGwEe5Gz96AnZM9scR2ynq&keyword=${tmpSearch}&locale=*&segmentId=${categoryId}`)
+      .then((response) => response.json())
+      .then((data) => {setEventsFromFetch(data._embedded.events); setAttractionsFromFetch(data._embedded.attractions); setVenuesFromFetch(data._embedded.venues)})
+      .catch((error) => 
+        console.error("Skjedde noe feil ved fetch av søk", error)
+    );
+    
+  }
+  
+  const getFindSuggest = async () => {
+    await fetch(`https://app.ticketmaster.com/discovery/v2/suggest?apikey=LWeeRs6C0ToGwEe5Gz96AnZM9scR2ynq&locale=*&segmentId=${categoryId}`)
+    .then((response) => response.json())
+    .then((data) => {setEventsFromFetch(data._embedded.events); setAttractionsFromFetch(data._embedded.attractions); setVenuesFromFetch(data._embedded.venues)})
+    .catch((error) => console.error("Fetching from suggest failed", error))
+  }
 
-  useEffect(() => {
-    setFormData(() =>
+  const getFilteredSearch = async () => {
+    await fetch(`https://app.ticketmaster.com/discovery/v2/suggest?apikey=LWeeRs6C0ToGwEe5Gz96AnZM9scR2ynq&latlong=${selectedCity}&locale=*&countryCode=${selecedCountry}&geoPoint=59.9138688,10.7522454&startEndDateTime=${dato}T14:35:00Z&segmentId=${categoryId}`)
+    .then((response) => response.json())
+    .then((data) => {setEventsFromFetch(data._embedded.events); setAttractionsFromFetch(data._embedded.attractions); setVenuesFromFetch(data._embedded.venues)})
+    .catch((error) => console.error("Noe gikk galt med filtersøk", error))
+  }
+
+  const [byFraFilterKnapp, setByFraFilterKnapp] = useState();
+  const handleFilter = (e)=> {
+   e.preventDefault()
+   getFilteredSearch()
+  }
+  function translateSlug(){
+    switch(slug){
+      case "music":
+        setCategoryId('KZFzniwnSyZfZ7v7nJ')
+        setCategoryName('Musikk')
+        return;
+      case "sports":
+        setCategoryId('KZFzniwnSyZfZ7v7nE')
+        setCategoryName('Sport')
+        return;
+      case "theatre":
+        setCategoryId('KZFzniwnSyZfZ7v7na')
+        setCategoryName('Teater/Show')
+        return;
+      default:
+        setCategoryName("Det er ikke en gyldig kategori")
+        return;
+    }
+  }
+
+  return(
+    <>
+      <h1>{categoryName}</h1>
       <section className="filter-search"> 
-        <h2>Filtrert søk</h2>         
-        <form action={slug} id="filtercategory">
-          <label htmlFor="event">Dato:</label>
-          <label>
-            <input type="date" />
-          </label>
+        <h3>Filtrert søk</h3>         
+        <form id="filtercategory">
+          <label value="dateInput" htmlFor="dato">Dato:</label>
+            <input type="date" id="dato" onChange={handleChangeDate} />
           <label htmlFor="countries">Land:</label>
-          <select id="countries" name="land">
+          <select onChange={handleChangeSelectCountry} id="countries" name="land">
             <option value="velg-land">Velg et land</option>
-            <option value="norge">Norge</option>
-            <option value="sverige">Sverige</option>
-            <option value="danmark">Danmark</option>
+            <option value="NO">Norge</option>
+            <option value="SE">Sverige</option>
+            <option value="DK">Danmark</option>
           </select>
           <label htmlFor="byer">By:</label>
-          <select id="byer" name="byer">
+          <select onChange={handleChangeSelectCity} id="byer" name="byer">
             <option value="velg-by">Velg en by</option>
             <option value="oslo">Oslo</option>
             <option value="stockholm">Stockholm</option>
             <option value="kobenhavn">København</option>
           </select>
-          <button type="submit" name="filtrer">Filtrer</button>
+          <button type="submit" onClick={handleFilter} name="filtrer">Filtrer</button>
         </form>
         <form id="searchform" onSubmit={handleSubmit}>  
           <h2>Søk</h2>
           <label htmlFor="search">Søk etter event, attraksjon eller spillested</label>
-          <input type="search" id="search" placeholder="findings" onChange={handleChange} />
-          <button onClick={handleClickSearch}>Søk</button>
+          <input type="search" id="search" placeholder="findings" /*onChange={handleChangeSearch}*/ />
+          <button>Søk</button>
         </form>
       </section>
-    )
-  }, []);
-
-  console.log(genre, "genre")
-  
-
-  useEffect(() => {
-    setMapData(() =>
-        <>
-          <h2>Attractions</h2>
-          <section id="attractionsection">
-              {genre?.
-                map((attract) => <article key={attract.id}>
-                  <img src={attract.images.
-                    filter(image => image.width > 1000)[0].url}/>
-                  <h3>{attract.name}</h3>               
-              </article>)}
-          </section>
-          <h2>Arrangementer</h2>
-          <section id="eventsection">
-              {events?.map((events) => 
-                <article key={events.id}>
-                  <img src={events.images[0].url}/>
-                  <h3>{events.name}</h3>
-                </article>
-              )}
-          </section>
-          <h2>Spillesteder</h2>
-          <section id="venuesection">
-              {venue?.map((venues) => 
-                <article key={venues.id}>
-                  <h3>{venues._embedded.venues[0].name} </h3>
-                </article>
-              )}
-          </section>
-        </>
-    )
-  }, [genre])
-
-  function translateSlug(){
-    switch(slug){
-      case "music":
-        return (
-          <>
-
-            {formData}
-            {mapOutSearch}
-            {mapData}           
-          </>)
-      case "sports":
-        return (
-          <>
-            {formData}
-            {mapData}
-          </>)
-      case "theatre":
-        return (
-          <>
-            {formData}
-            {mapData}
-          </>)
-      default:
-        return "Det er ikke en gyldig kategori"
-    }
-    
-  }
-
-  return translateSlug()
+      <section>
+        <h2>Attraksjoner</h2>
+        {attractionsFromFetch?.map((event, index)=> <AttractionCard key={index} event={event}/>)}
+      </section>
+      <section>
+        <h2>Eventer</h2>
+        {eventsFromFetch?.map((event, index)=> <EventCard key={index} event={event}/>)}
+      </section>
+      <section>
+        <h2>Spillesteder</h2>
+        {venuesFromFetch?.map((event, index)=> <article key={index}>
+            <h3>{event?.name}</h3>
+            <ul>
+              <li>{event?.country ? event.country.name: "Land kommer snart"}</li>
+              <li>{event?.city ? event.city.name: "By kommer snart"}</li>
+            </ul>
+            <Link to={event?.url}>Les mer om spillestedet</Link>
+          </article>)}
+      </section>
+    </>
+  )
 }

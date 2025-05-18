@@ -102,7 +102,6 @@ main  {
         height: 50px;
       }
   }
-  
   #attraction-section {
     display: flex;
     flex-direction: column;
@@ -225,7 +224,7 @@ main  {
 
   /* Stor desktop */
   @media (min-width: 1025px) {
-  main {
+  main{
 
     section.filter-search {
       display: flex;
@@ -241,7 +240,6 @@ main  {
         display: flex;
         flex-direction: column;
         margin: 0 auto;
-        }
       }
     }
     
@@ -265,6 +263,7 @@ main  {
       gap: 2.5rem;
       
       article {
+        max-width: 300px;
         
         img {
           width: 300px;
@@ -281,4 +280,5 @@ main  {
       gap: 2.5rem;
     }
   }
+}
 }

@@ -10,8 +10,8 @@ import CategoryPage from './components/CategoryPage'
 import Dashboard from './components/Dashboard'
 import LoggInn from './components/LoggInn'
 
-function App() {
-  const [wishList, setWishList] = useState([{id: "Z698xZb_Z174K0o", name: "imagine dragons"}])
+function App({}) {
+  const [wishList, setWishList] = useState([{id: "Z698xZb_Z174K0o", name: "imagine dragons"}])  
 
   function isWishlisted(wishList, event){
     return wishList.some(wishEvent => wishEvent.id === event?.id)
@@ -48,6 +48,7 @@ function App() {
     navigate("/")
     sessionStorage.clear()
     setUserLoggedInn(false)
+    
   }
   
   return (

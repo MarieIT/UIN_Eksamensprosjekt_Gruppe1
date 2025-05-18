@@ -178,10 +178,10 @@ export default function CategoryPage({}) {
     //console.log(eventsFromFetch[0]._embedded.attractions, "TEST1")
     //console.log(eventsFromFetch[0]._embedded.venues, "TEST2")
     if (search == "undefined" && useByer == "undefined") {     
-      if (eventsFromFetch[0]._embedded.attractions != "undefined" && eventsFromFetch[0]._embedded.venues != "undefined") {
+      if (eventsFromFetch[0]?._embedded.attractions != "undefined" && eventsFromFetch[0]?._embedded.venues != "undefined") {
         console.log("test ett ledd under search/useByer")
-        if (eventsFromFetch[0]._embedded.attractions[0].images != "undefined" && eventsFromFetch[0]._embedded.venues[0].images != "undefined") {
-          console.log("yesRender1")
+        if (eventsFromFetch[0]?._embedded.attractions[0].images != "undefined" && eventsFromFetch[0]?._embedded.venues[0].images != "undefined") {
+          console.log("Render all")
           setEventsMapped(
             eventsFromFetch?.map((events) =>
               <article key={events.id}>
@@ -207,7 +207,7 @@ export default function CategoryPage({}) {
             )
           )
         } else if (eventsFromFetch[0]._embedded.attractions[0].images != "undefined" && eventsFromFetch[0]._embedded.venues[0].images == "undefined") {
-          console.log("yesRender2")
+          console.log("Render venue image missing")
           setEventsMapped(
             eventsFromFetch?.map((events) =>
               <article key={events.id}>
@@ -233,7 +233,7 @@ export default function CategoryPage({}) {
             )
           )
         } else {
-          console.log("yesRender3")
+          console.log("Render attractions and venue images missing")
           setEventsMapped(
             eventsFromFetch?.map((events) =>
               <article key={events.id}>

@@ -161,6 +161,15 @@ header {
                         text-decoration: none;
                     }
                 }
+
+                button{
+                    border-style: none;
+                    background-color: colors.$header;
+                    padding: 0;
+                    font-family: fonts.$buttons;
+                    font-size: 16px;
+                    margin: 0;
+                }
             }       
         }
     }
@@ -226,6 +235,15 @@ header {
                     a {
                         text-decoration: none;
                     }
+                }
+
+                button{
+                    border-style: none;
+                    background-color: colors.$header;
+                    padding: 0;
+                    font-family: fonts.$buttons;
+                    font-size: 16px;
+                    margin: 0;
                 }
             }       
         }

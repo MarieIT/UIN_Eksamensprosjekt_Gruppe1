@@ -8,6 +8,39 @@ export default function CategoryPage({}) {
   const [genre, setGenre] = useState();
   const [formData, setFormData] = useState();
   
+  useEffect(() => {
+    setFormData(() =>
+      <section className="filter-search"> 
+        <h3>Filtrert søk</h3>         
+        <form action={(e) => handleFilter(e)} id="filtercategory">
+          <label value="dateInput" htmlFor="dato">Dato:</label>
+            <input type="date" id="dato" onChange={(e) => handleChangeDate(e)} />
+          <label htmlFor="countries">Land:</label>
+          <select onChange={(e) => handleChangeSelectCountry(e)} id="countries" name="land">
+            <option value="velg-land">Velg et land</option>
+            <option value="norge">Norge</option>
+            <option value="sverige">Sverige</option>
+            <option value="danmark">Danmark</option>
+          </select>
+          <label htmlFor="byer">By:</label>
+          <select onChange={(e) => handleChangeSelectCity(e)} id="byer" name="byer">
+            <option value="velg-by">Velg en by</option>
+            <option value="oslo">Oslo</option>
+            <option value="stockholm">Stockholm</option>
+            <option value="kobenhavn">København</option>
+          </select>
+          <button type="submit" name="filtrer">Filtrer</button>
+        </form>
+        <form id="searchform" onSubmit={handleSubmit}>  
+          <h2>Søk</h2>
+          <label htmlFor="search">Søk etter event, attraksjon eller spillested</label>
+          <input type="search" id="search" placeholder="findings" /*onChange={handleChangeSearch}*/ />
+          <button>Søk</button>
+        </form>
+      </section>
+    );
+  }, []);
+
   //Filter for by og land
 
   const [useLand, setUseLand] = useState();  
@@ -89,12 +122,27 @@ export default function CategoryPage({}) {
   const [attractionsFromFetch, setAttractionsFromFetch] = useState();
   const [venuesFromFetch, setVenuesFromFetch] = useState();
   
-  const getEventsCategory = async () => {
-    fetch(`https://app.ticketmaster.com/discovery/v2/events?apikey=LWeeRs6C0ToGwEe5Gz96AnZM9scR2ynq&locale=*&startDateTime=2025-05-30T00:00:00Z&size=10&city=oslo&countryCode=NO&classificationName=${slug}`)
-    .then((response) => response.json())
-    .then((data) => {setEventsFromFetch(data._embedded.events); setAttractionsFromFetch(data._embedded.events); setVenuesFromFetch(data._embedded.events)})
-    .catch((error) => console.error("Fetching failed ", error))
-  }
+  
+
+  useEffect(() => {
+    const getEventsCategory = async () => {
+      await fetch(`https://app.ticketmaster.com/discovery/v2/events?apikey=LWeeRs6C0ToGwEe5Gz96AnZM9scR2ynq&locale=*&startDateTime=2025-05-30T00:00:00Z&size=10&city=oslo&countryCode=NO&classificationName=${slug}`)
+      .then((response) => response.json())
+      .then((data) => {setEventsFromFetch(data._embedded.events); setAttractionsFromFetch(data._embedded.events); setVenuesFromFetch(data._embedded.events)})
+      .catch((error) => console.error("Fetching failed ", error))
+    }
+    getEventsCategory();
+  }, [])
+
+  
+  useEffect(() => {
+    const waitForFetch = async () => {
+      await fetch(eventsFromFetch)
+      .then((data) => {RenderSite(data)})
+      .catch((error) => console.error("waitForFetch failed", error))
+    }
+    waitForFetch();
+  }, [eventsFromFetch])
 
   const [byFraFilterKnapp, setByFraFilterKnapp] = useState();
   function handleFilter() {
@@ -124,41 +172,136 @@ export default function CategoryPage({}) {
   const [eventsMapped, setEventsMapped] = useState();
   const [attractionsMapped, setAttractionsMapped] = useState();
   const [venuesMapped, setVenuesMapped] = useState();
+  //console.log(eventsFromFetch[0]._embedded.venues, "TEST2")
   
   function RenderSite() {
-    if (search == "undefined") {
-      setEventsMapped(
-        eventsFromFetch?.map((events) =>
-          <article key={events.id}>
-            <h3>{events.name}</h3>
-            <img src={events.images[0].url} alt="Image of event" />
-          </article>
+    console.log(eventsFromFetch[0]._embedded.attractions, "TEST1")
+    console.log(eventsFromFetch[0]._embedded.venues, "TEST2")
+    if (search == "undefined" && useByer == "undefined") {
+      console.log("search and useByer er undefined")
+      if (eventsFromFetch[0]._embedded.attractions != "undefined" && eventsFromFetch[0]._embedded.venues != "undefined") {
+        console.log("test ett ledd under search/useByer")
+        if (eventsFromFetch[0]._embedded.attractions[0].images != "undefined" && eventsFromFetch[0]._embedded.venues[0].images != "undefined") {
+          console.log("yesRender1")
+          setEventsMapped(
+            eventsFromFetch?.map((events) =>
+              <article key={events.id}>
+                <h3>{events.name}</h3>
+                <img src={events.images[0].url} alt="Image of event" />
+              </article>
+            )
+          )
+          setAttractionsMapped(
+            attractionsFromFetch?.map((event) =>
+              <article key={event._embedded.attractions[0].id}>
+                <h3>{event.name}</h3>
+                <img src={event.images[0].url} alt="Image of attraction" />
+              </article>
+            )
+          )
+          setVenuesMapped(
+            venuesFromFetch?.map((venues) => 
+              <article key={venues._embedded.venues[0].id}>
+                <h3>{venues._embedded.venues[0].name}</h3>
+                <img src={venues._embedded.venues[0].images[0].url} alt="Image of venue" />
+              </article>
+            )
+          )
+        } else if (eventsFromFetch[0]._embedded.attractions[0].images != "undefined" && eventsFromFetch[0]._embedded.venues[0].images == "undefined") {
+          console.log("yesRender2")
+          setEventsMapped(
+            eventsFromFetch?.map((events) =>
+              <article key={events.id}>
+                <h3>{events.name}</h3>
+                <img src={events.images[0].url} alt="Image of event" />
+              </article>
+            )
+          )
+          setAttractionsMapped(
+            attractionsFromFetch?.map((event) =>
+              <article key={event._embedded.attractions[0].id}>
+                <h3>{event.name}</h3>
+                <img src={event.images[0].url} alt="Image of attraction" />
+              </article>
+            )
+          )
+          setVenuesMapped(
+            venuesFromFetch?.map((venues) => 
+              <article key={venues._embedded.venues[0].id}>
+                <h3>{venues._embedded.venues[0].name}</h3>
+                <img src="../images/ImageMissing.jpg" alt="Image of venue is missing" />
+              </article>
+            )
+          )
+        } else {
+          console.log("yesRender3")
+          setEventsMapped(
+            eventsFromFetch?.map((events) =>
+              <article key={events.id}>
+                <h3>{events.name}</h3>
+                <img src={events.images[0].url} alt="Image of event" />
+              </article>
+            )
+          )
+          setAttractionsMapped(
+            attractionsFromFetch?.map((event) =>
+              <article key={event._embedded.attractions[0].id}>
+                <h3>{event.name}</h3>
+                <img src="../images/ImageMissing.jpg" alt="Image of attraction is missing" />
+              </article>
+            )
+          )
+          setVenuesMapped(
+            venuesFromFetch?.map((venues) => 
+              <article key={venues._embedded.venues[0].id}>
+                <h3>{venues._embedded.venues[0].name}</h3>
+                <img src="../images/ImageMissing.jpg" alt="Image of venue is missing" />
+              </article>
+            )
+          )
+        }        
+      } else if (eventsFromFetch[0]._embedded.attractions.length > 0 && eventsFromFetch[0]._embedded.venues == "undefined") {
+        console.log("yesRender2")
+        setEventsMapped(
+          eventsFromFetch?.map((events) =>
+            <article key={events.id}>
+              <h3>{events.name}</h3>
+              <img src={events.images[0].url} alt="Image of event" />
+            </article>
+          )
         )
-      )
-      setAttractionsMapped(
-        attractionsFromFetch?.map((event) =>
-          <article key={event._embedded.attractions[0].id}>
-            <h3>{event.name}</h3>
-            <img src={event.images[0].url} alt="Image of attraction" />
-          </article>
+        setAttractionsMapped(
+          attractionsFromFetch?.map((event) =>
+            <article key={event._embedded.attractions[0].id}>
+              <h3>{event.name}</h3>
+              <img src={event.images[0].url} alt="Image of attraction" />
+            </article>
+          )
         )
-      )
-      setVenuesMapped(
-        venuesFromFetch?.map((venues) => 
-          <article key={venues._embedded.venues[0].id}>
-            <h3>{venues._embedded.venues[0].name}</h3>
-            <img src={venues._embedded.venues[0].images[0].url} alt="Image of venue" />
-          </article>
+        setVenuesMapped(
+          <h3>No venue for this event found</h3>
         )
-      )
+      } else {
+        console.log("yesRender3")
+        setEventsMapped(
+          eventsFromFetch?.map((events) =>
+            <article key={events.id}>
+              <h3>{events.name}</h3>
+              <img src={events.images[0].url} alt="Image of event" />
+            </article>
+          )
+        )
+        setAttractionsMapped(
+          <h3>No attraction for this event found</h3>
+        )
+        setVenuesMapped(
+          <h3>No venue for this event found</h3>
+        )
+      }
     } else {
-      return <h2>WROOONG MOTHERFUCKER</h2>
+      console.log("noRender")
     }
   }
-
-  console.log(eventsMapped, "eventsMapped")
-  console.log(attractionsMapped, "attractionsMapped")
-
 
 /*
   useEffect(() => {
@@ -247,41 +390,6 @@ export default function CategoryPage({}) {
   }, [slug])
 
   */
-
-  useEffect(() => {
-    setFormData(() =>
-      <section className="filter-search"> 
-        <h3>Filtrert søk</h3>         
-        <form action={(e) => handleFilter(e)} id="filtercategory">
-          <label value="dateInput" htmlFor="dato">Dato:</label>
-            <input type="date" id="dato" onChange={(e) => handleChangeDate(e)} />
-          <label htmlFor="countries">Land:</label>
-          <select onChange={(e) => handleChangeSelectCountry(e)} id="countries" name="land">
-            <option value="velg-land">Velg et land</option>
-            <option value="norge">Norge</option>
-            <option value="sverige">Sverige</option>
-            <option value="danmark">Danmark</option>
-          </select>
-          <label htmlFor="byer">By:</label>
-          <select onChange={(e) => handleChangeSelectCity(e)} id="byer" name="byer">
-            <option value="velg-by">Velg en by</option>
-            <option value="oslo">Oslo</option>
-            <option value="stockholm">Stockholm</option>
-            <option value="kobenhavn">København</option>
-          </select>
-          <button type="submit" name="filtrer">Filtrer</button>
-        </form>
-        <form onSubmit={handleSubmit}>  
-          <h3>Søk</h3>
-          <label htmlFor="search">Søk etter event, attraksjon eller spillested</label>
-          <input type="search" id="search" placeholder="findings" /*onChange={handleChangeSearch}*/ />
-          <button>Søk</button>
-        </form>
-      </section>
-    );
-    RenderSite();
-    getEventsCategory();
-  }, []);
 
   function translateSlug(){
     switch(slug){

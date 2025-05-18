@@ -14,25 +14,37 @@ export default function Dashboard({handleClick}) {
   const getProfileCardInfo = async () => {
     const data = await fetchProfilePageInfo("mariab29")
     setUser(data[0])
-    console.log(user, "user data")
-    
   }
 
   const getPurchasedEvents = async () => {
     let apiids = ``
     user?.prevpurchase.map(purchase => apiids += purchase.apiid + ", ")
     console.log(apiids, "apiids")
-    fetch(`https://app.ticketmaster.com/discovery/v2/events?apikey=D7ioqsgGEEqH9C5FsLqZZzGw54kRgsYp&id=${apiids}&locale=*`)
+    await fetch(`https://app.ticketmaster.com/discovery/v2/events?apikey=D7ioqsgGEEqH9C5FsLqZZzGw54kRgsYp&id=${apiids}&locale=*`)
     .then((response) => response.json())
     .then((data) => setPurchases(data))
     .catch((error) => console.error("Fetching failed ", error))
+    console.log(user, "user data")
+  }
+  
+  function getFriendEventRecomondation(friend){
+    if(friend?.commonEvents.length > 0){
+      return <p>{friend?.name} og du ønsker begge å dra på <span>{friend?.commonEvents[0].title}</span>, hva med å dra sammen?</p>
+    }
+    else
+    {
+      return <p>Du ønsker å dra på <span>{user?.wishlist[0].title}</span>, hva med å spørre {friend?.name} om å dra?</p>
+    }
   }
 
   useEffect(()=>{
     setUser2(JSON.parse(localStorage.getItem("user")))
     getProfileCardInfo()
-    getPurchasedEvents()
   },[])
+
+  useEffect(()=>{
+    getPurchasedEvents()
+  }, [user])
 
   return (
     <>
@@ -57,7 +69,7 @@ export default function Dashboard({handleClick}) {
         {user?.friends.map((friend, index) => <article key={index}>
           <img src={friend.image}/>
           <h3>{friend.name}</h3>
-          <p>{friend.name} og du ønsker å dra på <span>Wacken 2026</span>, hva med å dra sammen ?</p>
+          {getFriendEventRecomondation(friend)}
         </article>)}
       </section>  
     </>

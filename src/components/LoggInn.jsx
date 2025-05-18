@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import '../styles/logginn.scss'
+import { fetchLogginn } from "../../backend/sanity/services/userService";
 
 
 export default function LoggInn({setUserLoggedInn}){
     const [userLogin, setUserLogin] = useState([]);
+    const [response, setResponse] = useState()
     const [error, setError] = useState()
     const navigate = useNavigate()
 
@@ -14,14 +16,18 @@ export default function LoggInn({setUserLoggedInn}){
         setUserLogin((prev) => ({ ...prev, [inputName]: inputValue}))
     }
 
-    const handleClick = (event) => {
+    const getUserLoggin = async ()=>{
+        const data = fetchLogginn(userLogin.username, userLogin.password)
+        return data
+    }
+
+    const handleClick = async(event) => {
         event.preventDefault()
-        const existingUser = JSON.parse(localStorage.getItem("user"))
-        const exists = userLogin.username === existingUser.username && userLogin.password === existingUser.password
-        console.log("does he exist? ", exists)
-        if(exists){
+        await setResponse(getUserLoggin())
+        if(response){
             sessionStorage.setItem("loggedinn", "true")
             setUserLoggedInn(true)
+            localStorage.setItem("username", userLogin.username)
             navigate("/dashboard")
         }
         else{

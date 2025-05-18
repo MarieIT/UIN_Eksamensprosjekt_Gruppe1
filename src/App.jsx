@@ -50,20 +50,6 @@ function App() {
     setUserLoggedInn(false)
   }
   
-  const [searchResult, setSearchResult] = useState();
-  const [tempSearch, setTempSearch] = useState();
-  const [search, setSearch] = useState("temp");
-
-  const handleClickSearch = async() => {
-    console.log(search, "fra knapp")
-    fetch(`https://app.ticketmaster.com/discovery/v2/suggest?apikey=LWeeRs6C0ToGwEe5Gz96AnZM9scR2ynq&keyword=${search}&locale=*`)
-      .then((response) => response.json())
-      .then((data) => setSearchResult(data))
-      .catch((error) => 
-        console.error("Skjedde noe feil ved fetch av søk", error)
-      );
-  };
-  
   return (
     <Layout linkData={linkData}>
       <Routes>

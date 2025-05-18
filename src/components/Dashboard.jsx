@@ -4,7 +4,7 @@ import "../styles/dashboard.scss"
 import { fetchProfilePageInfo } from "../../backend/sanity/services/userService"
 import EventCard from "./EventCard"
 
-export default function Dashboard({wishList, handleClick, isWishlisted, addToWishlist, removeWishlist, username}) {
+export default function Dashboard({wishList, handleClick, isWishlisted, addToWishlist, removeWishlist}) {
   const [user, setUser] = useState()
   const [purchases, setPurchases] = useState()
   const [user2, setUser2] = useState()
@@ -12,7 +12,7 @@ export default function Dashboard({wishList, handleClick, isWishlisted, addToWis
   
 
   const getProfileCardInfo = async () => {
-    const data = await fetchProfilePageInfo(username)
+    const data = await fetchProfilePageInfo(localStorage.getItem("username"))
     setUser(data[0])
   }
 

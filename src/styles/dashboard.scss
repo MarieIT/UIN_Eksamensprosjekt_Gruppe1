@@ -4,46 +4,47 @@
 //Mobile-first 
 
 #root {
-    margin: 0, auto; 
     width: 100%;
     background-color: colors.$backgroundcolor;
 }
 
-main { 
+main {
 
     h1 {
-        font-family: fonts.$titles;
-        font-size: 2.8rem; 
         color: colors.$blacktext; 
-        margin: 0px 0px 25px; 
     }
 
     #user-info { 
 
-        gap: 2rem; 
+        display: flex; 
+        flex-direction: column;
+        justify-content: center;
+
+        gap: 1rem; 
         
         h2 {
             font-family: fonts.$titles; 
-            font-size: 1.6rem; 
+            font-size: 1.8rem; 
             color: colors.$blacktext;
             text-align: center;
+            margin: 10px; 
         }
 
         button {
             font-family: fonts.$buttons; 
             font-size: 1.4rem; 
             background-color: colors.$buttons;
-            color: colors.$whitetext;
-            margin: 0 100px 0 100px;
-            padding: 15px 0px 15px 0px; 
+            color: colors.$whitetext; 
+            padding: 15px;
+            width: 125px;  
+            align-self: center;
             border-color: colors.$frames;
             font-weight: bold; 
         }
 
         img {
             max-width: 333px;
-            height: auto; 
-            margin-bottom: 50px;  
+            height: auto;   
             border: 10px solid;
             border-color: colors.$frames;
             border-radius: 25px; 
@@ -53,15 +54,18 @@ main {
 
     #user-purchases {
 
+        display: flex; 
+        flex-direction: column;
+        justify-content: center; 
+
         .star {
             width: 38px;
             height: 42px;
             position: absolute;
-            top: 12px;
+            top: 8px;
             right: 12px;
             fill: colors.$star;
         }
-
         
         h2 {
             font-family: fonts.$titles; 
@@ -70,11 +74,7 @@ main {
             text-align: center; 
         }
 
-        article {
-
-            margin: 0; 
-            padding: 0;  
-            gap: 0; 
+        article { 
             
             img {
                 width: 333px;
@@ -90,13 +90,15 @@ main {
                 text-align: center;
                 max-width: 313px; 
             }
+
+            .event-menu {
+                margin: 10px 0; 
+            }
              
         }
     }
 
     #user-wishlist {
-
-        gap: 0; 
 
         h2 { 
             font-family: fonts.$titles; 
@@ -113,24 +115,35 @@ main {
             flex-direction: column;
             flex-wrap: wrap; 
             align-items: center;
-            width: 250px; 
+            width: 300px; 
             
             li {
 
+                display: flex; 
+                justify-content: space-between;
+                position: relative;
                 list-style: none; 
                 margin: 10px; 
                 padding: 15px;
                 background-color: colors.$frames; 
-                text-align: center;
                 font-family: fonts.$buttons;
-                min-width: 185px; 
-                max-width: 185px; 
+                width: 225px;
+                align-content: center;
+
+                .star {
+                    position: relative; 
+                    top: 0px; 
+                    right: 0px;
+                    width: 35px; 
+                    height: 35px; 
+                    fill: colors.$star;
+                } 
 
                 a {
+
                     text-decoration: none;
                     color: colors.$whitetext; 
                     font-size: 1.1rem;
-
                 }
             }
         }
@@ -187,6 +200,7 @@ main {
                 span {
                     color: colors.$whitetext;
                     font-weight: bolder;
+                    font-size: 1rem;
                 }
             }
         }

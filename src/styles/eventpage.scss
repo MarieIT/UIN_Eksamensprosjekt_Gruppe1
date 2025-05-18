@@ -3,7 +3,7 @@
 
 //Mobile-first
 #root {
-    margin: 0, auto;
+    margin: 0 auto;
     width: 100%;
     font-family: fonts.$quantitytext;
 }
@@ -92,7 +92,7 @@ main {
                 list-style-type: none;
 
                 a {
-                    color: colors.$header;
+                    color: colors.$star;
                 }
             }
         }
@@ -155,9 +155,9 @@ main {
         #infosection {
             display: flex;
             flex-direction: column;
-            margin-right: 35rem;
             gap: 1rem;
             margin: 1 auto;
+
         }
 
         #artistinfo {
@@ -199,7 +199,6 @@ main {
         #infosection {
             display: flex;
             flex-direction: column;
-            margin-right: 35rem;
             gap: 1rem;
             margin: 1 auto;
         }

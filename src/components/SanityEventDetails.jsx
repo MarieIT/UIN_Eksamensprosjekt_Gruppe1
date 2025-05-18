@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom"
 import { useEffect } from "react"
 import { fetchSanityEvent } from "../../backend/sanity/services/eventService"
 import { useState } from "react"
+import '../styles/sanityeventdetails.scss'
 
 export default function SanityEventDetails(){
     const {id} = useParams()
@@ -31,7 +32,7 @@ export default function SanityEventDetails(){
     return(
         <>
             <h1>{sanityEvent?.title}</h1>
-            <section>
+            <section id="eventdetailssection">
                 <img src={eventInfo?.images.filter(image => image.width > 1000)[0].url}/>
                 <ul className="event-info">
                     <li>Event type: {eventInfo?.type}</li>
@@ -42,14 +43,14 @@ export default function SanityEventDetails(){
                     <li>Lokalet: {eventInfo?._embedded.venues[0].name}</li>
                 </ul>
             </section>
-            <section>
+            <section id="shared-wishlist-section">
                 <h2>Andre brukere som ønsker å dra på {sanityEvent?.title}</h2>
                 {sanityEvent?.wishlistreference.map((user, index) => <article key={index}>
                     <h3>{user.name}</h3>
                     <img src={user.image}/>
                 </article>)}
             </section>
-            <section>
+            <section id="shared-purchases">
                 <h2>Andre brukere som har kjøpt biletter til {sanityEvent?.title}</h2>
                 {sanityEvent?.previouspurchasereference.map((user, index) => <article key={index}>
                     <h3>{user.name}</h3>

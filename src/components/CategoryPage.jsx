@@ -11,7 +11,7 @@ export default function CategoryPage({}) {
   const [categoryName, setCategoryName] = useState()
   const [selecedCountry, setSelectedCountry] = useState()
   const [selectedCity, setSelectedCity] = useState()
-  const [dato, setDato] = useState(cleanDato());
+  const [dato, setDato] = useState();
   const [eventsFromFetch, setEventsFromFetch] = useState();
   const [attractionsFromFetch, setAttractionsFromFetch] = useState();
   const [venuesFromFetch, setVenuesFromFetch] = useState();

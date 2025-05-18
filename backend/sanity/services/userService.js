@@ -17,3 +17,7 @@ export async function fetchProfilePageInfo(username){
         }`)
     return data
 }
+
+export async function fetchLogginn(username, password) {
+    
+}

@@ -13,6 +13,7 @@ import SanityEventDetails from './components/SanityEventDetails'
 
 function App() {
   const [wishList, setWishList] = useState([{id: "Z698xZb_Z174K0o", name: "imagine dragons"}])
+  const [username, setUsername] = useState()
 
   function isWishlisted(wishList, event){
     return wishList.some(wishEvent => wishEvent.id === event?.id)
@@ -67,11 +68,11 @@ function App() {
   return (
     <Layout linkData={linkData}>
       <Routes>
-        <Route path='/' element={<Home setWishList={setWishList} wishList={wishList} isWishlisted={isWishlisted} addToWishlist={addToWishlist} removeWishlist={removeWishlist}/>}/>
-        <Route path='/event/:id' element={<EventPage setWishList={setWishList} wishList={wishList} isWishlisted={isWishlisted} addToWishlist={addToWishlist} removeWishlist={removeWishlist}/>}/>
+        <Route path='/' element={<Home wishList={wishList} isWishlisted={isWishlisted} addToWishlist={addToWishlist} removeWishlist={removeWishlist}/>}/>
+        <Route path='/event/:id' element={<EventPage wishList={wishList} isWishlisted={isWishlisted} addToWishlist={addToWishlist} removeWishlist={removeWishlist}/>}/>
         <Route path='/category/:slug' element={<CategoryPage />}/>
-        <Route path='/dashboard' element={<Dashboard wishList={wishList} handleClick={handleClick} isWishlisted={isWishlisted} addToWishlist={addToWishlist} removeWishlist={removeWishlist} />}/>
-        <Route path='/logginn' element={<LoggInn setUserLoggedInn={setUserLoggedInn}/>}/>
+        <Route path='/dashboard' element={<Dashboard wishList={wishList} handleClick={handleClick} isWishlisted={isWishlisted} addToWishlist={addToWishlist} removeWishlist={removeWishlist} username={username}/>}/>
+        <Route path='/logginn' element={<LoggInn setUserLoggedInn={setUserLoggedInn} setWishList={setWishList} setUsername={setUsername}/>}/>
         <Route path='/sanity-event/:id' element={<SanityEventDetails/>}/>
       </Routes>
     </Layout>

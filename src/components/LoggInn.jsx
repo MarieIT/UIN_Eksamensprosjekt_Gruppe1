@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import '../styles/logginn.scss'
 
 
-export default function LoggInn({setUserLoggedInn}){
+export default function LoggInn({setUserLoggedInn, setUsername}){
     const [userLogin, setUserLogin] = useState([]);
     const [error, setError] = useState()
     const navigate = useNavigate()
@@ -22,6 +22,7 @@ export default function LoggInn({setUserLoggedInn}){
         if(exists){
             sessionStorage.setItem("loggedinn", "true")
             setUserLoggedInn(true)
+            setUsername('mariab29')
             navigate("/dashboard")
         }
         else{

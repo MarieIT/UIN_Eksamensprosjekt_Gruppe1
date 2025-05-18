@@ -3,8 +3,10 @@ import { Link, useNavigate } from "react-router-dom"
 import "../styles/dashboard.scss"
 import { fetchProfilePageInfo } from "../../backend/sanity/services/userService"
 import EventCard from "./EventCard"
+import filledStar from '../assets/StarFilled.svg'
+import hollowStar from '../assets/StarHollow.svg'
 
-export default function Dashboard({handleClick}) {
+export default function Dashboard({handleClick, isWishlisted}) {
   const [user, setUser] = useState()
   const [purchases, setPurchases] = useState()
   const [user2, setUser2] = useState()
@@ -61,7 +63,7 @@ export default function Dashboard({handleClick}) {
       <section id="user-wishlist">
         <h2>Min Ønskeliste</h2>
         <ul>
-          {user?.wishlist.map((event, index) => <li key={index}><Link to={`/event/${event.apiid}`}>{event.title}</Link></li>)}
+          {user?.wishlist.map((event, index) => <li key={index}><Link to={`/event/${event.apiid}`}>{event.title}</Link>{isWishlisted ? <img className="star" src={filledStar}/>: <img className="star" src={hollowStar}/>}</li>)}
         </ul>
       </section>
       <section id="user-friends">

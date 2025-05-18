@@ -4,7 +4,6 @@
 //Mobile-first 
 
 #root {
-    margin: 0, auto; 
     width: 100%;
     background-color: colors.$backgroundcolor;
 }
@@ -24,7 +23,7 @@ main {
         
         h2 {
             font-family: fonts.$titles; 
-            font-size: 1.6rem; 
+            font-size: 1.8rem; 
             color: colors.$blacktext;
             text-align: center;
         }
@@ -57,7 +56,7 @@ main {
             width: 38px;
             height: 42px;
             position: absolute;
-            top: 12px;
+            top: 8px;
             right: 12px;
             fill: colors.$star;
         }
@@ -98,6 +97,7 @@ main {
 
         gap: 0; 
 
+
         h2 { 
             font-family: fonts.$titles; 
             font-size: 2rem; 
@@ -113,24 +113,35 @@ main {
             flex-direction: column;
             flex-wrap: wrap; 
             align-items: center;
-            width: 250px; 
+            width: 300px; 
             
             li {
 
+                display: flex; 
+                justify-content: space-between;
+                position: relative;
                 list-style: none; 
                 margin: 10px; 
                 padding: 15px;
                 background-color: colors.$frames; 
-                text-align: center;
                 font-family: fonts.$buttons;
-                min-width: 185px; 
-                max-width: 185px; 
+                width: 225px;
+                align-content: center;
+
+                .star {
+                    position: relative; 
+                    top: 0px; 
+                    right: 0px;
+                    width: 35px; 
+                    height: 35px; 
+                    fill: colors.$star;
+                } 
 
                 a {
+
                     text-decoration: none;
                     color: colors.$whitetext; 
                     font-size: 1.1rem;
-
                 }
             }
         }
@@ -187,6 +198,7 @@ main {
                 span {
                     color: colors.$whitetext;
                     font-weight: bolder;
+                    font-size: 1rem;
                 }
             }
         }

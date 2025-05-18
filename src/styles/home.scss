@@ -97,7 +97,6 @@ main {
         
         article.event-card{
             border: 1px solid black;
-            width: 300px;
             padding: 1rem;
             gap: 1rem;
             margin: 1rem 1rem;
@@ -116,9 +115,9 @@ main {
                 width: 38px;
                 height: 42px;
                 position: absolute;
-                top: 12px;
-                right: 12px;
-                fill: #d58bd7;
+                top: 20px;
+                right: 20px;
+                fill: colors.$star;
             }
 
             p{

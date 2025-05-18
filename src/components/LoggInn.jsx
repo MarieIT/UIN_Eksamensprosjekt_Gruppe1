@@ -8,7 +8,6 @@ import { useRef } from "react";
 
 export default function LoggInn({setUserLoggedInn}){
     const [userLogin, setUserLogin] = useState([]);
-    const [response, setResponse] = useState()
     const [error, setError] = useState()
     const navigate = useNavigate()
 
@@ -21,7 +20,7 @@ export default function LoggInn({setUserLoggedInn}){
     const getUserLoggin = async ()=>{
         await fetchLogginn(userLogin.username, userLogin.password)
         .then((data) => checkLogginn(data[0]))
-        .catch((error)=> console.log("Noe gikk galt med fetching av logginn info", error))
+        .catch((error)=> console.error("Noe gikk galt med fetching av logginn info", error))
     }
 
     function checkLogginn(userExists){
@@ -39,7 +38,6 @@ export default function LoggInn({setUserLoggedInn}){
     const handleClick = (event) => {
         event.preventDefault()
         getUserLoggin()
-        console.log(response)
     }
 
     return(

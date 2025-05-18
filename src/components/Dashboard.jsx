@@ -9,24 +9,20 @@ import hollowStar from '../assets/StarHollow.svg'
 export default function Dashboard({wishList, handleClick, isWishlisted, addToWishlist, removeWishlist}) {
   const [user, setUser] = useState()
   const [purchases, setPurchases] = useState()
-  const [user2, setUser2] = useState()
-
-  
 
   const getProfileCardInfo = async () => {
-    const data = await fetchProfilePageInfo(localStorage.getItem("username"))
-    setUser(data[0])
+    await fetchProfilePageInfo(localStorage.getItem("username"))
+    .then((data) => {setUser(data[0]);getPurchasedEvents(data[0])})
+    .catch((error)=>console.error("Noe gikk galt med henting av profil info", error)) 
   }
 
-  const getPurchasedEvents = async () => {
+  const getPurchasedEvents = async (user) => {
     let apiids = ``
     user?.prevpurchase.map(purchase => apiids += purchase.apiid + ", ")
-    console.log(apiids, "apiids")
     await fetch(`https://app.ticketmaster.com/discovery/v2/events?apikey=D7ioqsgGEEqH9C5FsLqZZzGw54kRgsYp&id=${apiids}&locale=*`)
     .then((response) => response.json())
     .then((data) => setPurchases(data))
     .catch((error) => console.error("Fetching failed ", error))
-    console.log(user, "user data")
   }
   
   function getFriendEventRecomondation(friend){
@@ -40,13 +36,8 @@ export default function Dashboard({wishList, handleClick, isWishlisted, addToWis
   }
 
   useEffect(()=>{
-    setUser2(JSON.parse(localStorage.getItem("user")))
     getProfileCardInfo()
   },[])
-
-  useEffect(()=>{
-    getPurchasedEvents()
-  }, [user])
 
   return (
     <>

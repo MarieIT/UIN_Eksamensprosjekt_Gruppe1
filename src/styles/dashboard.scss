@@ -144,6 +144,7 @@ main {
                     text-decoration: none;
                     color: colors.$whitetext; 
                     font-size: 1.1rem;
+                    align-self: center; 
                 }
             }
         }
@@ -161,18 +162,17 @@ main {
 
         article {
 
+            display: flex; 
+            flex-direction: column;
             background-color: colors.$frames; 
             max-width: 333px;
             border-radius: 25px; 
             align-items: center; 
-            margin: 0px; 
-            padding: 0px; 
+            margin: 30px; 
 
-            img { 
-                align-content: center;
+            img {  
                 max-width: 200px;
                 height: auto;
-                margin-bottom: 25px;
                 margin-top: 25px;
                 border-radius: 25px; 
             }
@@ -182,8 +182,7 @@ main {
                 font-size: 1.2rem; 
                 color: colors.$blacktext; 
                 text-align: center;
-                padding-left: 25px;
-                padding-right: 25px;
+                padding: 10px; 
                 color: colors.$whitetext; 
             }
 
@@ -192,9 +191,7 @@ main {
                 font-size: 1rem; 
                 color: colors.$blacktext;
                 text-align: center;
-                padding-left: 25px;
-                padding-right: 25px;
-                margin-bottom: 25px; 
+                padding: 15px;
                 color: colors.$whitetext; 
 
                 span {

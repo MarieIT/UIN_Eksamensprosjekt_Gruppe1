@@ -70,7 +70,7 @@ function App() {
         <Route path='/' element={<Home setWishList={setWishList} wishList={wishList} isWishlisted={isWishlisted} addToWishlist={addToWishlist} removeWishlist={removeWishlist}/>}/>
         <Route path='/event/:id' element={<EventPage setWishList={setWishList} wishList={wishList} isWishlisted={isWishlisted} addToWishlist={addToWishlist} removeWishlist={removeWishlist}/>}/>
         <Route path='/category/:slug' element={<CategoryPage />}/>
-        <Route path='/dashboard' element={<Dashboard handleClick={handleClick}/>}/>
+        <Route path='/dashboard' element={<Dashboard handleClick={handleClick} isWishlisted={isWishlisted}/>}/>
         <Route path='/logginn' element={<LoggInn setUserLoggedInn={setUserLoggedInn}/>}/>
       </Routes>
     </Layout>

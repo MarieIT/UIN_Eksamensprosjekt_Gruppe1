@@ -175,10 +175,9 @@ export default function CategoryPage({}) {
   //console.log(eventsFromFetch[0]._embedded.venues, "TEST2")
   
   function RenderSite() {
-    console.log(eventsFromFetch[0]._embedded.attractions, "TEST1")
-    console.log(eventsFromFetch[0]._embedded.venues, "TEST2")
-    if (search == "undefined" && useByer == "undefined") {
-      console.log("search and useByer er undefined")
+    //console.log(eventsFromFetch[0]._embedded.attractions, "TEST1")
+    //console.log(eventsFromFetch[0]._embedded.venues, "TEST2")
+    if (search == "undefined" && useByer == "undefined") {     
       if (eventsFromFetch[0]._embedded.attractions != "undefined" && eventsFromFetch[0]._embedded.venues != "undefined") {
         console.log("test ett ledd under search/useByer")
         if (eventsFromFetch[0]._embedded.attractions[0].images != "undefined" && eventsFromFetch[0]._embedded.venues[0].images != "undefined") {

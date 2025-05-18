@@ -28,11 +28,13 @@ export default function CategoryPage({}) {
   function handleChangeSelectCountry(e) {
     e.preventDefault(e)
     setSelectedCountry(e.target.value)
+    console.log(selecedCountry, "country")
   }
 
   function handleChangeSelectCity(e) {
     e.preventDefault();
     setSelectedCity(e.target.value)
+    console.log(selectedCity, "City")
   }
   //Setter dato
   //https://www.geeksforgeeks.org/how-to-format-javascript-date-as-yyyy-mm-dd/
@@ -51,9 +53,7 @@ export default function CategoryPage({}) {
     e.preventDefault();
     imputDate = e.target.value;
     
-  } 
-
-  const [tempSearch, setTempSearch] = useState();
+  }
 
   const handleSubmit = async(e) => {
     e.preventDefault();
@@ -72,6 +72,10 @@ export default function CategoryPage({}) {
     .then((response) => response.json())
     .then((data) => {setEventsFromFetch(data._embedded.events); setAttractionsFromFetch(data._embedded.attractions); setVenuesFromFetch(data._embedded.venues); console.log(data)})
     .catch((error) => console.error("Fetching from suggest failed", error))
+  }
+
+  const getFilteredSearch = async () => {
+    await fetch(`https://app.ticketmaster.com/discovery/v2/https://app.ticketmaster.com/discovery/v2/suggest?apikey=LWeeRs6C0ToGwEe5Gz96AnZM9scR2ynq&latlong=59.9138688,10.7522454&locale=*&countryCode=NO&geoPoint=59.9138688,10.7522454&startEndDateTime=2025-10-15T14:35:00Z&segmentId=${categoryId}`)
   }
 
   const [byFraFilterKnapp, setByFraFilterKnapp] = useState();

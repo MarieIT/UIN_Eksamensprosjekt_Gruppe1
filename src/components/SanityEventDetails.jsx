@@ -43,15 +43,15 @@ export default function SanityEventDetails(){
                     <li>Lokalet: {eventInfo?._embedded.venues[0].name}</li>
                 </ul>
             </section>
+            <h2>Andre brukere som ønsker å dra på {sanityEvent?.title}</h2>
             <section id="shared-wishlist-section">
-                <h2>Andre brukere som ønsker å dra på {sanityEvent?.title}</h2>
                 {sanityEvent?.wishlistreference.map((user, index) => <article key={index}>
                     <h3>{user.name}</h3>
                     <img src={user.image}/>
                 </article>)}
             </section>
+            <h2>Andre brukere som har kjøpt biletter til {sanityEvent?.title}</h2>
             <section id="shared-purchases">
-                <h2>Andre brukere som har kjøpt biletter til {sanityEvent?.title}</h2>
                 {sanityEvent?.previouspurchasereference.map((user, index) => <article key={index}>
                     <h3>{user.name}</h3>
                     <img src={user.image}/>

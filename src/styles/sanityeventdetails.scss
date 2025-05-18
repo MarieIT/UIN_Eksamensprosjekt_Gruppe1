@@ -25,6 +25,15 @@ main {
         text-align: center;
     }
 
+    h2 {
+        font-family: fonts.$titles;
+        font-size: 2rem;
+        color: colors.$blacktext;
+        text-align: center;
+        margin-top: 50px;
+        margin-bottom: 15px;
+    }
+
     #eventdetailssection {
         img {
             width: 300px;
@@ -63,14 +72,6 @@ main {
     }
 
     #shared-purchases {
-        h2 {
-            font-family: fonts.$titles;
-            font-size: 2rem;
-            color: colors.$blacktext;
-            text-align: center;
-            margin-top: 50px;
-            margin-bottom: 15px;
-        }
         
         article {
             display: flex;
@@ -89,4 +90,62 @@ main {
             }
         }
     }
+}
+
+/* Tablet: */
+@media (min-width: 481px) and (max-width: 768px) {
+
+}
+
+/* Liten desktop */
+@media (min-width: 769px) and (max-width: 1024px) {
+    main {
+
+    }
+        #shared-wishlist-section {
+            display: flex; 
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: 2.5rem;
+
+        }
+
+        #shared-purchases {
+            display: flex; 
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: 2.5rem;
+
+        }
+
+}
+
+/* Stor desktop */
+@media (min-width: 1025px) {
+    main {
+
+        #eventdetailssection {
+            img {
+                width: 400px;
+                height: 300px;
+            }
+        }
+
+        #shared-wishlist-section {
+            display: flex; 
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: 2.5rem;
+
+        }
+
+        #shared-purchases {
+            display: flex; 
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: 2.5rem;
+
+        }
+    }
+
 }

@@ -4,7 +4,7 @@ import "../styles/dashboard.scss"
 import { fetchProfilePageInfo } from "../../backend/sanity/services/userService"
 import EventCard from "./EventCard"
 
-export default function Dashboard({handleClick}) {
+export default function Dashboard({wishList, handleClick, isWishlisted, addToWishlist, removeWishlist}) {
   const [user, setUser] = useState()
   const [purchases, setPurchases] = useState()
   const [user2, setUser2] = useState()
@@ -56,12 +56,12 @@ export default function Dashboard({handleClick}) {
       </section>
       <section id= "user-purchases">
         <h2>Mine Kjøp</h2>
-        {purchases?._embedded.events.map((event, index) => <EventCard key={index} event={event}/>)}
+        {purchases?._embedded.events.map((event, index) => <EventCard key={event?.id} event={event} isWishlisted={isWishlisted(wishList, event)} addToWishlist={addToWishlist} removeWishlist={removeWishlist}/>)}
       </section>
       <section id="user-wishlist">
         <h2>Min Ønskeliste</h2>
         <ul>
-          {user?.wishlist.map((event, index) => <li key={index}><Link to={`/event/${event.apiid}`}>{event.title}</Link></li>)}
+          {user?.wishlist.map((event, index) => <li key={index}><Link to={`/sanity-event/${event.apiid}`}>{event.title}</Link></li>)}
         </ul>
       </section>
       <section id="user-friends">

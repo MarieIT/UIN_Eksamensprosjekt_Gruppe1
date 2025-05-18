@@ -45,6 +45,7 @@ function App() {
   function handleClick(){
     navigate("/")
     sessionStorage.clear()
+    localStorage.clear()
     setUserLoggedInn(false)
   }
   

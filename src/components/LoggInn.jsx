@@ -1,7 +1,9 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { data, useNavigate } from "react-router-dom";
 import '../styles/logginn.scss'
 import { fetchLogginn } from "../../backend/sanity/services/userService";
+import { useEffect } from "react";
+import { useRef } from "react";
 
 
 export default function LoggInn({setUserLoggedInn}){
@@ -17,14 +19,13 @@ export default function LoggInn({setUserLoggedInn}){
     }
 
     const getUserLoggin = async ()=>{
-        const data = fetchLogginn(userLogin.username, userLogin.password)
-        return data
+        await fetchLogginn(userLogin.username, userLogin.password)
+        .then((data) => checkLogginn(data[0]))
+        .catch((error)=> console.log("Noe gikk galt med fetching av logginn info", error))
     }
 
-    const handleClick = async(event) => {
-        event.preventDefault()
-        await setResponse(getUserLoggin())
-        if(response){
+    function checkLogginn(userExists){
+        if(userExists){
             sessionStorage.setItem("loggedinn", "true")
             setUserLoggedInn(true)
             localStorage.setItem("username", userLogin.username)
@@ -34,6 +35,13 @@ export default function LoggInn({setUserLoggedInn}){
             setError("Brukernavn eller passord er feil")
         }
     }
+
+    const handleClick = (event) => {
+        event.preventDefault()
+        getUserLoggin()
+        console.log(response)
+    }
+
     return(
         <>
             <h2>LoggInn</h2>

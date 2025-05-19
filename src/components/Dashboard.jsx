@@ -53,8 +53,9 @@ export default function Dashboard({wishList, handleClick, isWishlisted, addToWis
       </section>
       <section id="user-wishlist">
         <h2>Min Ønskeliste</h2>
+        {console.log(wishList, "dashboard wishlist")}
         <ul>
-          {user?.wishlist.map((event, index) => <li key={index}><Link to={`/sanity-event/${event.apiid}`}>{event.title}</Link>{isWishlisted ? <img className="star" src={filledStar}/>: <img className="star" src={hollowStar}/>}</li>)}
+          {wishList?.map((event, index) => <li key={index}><Link to={`/sanity-event/${event.apiid}`}>{event.title}</Link>{isWishlisted ? <img className="star" src={filledStar}/>: <img className="star" src={hollowStar}/>}</li>)}
         </ul>
       </section>
       <section id="user-friends">

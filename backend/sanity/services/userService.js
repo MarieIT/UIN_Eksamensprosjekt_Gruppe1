@@ -24,6 +24,6 @@ export async function fetchLogginn(username, password) {
 }
 
 export async function fetchWishlist(username) {
-    const data = await client.fetch(`*[_type == 'user' && username == '${username}']`)
+    const data = await client.fetch(`*[_type == 'user' && username == '${username}']{wishlist[]->{apiid, title}}`)
     return data
 }

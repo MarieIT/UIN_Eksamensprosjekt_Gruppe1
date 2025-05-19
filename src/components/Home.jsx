@@ -53,7 +53,7 @@ export default function Home({ isWishlisted, wishList, addToWishlist, removeWish
     <section className="hoved-events">
       {attractionContent?._embedded.attractions.
         map((event) => 
-          <AttractionCard event={event}/>)}
+          <AttractionCard key={event?.id} event={event}/>)}
     </section>
     <section className="by-knapper">
       <h2>Hva skjer i verdens storbyer?</h2>

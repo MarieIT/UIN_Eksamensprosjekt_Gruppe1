@@ -4,6 +4,9 @@ import { useEffect, useState } from "react"
 import AttractionCard from "./AttractionCard";
 import EventCard from "./EventCard";
 
+//Et av gruppemedlemmene hadde en lengre samtale med GPT UiO om CategoryPage.
+//Men det ble servert dårlige svar som ble lite benyttet, og stort sett hele komponentet er gjort på nytt av et annet medlem.
+//Samtale: https://drive.google.com/file/d/1Q6n_qp5Zt5rqmEoye_YTq1wt_c4uEDoh/view?usp=sharing
 
 export default function CategoryPage({}) {
   const { slug } = useParams()

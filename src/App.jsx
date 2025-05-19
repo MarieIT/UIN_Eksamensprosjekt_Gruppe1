@@ -103,7 +103,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Home wishList={wishList} isWishlisted={isWishlisted} addToWishlist={addToWishlist} removeWishlist={removeWishlist}/>}/>
         <Route path='/event/:id' element={<EventPage wishList={wishList} isWishlisted={isWishlisted} addToWishlist={addToWishlist} removeWishlist={removeWishlist}/>}/>
-        <Route path='/category/:slug' element={<CategoryPage />}/>
+        <Route path='/category/:slug' element={<CategoryPage wishList={wishList} isWishlisted={isWishlisted} addToWishlist={addToWishlist} removeWishlist={removeWishlist}/>}/>
         <Route path='/dashboard' element={<Dashboard wishList={wishList} loggout={loggout} isWishlisted={isWishlisted} addToWishlist={addToWishlist} removeWishlist={removeWishlist}/>}/>
         <Route path='/logginn' element={<LoggInn setUserLoggedInn={setUserLoggedInn} setWishList={setWishList}/>}/>
         <Route path='/sanity-event/:id' element={<SanityEventDetails/>}/>

@@ -9,7 +9,7 @@ export default function Layout({ children, logginnMenu }) {
       <main>
         {children}
       </main>
-      <footer class="footer">
+      <footer className="footer">
         <p>© 2025 Billettlyst. Alle rettigheter reservert.</p>
         <p>
           Data levert av 

@@ -11,8 +11,6 @@ export default function Hamburger({ logginnMenu }) {
   const [checkHamburger, setCheckHamburger] = useState();
   function toggleHamburger() {
     setCheckHamburger(!checkHamburger);
-    
-    console.log(logginnMenu, "linkData")
   };
 
   useEffect(() => {

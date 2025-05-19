@@ -64,7 +64,6 @@ function App() {
    */
   function isWishlisted(wishList, event){
     if(wishList != undefined){
-      console.log(wishList, "iswishlisted defined")
       return wishList?.some(wishEvent => wishEvent.apiid === event?.id)
     }
   }

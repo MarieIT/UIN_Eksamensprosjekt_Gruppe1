@@ -74,8 +74,6 @@ export default function CategoryPage({isWishlisted, wishList, addToWishlist, rem
   function handleChangeDate(e) {
     e.preventDefault();
     setDato(e.target.value);
-    console.log(dato, "imputdate")
-    
   }
 
   const handleSubmit = async(e) => {

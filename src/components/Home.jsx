@@ -18,7 +18,6 @@ export default function Home({ isWishlisted, wishList, addToWishlist, removeWish
   function CityNameFromClick(input) {
     input.preventDefault();
     setCityName(input.target.innerHTML);
-    console.log(cityName);
   }
 
   useEffect(() => {
@@ -27,7 +26,6 @@ export default function Home({ isWishlisted, wishList, addToWishlist, removeWish
       return res.json();
     })
     .then((data) => {
-      console.log(data, "fra Home ");
       setEventContent(data);
     })  
   }, [])
@@ -38,15 +36,10 @@ export default function Home({ isWishlisted, wishList, addToWishlist, removeWish
       return res.json();
     })
     .then((data) => {
-      console.log(data, "fra Home – byer");
       setCityContent(data);
     })  
   }, [cityName]);
-
-  console.log(cityName, "cityName");
-  console.log(cityContent, "cityContent");
   
-
   return (
     <>
     <h1>Sommerens Festivaler</h1>
@@ -72,17 +65,3 @@ export default function Home({ isWishlisted, wishList, addToWishlist, removeWish
     </>
   )
 }
-
-/*
-{cityContent?._embedded.events.
-        map((cityEvent) => <article key={cityEvent.id}>
-          <img src={cityEvent.images.
-            filter(image => image.width > 1000)[0].url}/>
-          <h3>{cityEvent.name}</h3>
-          <p>{cityEvent.dates.start.localDate}</p>
-          <p>{cityEvent.dates.start.localTime}</p>
-          <p>{cityEvent._embedded.venues[0].city.name}</p>
-          <p>{cityEvent._embedded.venues[0].country.name}</p>
-          <p>{cityEvent._embedded.venues[0].name}</p>
-      </article>)}
-*/

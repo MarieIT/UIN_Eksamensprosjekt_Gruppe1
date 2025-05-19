@@ -115,8 +115,8 @@ export default function CategoryPage({}) {
   return(
     <>
       <h1>{categoryName}</h1>
+      <h3>Filtrert søk</h3>         
       <section className="filter-search"> 
-        <h3>Filtrert søk</h3>         
         <form id="filtercategory">
           <label value="dateInput" htmlFor="dato">Dato:</label>
             <input type="date" id="dato" onChange={handleChangeDate} />

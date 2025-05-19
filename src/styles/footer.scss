@@ -1,0 +1,36 @@
+@use "./partials/colors";
+@use "./partials/fonts.scss";
+
+
+#root {
+    margin: 0 auto;
+    width: 100%;
+    font-family: fonts.$quantitytext;
+}
+
+.footer {
+    background-color: colors.$header;
+    color: colors.$blacktext;
+    padding: 2rem 1rem;
+    text-align: center;
+    font-family: fonts.$quantitytext;
+    font-size: 1rem;
+    border-top: 1px solid colors.$blacktext;
+
+    a {
+        color: colors.$buttons;
+        text-decoration: underline;
+    }
+
+    @media (min-width: 768px) {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 2rem 4rem;
+
+        p {
+            margin: 0;
+        }
+    }
+}

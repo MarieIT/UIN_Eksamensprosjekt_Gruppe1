@@ -7,6 +7,9 @@ export default function Layout({ children, linkData }) {
       <main>
         {children}
       </main>
+      <footer>
+        <p></p>
+      </footer>
     </>
   )
 }

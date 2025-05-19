@@ -309,8 +309,47 @@ main {
 }
 
 /* Stor desktop */
-@media (min-width: 1025px) and (max-width: 1600px) {
-    
+@media (min-width: 1025px){
+    #dashbord-layout{
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        flex-wrap: wrap;
+
+        max-width: 1600px;
+
+        h1{
+            flex-basis: 100%;
+        }
+        #user-info{
+            flex-basis: 30%;
+            align-items: center;
+        }
+
+        #user-purchases{
+            flex-basis: 70%;
+            flex-wrap: wrap;
+            flex-direction: row;
+            h2{
+                flex-basis: 100%;
+            }
+        }
+
+        #user-wishlist{
+            display: flex;
+            flex-direction: column;
+            flex-basis: 20%;
+        }
+
+        #user-friends{
+            display: flex;
+            flex-wrap: wrap;
+            flex-basis: 80%;
+            h2{
+                flex-basis: 100%;
+            }
+        }
+    }
 
 }
 

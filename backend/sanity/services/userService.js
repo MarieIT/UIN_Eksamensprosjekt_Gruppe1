@@ -17,3 +17,13 @@ export async function fetchProfilePageInfo(username){
         }`)
     return data
 }
+
+export async function fetchLogginn(username, password) {
+    const data = await client.fetch(`[count(*[_type == 'user' && username == '${username}' && password == '${password}']) > 0]`)
+    return data
+}
+
+export async function fetchWishlist(username) {
+    const data = await client.fetch(`*[_type == 'user' && username == '${username}']{wishlist[]->{apiid, title}}`)
+    return data
+}

@@ -1,12 +1,16 @@
 @use "./partials/colors"; 
 @use "./partials/fonts.scss"; 
 
-
+body {
+    background-color: colors.$backgroundcolor; 
+}
 //Mobile-first
 #root {
     margin: 0 auto; 
     width: 100%;
     font-family: fonts.$quantitytext;
+
+    
 }
 
 main {
@@ -24,18 +28,20 @@ main {
         padding: 0 20px;
     }
 
-    section.hoved-events {
-        display: flex;
-        flex-direction: column;
-        gap: 2.5rem;
-
-        article {
+    .hoved-events {
+        
+        gap: 2rem;
+        justify-content: center;
+    
+        .article-attractions {
             display: flex;
             flex-direction: column;
-            margin: 1rem 1rem;
-            padding: 0 20px;
             gap: 1rem;
-
+            border: 1px solid black;
+            min-width: 300px;
+            margin: 1rem;
+            padding: 1rem;
+        
             h2 {
                 font-family: fonts.$titles;
                 font-size: 2rem;
@@ -44,22 +50,24 @@ main {
             }
             
             img {
-                width: 310px;
-                height: 200px;
+                width: 100%;
+                min-height: 220px;
             }
     
             .mainEventBtn {
-                max-width: 400px;
+                
                 color: colors.$whitetext;
                 background-color: colors.$buttons;
                 font-size: 1rem;
                 padding: .5rem 1rem;
                 border-radius: 2px;
                 text-decoration: none;
-                width: 280px;
+
                 height: 35px;
                 text-align: center;
-                display: inline-block;
+                align-content: center;
+                
+                
     
             }
         
@@ -93,20 +101,42 @@ main {
     }
 
     .artikkel-fra-byer {
-
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
         
-        article.event-card{
+        .event-card{
             border: 1px solid black;
-            width: 300px;
-            padding: 1rem;
+            display: flex;
+            flex-direction: column;
             gap: 1rem;
-            margin: 1rem 1rem;
-            
-            img {
-                width: 300px;
-                height: 200px;
+            margin: 1rem;
+            max-width: 300px;
+            padding: 1rem;
+
+
+            ul {
+                padding: 0;
+                margin: 0;
+                align-content: center;
+                .buttons-eventcard {
+                
+                    margin: 0;
+                }
             }
             
+
+            img {
+                max-width: 100%;
+                height: auto;
+                padding: 0;
+                margin: 0;
+            }
+                      
+            .event-info {
+                max-width: 100%;
+            }
 
             h3{
                 min-height: 46px;
@@ -116,9 +146,9 @@ main {
                 width: 38px;
                 height: 42px;
                 position: absolute;
-                top: 12px;
-                right: 12px;
-                fill: #d58bd7;
+                top: 20px;
+                right: 20px;
+                fill: colors.$star;
             }
 
             p{
@@ -132,51 +162,264 @@ main {
 
 
 
-body {
-    background-color: colors.$backgroundcolor; 
-}
-
 /* Tablet: */
 @media (min-width: 481px) and (max-width: 768px) {
+    main {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: 3rem auto; 
+        padding: 0 20px;
+    
+        h1 {
+            font-family: fonts.$titles;
+            font-size: 2.3rem;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+    
+        .hoved-events {
+            padding: 1rem;
+            gap: 2rem;
+        
+            .article-attractions {
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+                border: 1px solid black;
+                min-width: 300px;
+                max-width: 360px;
+                padding: 1rem;
+                gap: 1rem;
+                margin: 1rem 1rem;
+                
+    
+                h2 {
+                    font-family: fonts.$titles;
+                    font-size: 2rem;
+                    color: colors.$blacktext;
+                    text-align: center;
+                }
+                
+                img {
+                    width: 100%;
+                    height: auto;
+                }
+        
+                .mainEventBtn {
+                    max-width: 100%;
+                    color: colors.$whitetext;
+                    background-color: colors.$buttons;
+                    font-size: 1rem;
+                    padding: .5rem 1rem;
+                    border-radius: 2px;
+                    text-decoration: none;
+    
+                    height: 35px;
+                    text-align: center;
+                    align-content: center;
+                    
+        
+                }
+            
+            }
+    
+        }
+    
+        .by-knapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 3rem 0 2rem 0;
+    
+            article {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+    
+                a {
+                    text-decoration: none;
+                    color: colors.$whitetext;
+                    background-color: colors.$buttons;
+                    padding: .7rem 1.2rem;
+                    border-radius: 2px;
+                    text-decoration: none;
+                    margin: 0.5rem;
+                    width: auto;
+                    height: 25px;
+                }
+            }
+        }
+    
+        .artikkel-fra-byer {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
+            
+            article.event-card{
+                border: 1px solid black;
+                width: 300px;
+                padding: 1rem;
+                gap: 1rem;
+                margin: 1rem 1rem;
+                
+                img {
+                    width: 100%;
+                    height: auto;
+                }
+                
+    
+                h3{
+                    min-height: 46px;
+                }
+    
+                .star {
+                    width: 38px;
+                    height: 42px;
+                    position: absolute;
+                    top: 12px;
+                    right: 12px;
+                    fill: #d58bd7;
+                }
+    
+                p{
+                    line-height: 5px;
+                }
+            }
+        }
+    
+        
+    }
 
-
+    
 }
+
+    
+
+
+
 
     /* Liten desktop */
 @media (min-width: 769px) and (max-width: 1024px) {
 
     main {
-        display: block;
+        display: flex;
+        flex-direction: column;
+        margin: 3rem auto; 
+        padding: 0 20px;
+    
         h1 {
             font-family: fonts.$titles;
-            font-size: 2rem;
+            font-size: 2.3rem;
             margin: 0 auto;
             padding: 0 20px;
         }
-        section.hoved-events {
+    
+        .hoved-events {
             display: flex;
             flex-direction: row;
             flex-wrap: wrap;
-            justify-content: space-between;
-            gap: 2.5rem;
-
-            .mainEventBtn {
+            gap: 1rem;
+    
+            .article-attractions {
+                display: flex;
+                flex-direction: column;
+                margin: 0;
+                padding: 1rem;
+                gap: 1rem;
                 max-width: 300px;
-                color: colors.$whitetext;
-                background-color: colors.$buttons;
-                padding: .7rem 1.2rem;
-                border-radius: 2px;
-                text-decoration: none;
-                height: 25px;
-                display: inline-block;
+    
+                h2 {
+                    font-family: fonts.$titles;
+                    font-size: 2rem;
+                    color: colors.$blacktext;
+                    text-align: center;
+                    padding: 0;
+                }
+                
+                img {
+                    width: 100%;
+                    height: auto;
+                    
+                }
+        
+                .mainEventBtn {
+                    max-width: 100%;
+                    color: colors.$whitetext;
+                    background-color: colors.$buttons;
+                    font-size: 1rem;
+                    padding: 1rem;
+                    border-radius: 2px;
+                    text-decoration: none;
+                    height: 35px;
+                    text-align: center;       
+                }
+            
             }
-        }
-        section.artikkel-fra-byer {
-            display: flex;
-            flex-direction: row;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            gap: 2.5rem; 
+
+            .by-knapper {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding: 3rem 0 2rem 0;
+        
+                article {
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+        
+                    a {
+                        text-decoration: none;
+                        color: colors.$whitetext;
+                        background-color: colors.$buttons;
+                        padding: .7rem 1.2rem;
+                        border-radius: 2px;
+                        text-decoration: none;
+                        margin: 0.5rem;
+                        width: auto;
+                        height: 25px;
+                    }
+                }
+            }
+        
+            .artikkel-fra-byer{
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+
+                .event-card{
+                    border: 1px solid black;
+                    width: 300px;
+                    padding: 1rem;
+                    gap: 1rem;
+                    margin: 1rem 1rem;
+                    
+                    img {
+                        width: 300px;
+                        height: 200px;
+                    }
+                    
+        
+                    h3{
+                        min-height: 46px;
+                    }
+        
+                    .star {
+                        width: 38px;
+                        height: 42px;
+                        position: absolute;
+                        top: 12px;
+                        right: 12px;
+                        fill: #d58bd7;
+                    }
+        
+                    p{
+                        line-height: 5px;
+                    }
+                }
+            }   
         }
     }
 }
@@ -185,28 +428,121 @@ body {
 /* Stor desktop */
 @media (min-width: 1025px) {
     main {
-        display: block; 
+        display: flex;
+        flex-direction: column;
+        margin: 3rem auto; 
+        padding: 0 20px;
+    
         h1 {
             font-family: fonts.$titles;
-            font-size: 2rem;
+            font-size: 2.3rem;
             margin: 0 auto;
             padding: 0 20px;
         }
-
-        section.hoved-events {
+    
+        .hoved-events {
             display: flex;
             flex-direction: row;
             flex-wrap: wrap;
-            justify-content: flex-start;
             gap: 1rem;
-        }
+    
+            .article-attractions {
+                display: flex;
+                flex-direction: column;
+                margin: 0;
+                padding: 1rem;
+                gap: 1rem;
+                max-width: 300px;
+    
+                h2 {
+                    font-family: fonts.$titles;
+                    font-size: 2rem;
+                    color: colors.$blacktext;
+                    text-align: center;
+                    padding: 0;
+                }
+                
+                img {
+                    width: 100%;
+                    height: auto;
+                    
+                }
+        
+                .mainEventBtn {
+                    max-width: 100%;
+                    color: colors.$whitetext;
+                    background-color: colors.$buttons;
+                    font-size: 1rem;
+                    padding: 1rem;
+                    border-radius: 2px;
+                    text-decoration: none;
+                    height: 35px;
+                    text-align: center;
+                }
+            
+            }
 
-        section.artikkel-fra-byer {
-            display: flex;
-            flex-direction: row;
-            flex-wrap: wrap;
-            justify-content: flex-start;
-            gap: 2.5rem; 
+            .by-knapper {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding: 3rem 0 2rem 0;
+        
+                article {
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+        
+                    a {
+                        text-decoration: none;
+                        color: colors.$whitetext;
+                        background-color: colors.$buttons;
+                        padding: .7rem 1.2rem;
+                        border-radius: 2px;
+                        text-decoration: none;
+                        margin: 0.5rem;
+                        width: auto;
+                        height: 25px;
+                    }
+                }
+            }
+        
+            .artikkel-fra-byer{
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+
+                .event-card{
+                    border: 1px solid black;
+                    width: 300px;
+                    padding: 1rem;
+                    gap: 1rem;
+                    margin: 1rem 1rem;
+                    
+                    img {
+                        width: 300px;
+                        height: 200px;
+                    }
+                    
+        
+                    h3{
+                        min-height: 46px;
+                    }
+        
+                    .star {
+                        width: 38px;
+                        height: 42px;
+                        position: absolute;
+                        top: 12px;
+                        right: 12px;
+                        fill: #d58bd7;
+                    }
+        
+                    p{
+                        line-height: 5px;
+                    }
+                }
+            }   
         }
     }
 }

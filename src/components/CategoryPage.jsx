@@ -8,7 +8,7 @@ import EventCard from "./EventCard";
 //Men det ble servert dårlige svar som ble lite benyttet, og stort sett hele komponentet er gjort på nytt av et annet medlem.
 //Samtale: https://drive.google.com/file/d/1Q6n_qp5Zt5rqmEoye_YTq1wt_c4uEDoh/view?usp=sharing
 
-export default function CategoryPage({}) {
+export default function CategoryPage({isWishlisted, wishList, addToWishlist, removeWishlist}) {
   const { slug } = useParams()
   const [categoryId, setCategoryId] = useState()
   const [categoryName, setCategoryName] = useState()
@@ -152,7 +152,7 @@ export default function CategoryPage({}) {
       </section>
       <h2>Eventer</h2>
       <section className="events-section">
-        {eventsFromFetch?.map((event, index)=> <EventCard key={index} event={event}/>)}
+        {eventsFromFetch?.map((event, index)=> <EventCard key={index} event={event} isWishlisted={isWishlisted(wishList, event)} addToWishlist={addToWishlist} removeWishlist={removeWishlist}/>)}
       </section>
       <h2>Spillesteder</h2>
       <section className="venue-section">

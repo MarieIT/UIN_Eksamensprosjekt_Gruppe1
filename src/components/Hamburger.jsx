@@ -1,5 +1,8 @@
+//Guide til dropdown Hamburger-meny:
 //https://khuang159.medium.com/creating-a-hamburger-menu-in-react-f22e5ae442cb
 
+//Guide til å lage en pil med CSS:
+//https://www.w3schools.com/howto/howto_css_arrows.asp
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 

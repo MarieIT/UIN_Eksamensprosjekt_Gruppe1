@@ -2,10 +2,10 @@ import { Link } from "react-router-dom";
 import Nav from "./Nav";
 import '../styles/footer.scss';
 
-export default function Layout({ children, linkData }) {
+export default function Layout({ children, logginnMenu }) {
   return (
     <>
-      <Nav linkData={linkData}/>
+      <Nav logginnMenu={logginnMenu}/>
       <main>
         {children}
       </main>

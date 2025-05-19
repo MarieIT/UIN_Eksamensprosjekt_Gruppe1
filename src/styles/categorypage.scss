@@ -512,5 +512,31 @@ main  {
       flex-wrap: wrap;
       gap: 2.5rem;
     }
+
+    .venue-section {
+      display: flex;
+      flex-direction: row;
+      gap: 0.5rem;
+      margin: 0 auto;
+      padding: 0 20px;
+      min-width: 100px;
+
+
+      article {
+        border: 1px solid black;
+        padding: .5rem;
+        text-align: left;
+
+        ul {
+          list-style: none;
+        }
+
+      }
+
+      h3 {
+        font-family: fonts.$quantitytext;
+        font-size: 1rem;
+      }
+    }
   }
 }

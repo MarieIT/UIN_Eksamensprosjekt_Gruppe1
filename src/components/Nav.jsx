@@ -19,9 +19,9 @@ export default function Nav({linkData}){
                         <li><Link to={"/category/sports"}>Sport</Link></li>
                         <li><Link to={"/category/theatre"}>Teater/Show</Link></li>
                     </ul>
-                    <span>
+                    <ul id='logginn-menu'>
                         {linkData}
-                    </span>
+                    </ul>
                 </div>
             </nav>
         </header>

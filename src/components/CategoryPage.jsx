@@ -144,15 +144,15 @@ export default function CategoryPage({}) {
         </form>
       </section>
       <h2>Attraksjoner</h2>
-      <section id="attraction-section">
+      <section className="attraction-section">
         {attractionsFromFetch?.map((event, index)=> <AttractionCard key={index} event={event}/>)}
       </section>
       <h2>Eventer</h2>
-      <section id="events-section">
+      <section className="events-section">
         {eventsFromFetch?.map((event, index)=> <EventCard key={index} event={event}/>)}
       </section>
       <h2>Spillesteder</h2>
-      <section id="venue-section">
+      <section className="venue-section">
         {venuesFromFetch?.map((event, index)=> <article key={index}>
             <h3>{event?.name}</h3>
             <ul>

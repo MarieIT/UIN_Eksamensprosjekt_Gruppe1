@@ -6,13 +6,13 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-export default function Hamburger({ linkData }) {
+export default function Hamburger({ logginnMenu }) {
   const [hamburger, setHamburger] = useState()
   const [checkHamburger, setCheckHamburger] = useState();
   function toggleHamburger() {
     setCheckHamburger(!checkHamburger);
     
-    console.log(linkData, "linkData")
+    console.log(logginnMenu, "linkData")
   };
 
   useEffect(() => {
@@ -23,7 +23,7 @@ export default function Hamburger({ linkData }) {
         <li><Link to={"/category/music"} onClick={toggleHamburger}>Musikk<i className="arrow"></i></Link></li>
         <li><Link to={"/category/sports"} onClick={toggleHamburger}>Sport<i className="arrow"></i></Link></li>
         <li><Link to={"/category/theatre"} onClick={toggleHamburger}>Teater/Show<i className="arrow"></i></Link></li>
-        {linkData}
+        {logginnMenu}
       </ul>
     </div>)
     } else {

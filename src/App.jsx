@@ -17,23 +17,24 @@ function App() {
 
   const getUserWishlist = async()=>{
     await fetchWishlist(localStorage.getItem("username"))
-    .then((data)=> setWishList([data[0]]))
+    .then((data)=> setWishList(data[0].wishlist))
     .catch((error) => console.error("Noe gikk galt med å hente ønskelisten", error))
     console.log("something happened", wishList)
   }
 
   function isWishlisted(wishList, event){
     if(wishList != undefined){
-      return wishList?.some(wishEvent => wishEvent.id === event?.id)
+      console.log(wishList, "iswishlisted defined")
+      return wishList?.some(wishEvent => wishEvent.apiid === event?.id)
     }
   }
 
   function addToWishlist(event){
-    setWishList([...wishList, { id: event?.id, name: event?.name}])
+    setWishList([...wishList, { apiid: event?.id, title: event?.name}])
   }
 
   function removeWishlist(event){
-    setWishList(wishList.filter((wishEvent)=>event?.id != wishEvent.id))
+    setWishList(wishList.filter((wishEvent)=>event?.id != wishEvent.apiid))
   }
   const [userLoggedInn, setUserLoggedInn] = useState(false)
   useEffect(() => {

@@ -60,6 +60,7 @@ function App() {
     localStorage.clear()
     setWishList([])
     setUserLoggedInn(false)
+    
   }
   
   const [searchResult, setSearchResult] = useState();

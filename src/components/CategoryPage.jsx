@@ -115,8 +115,8 @@ export default function CategoryPage({}) {
   return(
     <>
       <h1>{categoryName}</h1>
+      <h3>Filtrert søk</h3>         
       <section className="filter-search"> 
-        <h3>Filtrert søk</h3>         
         <form id="filtercategory">
           <label value="dateInput" htmlFor="dato">Dato:</label>
             <input type="date" id="dato" onChange={handleChangeDate} />
@@ -143,16 +143,16 @@ export default function CategoryPage({}) {
           <button>Søk</button>
         </form>
       </section>
-      <section id="attraction-section">
-        <h2>Attraksjoner</h2>
+      <h2>Attraksjoner</h2>
+      <section className="attraction-section">
         {attractionsFromFetch?.map((event, index)=> <AttractionCard key={index} event={event}/>)}
       </section>
-      <section id="events-section">
-        <h2>Eventer</h2>
+      <h2>Eventer</h2>
+      <section className="events-section">
         {eventsFromFetch?.map((event, index)=> <EventCard key={index} event={event}/>)}
       </section>
-      <section id="venue-section">
-        <h2>Spillesteder</h2>
+      <h2>Spillesteder</h2>
+      <section className="venue-section">
         {venuesFromFetch?.map((event, index)=> <article key={index}>
             <h3>{event?.name}</h3>
             <ul>

@@ -8,21 +8,35 @@ import EventCard from "./EventCard";
 //Men det ble servert dårlige svar som ble lite benyttet, og stort sett hele komponentet er gjort på nytt av et annet medlem.
 //Samtale: https://drive.google.com/file/d/1Q6n_qp5Zt5rqmEoye_YTq1wt_c4uEDoh/view?usp=sharing
 
+/**
+ * component for rendering the category page on the site
+ * @param isWishlisted function that checks if a event is wishlisted
+ * @param wishList useState() containing the users wishlist
+ * @param addToWishlist function for adding event to wishlist
+ * @param removeWishlist function for removing event from the wishlist 
+ */
 export default function CategoryPage({isWishlisted, wishList, addToWishlist, removeWishlist}) {
   const { slug } = useParams()
+  /**holds the segmentids(wich is the category ids in the ticketmaster api for find suggest) */
   const [categoryId, setCategoryId] = useState()
+  /**useState() for holding the name that should display on the page
+   * (slug is in english and theater/show doesn't work well as a slug so it needed som formating)*/
   const [categoryName, setCategoryName] = useState()
+  /**useStates for holding the selected options for the filter and for search bar */
   const [selecedCountry, setSelectedCountry] = useState()
   const [selectedCity, setSelectedCity] = useState()
   const [dato, setDato] = useState();
+  /**useStates for holding the 3 diffrent types returned from the find suggest fetch */
   const [eventsFromFetch, setEventsFromFetch] = useState();
   const [attractionsFromFetch, setAttractionsFromFetch] = useState();
   const [venuesFromFetch, setVenuesFromFetch] = useState();
   
+  /**fetches from the find suggest when @var categoryId changes*/
   useEffect(() => {
     getFindSuggest();
   }, [categoryId])
 
+  /**translates the slug and gets the right segmentId when the @var slug changes */
   useEffect(()=>{
     translateSlug()
   }, [slug])

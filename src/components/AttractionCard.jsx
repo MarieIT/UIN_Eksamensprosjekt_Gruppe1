@@ -1,5 +1,9 @@
 import { Link } from "react-router-dom"
 
+/**
+ * component for rendering out attractions
+ * attractions have a diffrent settupp than events and events uses the EventCard component
+ */
 export default function AttractionCard({event}){
     return(
         <article className="article-attractions">

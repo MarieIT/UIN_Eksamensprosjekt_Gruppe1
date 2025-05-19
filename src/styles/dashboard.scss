@@ -14,6 +14,12 @@ main {
         color: colors.$blacktext; 
     }
 
+    #dashbord-layout{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
     #user-info { 
 
         display: flex; 
@@ -100,6 +106,7 @@ main {
 
     #user-wishlist {
         display: flex;
+        flex-direction: column;
     
         
         //Legger til flex for å få ønskelisten til å flytte seg dynamisk. 
@@ -207,6 +214,11 @@ main {
  /* Liten desktop */
 @media (min-width: 769px) and (max-width: 1024px) {
         main {
+            #dashbord-layout{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
 
         #user-info { 
             
@@ -271,6 +283,10 @@ main {
             display: flex;
             flex-wrap: wrap;
 
+            h2{
+                width: 100%;
+            }
+
             ul {
                 flex-direction: row; 
                 justify-content: center; 
@@ -312,94 +328,95 @@ main {
 
 /* Stor desktop */
 @media (min-width: 1025px){
-    #dashbord-layout{
-        display: flex;
-        flex-direction: row;
-        align-items: flex-start;
-        flex-wrap: wrap;
-
-        max-width: 1600px;
-
-        h1{
-            flex-basis: 100%;
-            margin: 25px; 
-        }
-        #user-info{
-            flex-basis: 30%;
-            align-items: center;
-        }
-
-        #user-purchases{
-            flex-basis: 70%;
+    main{
+        #dashbord-layout{
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
             flex-wrap: wrap;
-            flex-direction: row; 
-            
-            h2{
-                flex-basis: 100%;
-                margin: 0 0 15px 0; 
+
+            max-width: 1600px;
+
+            h1{
+                width: 100%;
+                margin: 25px; 
+            }
+            #user-info{
+                width: 30%;
+                align-items: center;
             }
 
-            .event-card {
-                display: flex; 
-                flex-direction: column;
-                justify-content: space-between;
-
-                img {
-                    align-self: center;
+            #user-purchases{
+                width: 70%;
+                flex-wrap: wrap;
+                flex-direction: row; 
+                
+                h2{
+                    flex-basis: 100%;
+                    margin: 0 0 15px 0; 
                 }
-            }
 
-            h3{
-                width: 280px;
-            }
+                .event-card {
+                    display: flex; 
+                    flex-direction: column;
+                    justify-content: space-between;
 
-                .event-info {
-
-                     margin: 16px; 
-                    li {
-                        font-size: large; 
+                    img {
+                        align-self: center;
                     }
                 }
 
-                .event-menu {
+                h3{
+                    width: 280px;
+                }
 
-                    align-items: center;
-                    margin: 10px;
-                    
-                    li { 
+                    .event-info {
 
-                        margin: 0; 
-                        border: 3px solid; 
+                        margin: 16px; 
+                        li {
+                            font-size: large; 
+                        }
+                    }
+
+                    .event-menu {
+
+                        align-items: center;
+                        margin: 10px;
                         
-                        a {
-                            width: 100px;
-                            padding: 18px 16px 18px 16px; 
-                            margin: 0;
-                        }
+                        li { 
 
-                        button {
-                            margin: 0px;
+                            margin: 0; 
+                            border: 3px solid; 
+                            
+                            a {
+                                width: 100px;
+                                padding: 18px 16px 18px 16px; 
+                                margin: 0;
+                            }
+
+                            button {
+                                margin: 0px;
+                            }
                         }
                     }
+            }
+
+            #user-wishlist{
+                display: flex;
+                flex-direction: column;
+                width: 20%;
+            }
+
+            #user-friends{
+                display: flex;
+                flex-wrap: wrap;
+                width: 80%;
+                h2{
+                    width: 100%;
                 }
-        }
-
-        #user-wishlist{
-            display: flex;
-            flex-direction: column;
-            flex-basis: 20%;
-        }
-
-        #user-friends{
-            display: flex;
-            flex-wrap: wrap;
-            flex-basis: 80%;
-            h2{
-                flex-basis: 100%;
             }
         }
     }
-
 }
 
 

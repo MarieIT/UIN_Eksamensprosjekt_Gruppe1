@@ -51,15 +51,15 @@ export default function Dashboard({wishList, handleClick, isWishlisted, addToWis
         <h2>Mine Kjøp</h2>
         {purchases?._embedded.events.map((event, index) => <EventCard key={event?.id} event={event} isWishlisted={isWishlisted(wishList, event)} addToWishlist={addToWishlist} removeWishlist={removeWishlist} isBought={true}/>)}
       </section>
+      <h2>Min Ønskeliste</h2>
       <section id="user-wishlist">
-        <h2>Min Ønskeliste</h2>
         {console.log(wishList, "dashboard wishlist")}
         <ul>
           {wishList?.map((event, index) => <li key={index}><Link to={`/sanity-event/${event.apiid}`}>{event.title}</Link>{isWishlisted ? <img className="star" src={filledStar}/>: <img className="star" src={hollowStar}/>}</li>)}
         </ul>
       </section>
+      <h2>Venner</h2>
       <section id="user-friends">
-        <h2>Venner</h2>
         {user?.friends.map((friend, index) => <article key={index}>
           <img src={friend.image}/>
           <h3>{friend.name}</h3>

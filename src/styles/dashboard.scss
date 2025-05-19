@@ -99,15 +99,8 @@ main {
     }
 
     #user-wishlist {
-
-        h2 { 
-            font-family: fonts.$titles; 
-            font-size: 2rem; 
-            color: colors.$blacktext;
-            text-align: center;
-            margin-top: 50px; 
-            margin-bottom: 15px; 
-        }
+        display: flex;
+    
         
         //Legger til flex for å få ønskelisten til å flytte seg dynamisk. 
         ul {
@@ -272,6 +265,9 @@ main {
         }
 
         #user-wishlist { 
+            display: flex;
+            flex-wrap: wrap;
+
             ul {
                 flex-direction: row; 
                 justify-content: center; 
@@ -284,6 +280,9 @@ main {
         }
 
         #user-friends {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
             
             article {
                 max-width: 400px; 
@@ -310,7 +309,104 @@ main {
 
 /* Stor desktop */
 @media (min-width: 1025px) and (max-width: 1600px) {
-    
+    main {
+
+        #user-info { 
+            
+            h2 { 
+                text-align: center; 
+            }
+
+            button {
+                margin: 10px; 
+                padding: 10px; 
+                width: 200px; 
+            }
+
+            img {
+                align-items: center;
+                max-width: 400px;  
+            }
+        }
+
+        #user-purchases {
+            
+            article {
+                img {
+                    max-width: 400px; 
+                }
+                
+                h3 {
+                    max-width: 380px; 
+                }
+
+                .event-info {
+                    margin-top: 20px; 
+
+                    li {
+                        font-size: large; 
+                    }
+                }
+
+                .event-menu {
+
+                    justify-content: center; 
+
+                    li {
+                        a {
+                            padding: 15px; 
+                        }
+
+                        button {
+                            padding: 15px; 
+                        }
+                    }
+                }
+
+            }
+
+        }
+
+        #user-wishlist { 
+            display: flex;
+            flex-wrap: wrap;
+
+            ul {
+                flex-direction: row; 
+                justify-content: center; 
+                max-width: max-content;
+
+                li {
+                    height: 40px; 
+                }
+            }
+        }
+
+        #user-friends {
+            display: flex;
+            flex-wrap: wrap;
+
+            article {
+                max-width: 400px; 
+
+                img {
+                    max-width: 225px; 
+                }
+
+                h3 { 
+                    font-size: 1.3rem; 
+                }
+
+                p {
+                    font-size: 1.1rem; 
+
+                    span {
+                        font-size: 1.1rem; 
+                    }
+                }
+            }
+        }
+    }
 
 }
 

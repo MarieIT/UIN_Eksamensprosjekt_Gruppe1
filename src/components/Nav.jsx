@@ -10,7 +10,7 @@ export default function Nav({logginnMenu}){
             <nav>
                 <div className="header-mobil">
                     <Link className="logo" to="/">BillettLyst</Link>
-                    <Hamburger linkData={logginnMenu} />
+                    <Hamburger logginnMenu={logginnMenu} />
                 </div>
                 <div className="header-desktop">
                     <Link className="logo" to="/">BillettLyst</Link>

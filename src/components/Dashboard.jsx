@@ -40,7 +40,7 @@ export default function Dashboard({wishList, handleClick, isWishlisted, addToWis
   },[])
 
   return (
-    <>
+    <div id="dashbord-layout">
       <h1>Dashbord</h1>
       <section id="user-info">
         <h2>{user?.name}</h2>
@@ -66,6 +66,6 @@ export default function Dashboard({wishList, handleClick, isWishlisted, addToWis
           {getFriendEventRecomondation(friend)}
         </article>)}
       </section>  
-    </>
+    </div>
   )
 }

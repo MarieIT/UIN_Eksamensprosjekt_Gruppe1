@@ -320,6 +320,7 @@ main {
 
         h1{
             flex-basis: 100%;
+            margin: 25px; 
         }
         #user-info{
             flex-basis: 30%;
@@ -329,10 +330,56 @@ main {
         #user-purchases{
             flex-basis: 70%;
             flex-wrap: wrap;
-            flex-direction: row;
+            flex-direction: row; 
+            
             h2{
                 flex-basis: 100%;
+                margin: 0 0 15px 0; 
             }
+
+            .event-card {
+                display: flex; 
+                flex-direction: column;
+                justify-content: space-between;
+
+                img {
+                    align-self: center;
+                }
+            }
+
+            h3{
+                width: 280px;
+            }
+
+                .event-info {
+
+                     margin: 16px; 
+                    li {
+                        font-size: large; 
+                    }
+                }
+
+                .event-menu {
+
+                    align-items: center;
+                    margin: 10px;
+                    
+                    li { 
+
+                        margin: 0; 
+                        border: 3px solid; 
+                        
+                        a {
+                            width: 100px;
+                            padding: 18px 16px 18px 16px; 
+                            margin: 0;
+                        }
+
+                        button {
+                            margin: 0px;
+                        }
+                    }
+                }
         }
 
         #user-wishlist{

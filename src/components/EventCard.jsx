@@ -7,6 +7,7 @@ export default function EventCard({event, isWishlisted, addToWishlist, removeWis
 
     const handleClick = (e) =>{
         e.preventDefault()
+        console.log("iswishlisted", isWishlisted)
         isWishlisted ? removeWishlist(event) : addToWishlist(event)
     }
 

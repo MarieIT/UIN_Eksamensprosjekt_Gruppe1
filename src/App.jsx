@@ -24,7 +24,8 @@ function App() {
 
   function isWishlisted(wishList, event){
     if(wishList != undefined){
-      return wishList?.some(wishEvent => wishEvent.id === event?.id)
+      console.log(wishList, "iswishlisted defined")
+      return wishList?.some(wishEvent => wishEvent.apiid === event?.id)
     }
   }
 
@@ -33,7 +34,7 @@ function App() {
   }
 
   function removeWishlist(event){
-    setWishList(wishList.filter((wishEvent)=>event?.id != wishEvent.id))
+    setWishList(wishList.filter((wishEvent)=>event?.id != wishEvent.apiid))
   }
   const [userLoggedInn, setUserLoggedInn] = useState(false)
   useEffect(() => {

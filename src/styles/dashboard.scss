@@ -99,15 +99,8 @@ main {
     }
 
     #user-wishlist {
-
-        h2 { 
-            font-family: fonts.$titles; 
-            font-size: 2rem; 
-            color: colors.$blacktext;
-            text-align: center;
-            margin-top: 50px; 
-            margin-bottom: 15px; 
-        }
+        display: flex;
+    
         
         //Legger til flex for å få ønskelisten til å flytte seg dynamisk. 
         ul {
@@ -272,6 +265,9 @@ main {
         }
 
         #user-wishlist { 
+            display: flex;
+            flex-wrap: wrap;
+
             ul {
                 flex-direction: row; 
                 justify-content: center; 
@@ -284,6 +280,9 @@ main {
         }
 
         #user-friends {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
             
             article {
                 max-width: 400px; 

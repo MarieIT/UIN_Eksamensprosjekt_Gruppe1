@@ -1,62 +1,59 @@
 import { useEffect, useState } from "react"
-import { Link, useParams } from "react-router-dom"
+import { Link } from "react-router-dom"
+import EventCard from "./EventCard";
+import AttractionCard from "./AttractionCard";
 import '../styles/home.scss'
 
-export default function Home({ discovery, setApi }) {
-  const [eventContent, setEventContent] = useState();
+/**
+ * Component that renders the home page of the site
+ * @param isWishlisted function that checks if a event is wishlisted
+ * @param wishList useState() containing the users wishlist
+ * @param addToWishlist function for adding event to wishlist
+ * @param removeWishlist function for removing event from the wishlist
+ */
+export default function Home({ isWishlisted, wishList, addToWishlist, removeWishlist }) {
+  /**useState() for holding the fetched attractions Findings, Neon, Skeikampen og Tons of rock festivalene*/
+  const [attractionContent, setAttractionContent] = useState();
+  /**useState() for keeping the fetched events filtered on city */
   const [cityContent, setCityContent] = useState();
+  /**useState() for what city the fetch should filter on */
   const [cityName, setCityName] = useState("Oslo");
-  const [testCityName, setTestCityName] = useState();
 
-  //Findings ID: K8vZ917K7fV
-  //Tons ID: K8vZ917oWOV
-  //Neon ID: K8vZ917_YJf
-  //Skeikampen ID: K8vZ917bJC7
-
+  /**when city button is clicked Sets the @var cityName based on the button clicked */
   function CityNameFromClick(input) {
     input.preventDefault();
     setCityName(input.target.innerHTML);
-    console.log(cityName);
   }
 
+  /**on render fetch the 4 festivals Findings, Neon, Skeikampen og Tons of rock from ticketmaster api*/
   useEffect(() => {
     fetch('https://app.ticketmaster.com/discovery/v2/attractions?apikey=LWeeRs6C0ToGwEe5Gz96AnZM9scR2ynq&id=K8vZ917K7fV,%20K8vZ917oWOV,%20K8vZ917_YJf,%20K8vZ917bJC7&locale=*')
     .then((res) => {
       return res.json();
     })
     .then((data) => {
-      console.log(data, "fra Home ");
-      setEventContent(data);
+      setAttractionContent(data);
     })  
   }, [])
   
+  /**when @var cityName changes fetch events based on @var cityName */
   useEffect(() => {
     fetch(`https://app.ticketmaster.com/discovery/v2/events?apikey=LWeeRs6C0ToGwEe5Gz96AnZM9scR2ynq&locale=*&size=10&city=${cityName}`)
     .then((res) => {
       return res.json();
     })
     .then((data) => {
-      console.log(data, "fra Home – byer");
       setCityContent(data);
     })  
   }, [cityName]);
-
-  console.log(cityName, "cityName");
-  console.log(cityContent, "cityContent");
   
-
   return (
     <>
     <h1>Sommerens Festivaler</h1>
-    <section>
-      {eventContent?._embedded.attractions.
+    <section className="hoved-events">
+      {attractionContent?._embedded.attractions.
         map((event) => 
-          <article key={event.id}>
-            <h2>{event.name}</h2>
-            <img src={event.images.
-            filter(image => image.width < 600)[0].url}/>
-          <Link to={`/event/${event.id}`} className="mainEventBtn">Les mer om {event.name} her!</Link>
-          </article>)}
+          <AttractionCard event={event}/>)}
     </section>
     <section className="by-knapper">
       <h2>Hva skjer i verdens storbyer?</h2>
@@ -70,31 +67,8 @@ export default function Home({ discovery, setApi }) {
     </section>    
     <section className="artikkel-fra-byer">
       {cityContent?._embedded.events.
-          map((cityEvent) => <article key={cityEvent.id}>
-            <img src={cityEvent.images.
-              filter(image => image.width > 1000)[0].url}/>
-            <h3>{cityEvent.name}</h3>
-            <p>{cityEvent.dates.start.localDate}</p>
-            <p>{cityEvent.dates.start.localTime}</p>
-            <p>{cityEvent._embedded.venues[0].city.name}</p>
-            <p>{cityEvent._embedded.venues[0].country.name}</p>
-            <p>{cityEvent._embedded.venues[0].name}</p>
-        </article>)}
+          map((cityEvent) => <EventCard key={cityEvent?.id} event={cityEvent} isWishlisted={isWishlisted(wishList, cityEvent)} addToWishlist={addToWishlist} removeWishlist={removeWishlist}/>)}
     </section>
     </>
   )
 }
-
-/*
-{cityContent?._embedded.events.
-        map((cityEvent) => <article key={cityEvent.id}>
-          <img src={cityEvent.images.
-            filter(image => image.width > 1000)[0].url}/>
-          <h3>{cityEvent.name}</h3>
-          <p>{cityEvent.dates.start.localDate}</p>
-          <p>{cityEvent.dates.start.localTime}</p>
-          <p>{cityEvent._embedded.venues[0].city.name}</p>
-          <p>{cityEvent._embedded.venues[0].country.name}</p>
-          <p>{cityEvent._embedded.venues[0].name}</p>
-      </article>)}
-*/

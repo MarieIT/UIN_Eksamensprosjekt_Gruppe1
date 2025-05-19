@@ -1,0 +1,423 @@
+@use "./partials/colors"; 
+@use "./partials/fonts.scss";
+
+//Mobile-first 
+
+#root {
+    width: 100%;
+    background-color: colors.$backgroundcolor;
+}
+
+main {
+
+    h1 {
+        color: colors.$blacktext; 
+    }
+
+    #dashbord-layout{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #user-info { 
+
+        display: flex; 
+        flex-direction: column;
+        justify-content: center;
+
+        gap: 1rem; 
+        
+        h2 {
+            font-family: fonts.$titles; 
+            font-size: 1.8rem; 
+            color: colors.$blacktext;
+            text-align: center;
+            margin: 10px; 
+        }
+
+        button {
+            font-family: fonts.$buttons; 
+            font-size: 1.4rem; 
+            background-color: colors.$buttons;
+            color: colors.$whitetext; 
+            padding: 15px;
+            width: 125px;  
+            align-self: center;
+            border-color: colors.$frames;
+            font-weight: bold; 
+        }
+
+        img {
+            max-width: 333px;
+            height: auto;   
+            border: 10px solid;
+            border-color: colors.$frames;
+            border-radius: 25px; 
+            
+        }
+    }
+
+    #user-purchases {
+
+        display: flex; 
+        flex-direction: column;
+        justify-content: center; 
+
+        .star {
+            width: 38px;
+            height: 42px;
+            position: absolute;
+            top: 8px;
+            right: 12px;
+            fill: colors.$star;
+        }
+        
+        h2 {
+            font-family: fonts.$titles; 
+            font-size: 2rem; 
+            color: colors.$blacktext; 
+            text-align: center; 
+        }
+
+        article { 
+            
+            img {
+                max-width: 333px;
+                height: auto;
+            }
+
+            h3 {
+                font-family: fonts.$quantitytext; 
+                font-size: 1.1rem;
+                color: colors.$whitetext; 
+                background-color: colors.$frames;
+                padding: 10px;
+                text-align: center;
+                max-width: 313px; 
+            }
+
+            .event-menu {
+                margin: 10px 0; 
+            }
+             
+        }
+    }
+
+    #user-wishlist {
+        display: flex;
+        flex-direction: column;
+    
+        
+        //Legger til flex for å få ønskelisten til å flytte seg dynamisk. 
+        ul {
+            display: flex; 
+            flex-direction: column;
+            flex-wrap: wrap; 
+            align-items: center;
+            max-width: 300px; 
+            
+            li {
+
+                display: flex; 
+                justify-content: space-between;
+                position: relative;
+                list-style: none; 
+                margin: 10px; 
+                padding: 15px;
+                background-color: colors.$frames; 
+                font-family: fonts.$buttons;
+                width: 225px;
+                align-content: center;
+
+                .star {
+                    position: relative; 
+                    top: 0px; 
+                    right: 0px;
+                    width: 35px; 
+                    height: 35px; 
+                    fill: colors.$star;
+                } 
+
+                a {
+
+                    text-decoration: none;
+                    color: colors.$whitetext; 
+                    font-size: 1.1rem;
+                    align-self: center; 
+                }
+            }
+        }
+    }
+
+    #user-friends { 
+
+        h2 {
+            font-family: fonts.$titles; 
+            font-size: 2rem; 
+            color: colors.$blacktext; 
+            text-align: center;
+            margin-top: 50px; 
+        }
+
+        article {
+
+            display: flex; 
+            flex-direction: column;
+            background-color: colors.$frames; 
+            max-width: 333px;
+            border-radius: 25px; 
+            align-items: center; 
+            margin: 30px; 
+
+            img {  
+                max-width: 200px;
+                height: auto;
+                margin-top: 25px;
+                border-radius: 25px; 
+            }
+
+            h3 {
+                font-family: fonts.$quantitytext; 
+                font-size: 1.2rem; 
+                color: colors.$blacktext; 
+                text-align: center;
+                padding: 10px; 
+                color: colors.$whitetext; 
+            }
+
+            p {
+                font-family: fonts.$quantitytext; 
+                font-size: 1rem; 
+                color: colors.$blacktext;
+                text-align: center;
+                padding: 15px;
+                color: colors.$whitetext; 
+
+                span {
+                    color: colors.$whitetext;
+                    font-weight: bolder;
+                    font-size: 1rem;
+                }
+            }
+        }
+
+    }
+
+}
+
+/* Tablet: */
+@media (min-width: 481px) and (max-width: 768px) {
+
+}
+
+ /* Liten desktop */
+@media (min-width: 769px) and (max-width: 1024px) {
+        main {
+            #dashbord-layout{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+        #user-info { 
+            
+            h2 { 
+                text-align: center; 
+            }
+
+            button {
+                margin: 10px; 
+                padding: 10px; 
+                width: 200px; 
+            }
+
+            img {
+                align-items: center;
+                max-width: 400px;  
+            }
+        }
+
+        #user-purchases {
+            
+            .event-card{
+                max-width: 400px;
+            }
+            article {
+                img {
+                    max-width: 400px; 
+                }
+                
+                h3 {
+                    max-width: 380px; 
+                }
+
+                .event-info {
+                    margin-top: 20px; 
+
+                    li {
+                        font-size: large; 
+                    }
+                }
+
+                .event-menu {
+
+                    justify-content: center; 
+
+                    li {
+                        a {
+                            padding: 15px; 
+                        }
+
+                        button {
+                            padding: 15px; 
+                        }
+                    }
+                }
+
+            }
+
+        }
+
+        #user-wishlist { 
+            display: flex;
+            flex-wrap: wrap;
+
+            h2{
+                width: 100%;
+            }
+
+            ul {
+                flex-direction: row; 
+                justify-content: center; 
+                max-width: max-content;
+
+                li {
+                    height: 40px; 
+                }
+            }
+        }
+
+        #user-friends {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            
+            article {
+                max-width: 400px; 
+
+                img {
+                    max-width: 225px; 
+                }
+
+                h3 { 
+                    font-size: 1.3rem; 
+                }
+
+                p {
+                    font-size: 1.1rem; 
+
+                    span {
+                        font-size: 1.1rem; 
+                    }
+                }
+            }
+        }
+    }
+}
+
+/* Stor desktop */
+@media (min-width: 1025px){
+    main{
+        #dashbord-layout{
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            flex-wrap: wrap;
+
+            max-width: 1600px;
+
+            h1{
+                width: 100%;
+                margin: 25px; 
+            }
+            #user-info{
+                width: 30%;
+                align-items: center;
+            }
+
+            #user-purchases{
+                width: 70%;
+                flex-wrap: wrap;
+                flex-direction: row; 
+                
+                h2{
+                    flex-basis: 100%;
+                    margin: 0 0 15px 0; 
+                }
+
+                .event-card {
+                    display: flex; 
+                    flex-direction: column;
+                    justify-content: space-between;
+
+                    img {
+                        align-self: center;
+                    }
+                }
+
+                h3{
+                    width: 280px;
+                }
+
+                    .event-info {
+
+                        margin: 16px; 
+                        li {
+                            font-size: large; 
+                        }
+                    }
+
+                    .event-menu {
+
+                        align-items: center;
+                        margin: 10px;
+                        
+                        li { 
+
+                            margin: 0; 
+                            border: 3px solid; 
+                            
+                            a {
+                                width: 100px;
+                                padding: 18px 16px 18px 16px; 
+                                margin: 0;
+                            }
+
+                            button {
+                                margin: 0px;
+                            }
+                        }
+                    }
+            }
+
+            #user-wishlist{
+                display: flex;
+                flex-direction: column;
+                width: 20%;
+            }
+
+            #user-friends{
+                display: flex;
+                flex-wrap: wrap;
+                width: 80%;
+                h2{
+                    width: 100%;
+                }
+            }
+        }
+    }
+}
+
+
+

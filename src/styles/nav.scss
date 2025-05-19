@@ -68,10 +68,20 @@ header {
                     display: flex;
                     justify-content: space-between;
                 }
-            }
 
-            .hamburger2 {
+                .button-flex{
+                    display: flex;
+                    justify-content: space-between;
+                }
 
+                button{
+                    border-style: none;
+                    background-color: colors.$header;
+                    padding: 10px 213px 10px 10px;
+                    font-family: fonts.$buttons;
+                    font-size: 16px;
+                    margin: -10px -10px -10px -10px;
+                }
             }
 
             img {
@@ -147,6 +157,15 @@ header {
                         text-decoration: none;
                     }
                 }
+
+                button{
+                    border-style: none;
+                    background-color: colors.$header;
+                    padding: 0;
+                    font-family: fonts.$buttons;
+                    font-size: 16px;
+                    margin: 0;
+                }
             }       
         }
     }
@@ -213,7 +232,21 @@ header {
                         text-decoration: none;
                     }
                 }
-            }       
+
+                button{
+                    border-style: none;
+                    background-color: colors.$header;
+                    padding: 0;
+                    font-family: fonts.$buttons;
+                    font-size: 16px;
+                    margin: 0;
+                }
+            }
+            
+            #logginn-menu{
+                display: flex;
+                flex-direction: row;
+            }
         }
     }
 

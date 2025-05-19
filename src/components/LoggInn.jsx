@@ -1,5 +1,10 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { data, useNavigate } from "react-router-dom";
+import '../styles/logginn.scss'
+import { fetchLogginn } from "../../backend/sanity/services/userService";
+import { useEffect } from "react";
+import { useRef } from "react";
+
 
 export default function LoggInn({setUserLoggedInn}){
     const [userLogin, setUserLogin] = useState([]);
@@ -12,24 +17,33 @@ export default function LoggInn({setUserLoggedInn}){
         setUserLogin((prev) => ({ ...prev, [inputName]: inputValue}))
     }
 
-    const handleClick = (event) => {
-        event.preventDefault()
-        const existingUser = JSON.parse(localStorage.getItem("user"))
-        const exists = userLogin.username === existingUser.username && userLogin.password === existingUser.password
-        console.log("does he exist? ", exists)
-        if(exists){
-            sessionStorage.setItem("loggedinn", "true")
+    const getUserLoggin = async ()=>{
+        await fetchLogginn(userLogin.username, userLogin.password)
+        .then((data) => checkLogginn(data[0]))
+        .catch((error)=> console.error("Noe gikk galt med fetching av logginn info", error))
+    }
+
+    function checkLogginn(userExists){
+        if(userExists){
+            localStorage.setItem("loggedinn", "true")
             setUserLoggedInn(true)
+            localStorage.setItem("username", userLogin.username)
             navigate("/dashboard")
         }
         else{
             setError("Brukernavn eller passord er feil")
         }
     }
+
+    const handleClick = (event) => {
+        event.preventDefault()
+        getUserLoggin()
+    }
+
     return(
         <>
             <h2>LoggInn</h2>
-            <form>
+            <form id="logginn">
                 <label>
                     Brukernavn
                     <input type="text" placeholder="TomHeine..." name="username" onChange={handleChange}/>
@@ -40,7 +54,7 @@ export default function LoggInn({setUserLoggedInn}){
                 </label>
                 <button onClick={handleClick}>Logg inn</button>
             </form>
-            {error}
+            {error && <p className='errormessage'>{error}</p>}
         </>
     )
 }

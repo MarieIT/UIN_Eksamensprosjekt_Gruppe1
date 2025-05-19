@@ -1,47 +1,71 @@
 import { useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
+import "../styles/dashboard.scss"
+import { fetchProfilePageInfo } from "../../backend/sanity/services/userService"
+import EventCard from "./EventCard"
+import filledStar from '../assets/StarFilled.svg'
+import hollowStar from '../assets/StarHollow.svg'
 
-export default function Dashboard({handleClick}) {
+export default function Dashboard({wishList, loggout, isWishlisted, addToWishlist, removeWishlist}) {
   const [user, setUser] = useState()
+  const [purchases, setPurchases] = useState()
+
+  const getProfileCardInfo = async () => {
+    await fetchProfilePageInfo(localStorage.getItem("username"))
+    .then((data) => {setUser(data[0]);getPurchasedEvents(data[0])})
+    .catch((error)=>console.error("Noe gikk galt med henting av profil info", error)) 
+  }
+
+  const getPurchasedEvents = async (user) => {
+    let apiids = ``
+    user?.prevpurchase.map(purchase => apiids += purchase.apiid + ", ")
+    await fetch(`https://app.ticketmaster.com/discovery/v2/events?apikey=D7ioqsgGEEqH9C5FsLqZZzGw54kRgsYp&id=${apiids}&locale=*`)
+    .then((response) => response.json())
+    .then((data) => setPurchases(data))
+    .catch((error) => console.error("Fetching failed ", error))
+  }
+  
+  function getFriendEventRecomondation(friend){
+    if(friend?.commonEvents.length > 0){
+      return <p>{friend?.name} og du ønsker begge å dra på <span>{friend?.commonEvents[0].title}</span>, hva med å dra sammen?</p>
+    }
+    else
+    {
+      return <p>Du ønsker å dra på <span>{user?.wishlist[0].title}</span>, hva med å spørre {friend?.name} om å dra?</p>
+    }
+  }
 
   useEffect(()=>{
-    setUser(JSON.parse(localStorage.getItem("user")))
+    getProfileCardInfo()
   },[])
 
   return (
-    <>
-      <h2>Dashbord</h2>
-      <section>
-        <p>{user?.username}</p>
-        <button onClick={handleClick}>Logg ut</button>
-        <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.explicit.bing.net%2Fth%3Fid%3DOIP.5swNd1zAKZRCz1LWWDueJwHaJ5%26pid%3DApi&f=1&ipt=9be4da7fb2566206dcf34fc5593f4b98ff2342cd36d155f441ce2aae7c72921c"/>
+    <div id="dashbord-layout">
+      <h1>Dashbord</h1>
+      <section id="user-info">
+        <h2>{user?.name}</h2>
+        <button onClick={loggout}>Logg ut</button>
+        <img src={user?.image}/>
       </section>
-      <section>
-        <h3>Mine Kjøp</h3>
-        {/** legge till billetter kjøpt */}  
+      <section id= "user-purchases">
+        <h2>Mine Kjøp</h2>
+        {purchases?._embedded.events.map((event, index) => <EventCard key={event?.id} event={event} isWishlisted={isWishlisted(wishList, event)} addToWishlist={addToWishlist} removeWishlist={removeWishlist} isBought={true}/>)}
       </section>
-      <section>
-        <h3>Min Ønskeliste</h3>
-        {/** ønskeliste items */}  
+      <section id="user-wishlist">
+        <h2>Min Ønskeliste</h2>
+        {console.log(wishList, "dashboard wishlist")}
+        <ul>
+          {wishList?.map((event, index) => <li key={index}><Link to={`/sanity-event/${event.apiid}`}>{event.title}</Link>{isWishlisted ? <img className="star" src={filledStar}/>: <img className="star" src={hollowStar}/>}</li>)}
+        </ul>
       </section>
-      <section>
-        <h3>Venner</h3>
-        <article>
-          <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fmedia.licdn.com%2Fdms%2Fimage%2FC4E03AQETIGLvxxQ12w%2Fprofile-displayphoto-shrink_800_800%2F0%2F1625595290274%3Fe%3D2147483647%26v%3Dbeta%26t%3DG5GHUAsJj01gfxfoNXxMwn0XFcQ1WjhuLO7hbDzkPLE&f=1&nofb=1&ipt=1f2355ef308909c2b18f613cb51c6bcf722ea1c5fd4b8409a02d9363990383bf"/>
-          <h4>Ann-Charlotte</h4>
-          <p>Ann-Charlotte og du ønsker å dra på <span>Wacken 2026</span>, hva med å dra sammen ?</p>
-        </article>
-        <article>
-          <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fmedia.licdn.com%2Fdms%2Fimage%2Fv2%2FC4D03AQHF5QTatUEIIg%2Fprofile-displayphoto-shrink_200_200%2Fprofile-displayphoto-shrink_200_200%2F0%2F1574680082142%3Fe%3D2147483647%26v%3Dbeta%26t%3D12W8t7z6SFBnpjQCeBa2GoUgf_m_4ek8d2Uo_kI0NLE&f=1&nofb=1&ipt=05af40851593c1d12484ac08b105fc8c9dc031d65a03aaad825d467409f35e93"/>
-          <h4>Ole-Edvard</h4>
-          <p>Ole-Edvard og du ønsker å dra på <span>Wacken 2026</span>, hva med å dra sammen ?</p>
-        </article>
-        <article>
-          <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%3Fid%3DOIP.Ozks5_LUaIIH7x9KUivYqgHaHa%26pid%3DApi&f=1&ipt=b42c5bcdfe5d5d3d1f295eabee4c3f9cddef807c872505e7300c624037b7557f"/>
-          <h4>Tore Marius</h4>
-          <p>Tore Marius og du ønsker å dra på <span>Wacken 2026</span>, hva med å dra sammen ?</p>
-        </article>
+      <section id="user-friends">
+        <h2>Venner</h2>
+        {user?.friends.map((friend, index) => <article key={index}>
+          <img src={friend.image}/>
+          <h3>{friend.name}</h3>
+          {getFriendEventRecomondation(friend)}
+        </article>)}
       </section>  
-    </>
+    </div>
   )
 }

@@ -1,0 +1,53 @@
+@use "./partials/colors";
+@use "./partials/fonts.scss";
+
+//Mobile-first 
+
+#root {
+    margin: 0 auto;
+    width: 100%;
+    font-family: fonts.$quantitytext;
+}
+
+.event-info{
+    list-style: none;
+    li{
+        margin: 10px 0;
+    }
+}
+
+.event-menu{
+    display: flex;
+    list-style: none;
+    margin: 0;
+    li{
+        a, button{
+            background-color: colors.$buttons;
+            color: colors.$whitetext;
+            text-decoration: none;
+            display: inline-block;
+            margin: 1rem;
+            padding: 0.5rem 1rem;
+            text-align: center;
+            border-style: none;
+            border-radius: 2px;
+            font-family: fonts.$quantitytext;
+            box-sizing: content-box;
+            font-size: large;
+        }
+    }
+}
+
+    .star {
+        width: 38px;
+        height: 42px;
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        fill: colors.$star;
+    }
+
+.event-card{
+    position: relative;
+}
+

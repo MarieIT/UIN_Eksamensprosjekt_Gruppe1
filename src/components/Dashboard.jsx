@@ -6,7 +6,7 @@ import EventCard from "./EventCard"
 import filledStar from '../assets/StarFilled.svg'
 import hollowStar from '../assets/StarHollow.svg'
 
-export default function Dashboard({wishList, handleClick, isWishlisted, addToWishlist, removeWishlist}) {
+export default function Dashboard({wishList, loggout, isWishlisted, addToWishlist, removeWishlist}) {
   const [user, setUser] = useState()
   const [purchases, setPurchases] = useState()
 
@@ -40,11 +40,11 @@ export default function Dashboard({wishList, handleClick, isWishlisted, addToWis
   },[])
 
   return (
-    <>
+    <div id="dashbord-layout">
       <h1>Dashbord</h1>
       <section id="user-info">
         <h2>{user?.name}</h2>
-        <button onClick={handleClick}>Logg ut</button>
+        <button onClick={loggout}>Logg ut</button>
         <img src={user?.image}/>
       </section>
       <section id= "user-purchases">
@@ -66,6 +66,6 @@ export default function Dashboard({wishList, handleClick, isWishlisted, addToWis
           {getFriendEventRecomondation(friend)}
         </article>)}
       </section>  
-    </>
+    </div>
   )
 }

@@ -7,7 +7,14 @@
   width: 100%;
   font-family: fonts.$quantitytext;
 }
+/*
 
+  I categorypage ble Open AIs ChatGPT 4o brukt for å feilsøke koden, da vi møtte på et problem med at sass styling ble arvet
+  og derfor overskrev det vi prøvde å style. 
+
+  Henviser til prompt for feilsøking i vedlagt dokumentasjon. 
+
+*/
 main  {
 
   article {

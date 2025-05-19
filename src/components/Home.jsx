@@ -1,19 +1,18 @@
 import { useEffect, useState } from "react"
-import { Link, useParams } from "react-router-dom"
-import '../styles/home.scss'
+import { Link } from "react-router-dom"
 import EventCard from "./EventCard";
 import AttractionCard from "./AttractionCard";
+import '../styles/home.scss'
 
+/**
+ * 
+ * @param {*} param0 
+ * @returns 
+ */
 export default function Home({ isWishlisted, wishList, addToWishlist, removeWishlist }) {
   const [eventContent, setEventContent] = useState();
   const [cityContent, setCityContent] = useState();
   const [cityName, setCityName] = useState("Oslo");
-  const [testCityName, setTestCityName] = useState();
-
-  //Findings ID: K8vZ917K7fV
-  //Tons ID: K8vZ917oWOV
-  //Neon ID: K8vZ917_YJf
-  //Skeikampen ID: K8vZ917bJC7
 
   function CityNameFromClick(input) {
     input.preventDefault();

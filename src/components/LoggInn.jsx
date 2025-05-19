@@ -25,7 +25,7 @@ export default function LoggInn({setUserLoggedInn}){
 
     function checkLogginn(userExists){
         if(userExists){
-            sessionStorage.setItem("loggedinn", "true")
+            localStorage.setItem("loggedinn", "true")
             setUserLoggedInn(true)
             localStorage.setItem("username", userLogin.username)
             navigate("/dashboard")

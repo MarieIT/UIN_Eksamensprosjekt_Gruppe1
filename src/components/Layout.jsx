@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Nav from "./Nav";
 
 export default function Layout({ children, linkData }) {
@@ -8,7 +9,7 @@ export default function Layout({ children, linkData }) {
         {children}
       </main>
       <footer>
-        <p></p>
+        <Link to={"https://developer.ticketmaster.com/api-explorer/v2/"}>Ticketmaster API Explorer V2.0</Link>
       </footer>
     </>
   )

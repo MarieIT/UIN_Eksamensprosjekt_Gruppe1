@@ -107,7 +107,7 @@ main  {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    gap: 2.5rem;
+    gap: 1rem;
     justify-content: center;
 
     article {
@@ -318,7 +318,7 @@ main  {
     .attraction-section {
       display: flex;
       flex-direction: column;
-      gap: 2.5rem;
+      gap: 1rem;
   
       article {
         max-width: 300px;
@@ -417,6 +417,13 @@ main  {
 @media (min-width: 769px) and (max-width: 1024px) {
   main {
 
+    h3 {
+      padding-bottom: 2rem;
+      font-size: 1.5rem;
+    }
+
+    
+
     .filter-search {
       display: flex;
       flex-direction: column;
@@ -438,7 +445,7 @@ main  {
       display: flex;
       flex-direction: row;
       flex-wrap: wrap;
-      gap: 2.5rem;
+      gap: 1rem;
 
       article {
         max-width: 300px;
@@ -454,7 +461,13 @@ main  {
       display: flex;
       flex-direction: row;
       flex-wrap: wrap;
-      gap: 2.5rem;
+      justify-content: center;
+      gap: 1rem;
+
+      .event-card{
+        margin: 0;
+      }
+      
     }
 
     .venue-section {
@@ -512,7 +525,7 @@ main  {
       display: flex;
       flex-direction: row;
       flex-wrap: wrap;
-      gap: 2.5rem;
+      gap: 1rem;
   
       article {
         max-width: 300px;
@@ -528,7 +541,14 @@ main  {
       display: flex;
       flex-direction: row;
       flex-wrap: wrap;
-      gap: 2.5rem;
+      justify-content: center;
+      gap: 1rem;
+
+      .event-card{
+        margin: 0;
+
+      }
+
     }
 
     .venue-section {
